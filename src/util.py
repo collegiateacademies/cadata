@@ -1,7 +1,17 @@
-import base64, requests, datetime, pprint, json, csv, logging, sys
+import base64, requests, datetime, pprint, json, csv, logging, sys, string
 from pathlib import Path
 
+
 pp = pprint.PrettyPrinter(indent=2)
+
+
+today_yyyy_mm_dd = datetime.datetime.today().strftime('%Y-%m-%d')
+
+
+school_codes = {
+    'LCA' : '15'
+}
+
 
 # ANSI Escape Codes
 
@@ -16,11 +26,14 @@ cyan = "\u001b[36m"
 white = "\u001b[37m"
 reset = "\u001b[0m"
 
+
 # Text Decorations
 bold = "\u001b[1m"
 underline = "\u001b[4m"
 
+
 sys.path.append("..")
+
 
 logging.basicConfig(
     level=logging.DEBUG,
@@ -30,10 +43,13 @@ logging.basicConfig(
     filemode='w'
 )
 
+
 with open('../creds.json') as file:
     credentials = json.load(file)
 
-def sr_api_pull(search_key, parameters={}, page_limit=''):
+
+def sr_api_pull(search_key, parameters={}, page_limit='') -> list:
+    """A blank function for returning an endpoint for Schoolrunner. Logs its progress in the logs folder and logs its outputs as a json file."""
     items = []
     headers = {'Authorization': 'Basic ' + base64.b64encode(bytes(f"{credentials['sr_email']}:{credentials['sr_pass']}", "UTF-8")).decode("ascii")}
     page_params = {key: value for (key, value) in parameters.items() if key != 'expand'}
@@ -59,3 +75,42 @@ def sr_api_pull(search_key, parameters={}, page_limit=''):
         json.dump(items, file, indent=4)
 
     return items
+
+
+def convert_yyyy_mm_dd_date(date_string: string) -> datetime.date:
+    year = int(date_string[0:4])
+    month = int(date_string[5:7])
+    day = int(date_string[8:10])
+
+    return datetime.datetime(year, month, day)
+
+
+def return_term_dates(term_bin_id: string) -> string:
+    """Returns the start and end dates of a given term in Schoolrunner."""
+    term_bins = sr_api_pull(
+        search_key='term-bins',
+        parameters={
+            'term_bin_ids': term_bin_id,
+            'expand': 'school_id'
+        }
+    )
+    logging.info(f"{term_bins[0]['long_name']} (Term ID {term_bins[0]['term_bin_id']}) starts on {term_bins[0]['start_date']} and ends on {term_bins[0]['end_date']}")
+    return term_bins[0]['start_date'], term_bins[0]['end_date']
+
+
+def return_this_sr_term(search_term: string, school: string) -> string:
+    """Finds the term based on the type of term you look up (semester, quuarter, etc.)"""
+    terms = sr_api_pull(
+        search_key='term-bins',
+        parameters={
+            "school_ids": school_codes[school],
+            'expand': 'term_bin_type'
+        }
+    )
+
+    for term in terms:
+        start_date = convert_yyyy_mm_dd_date(term['start_date'])
+        end_date = convert_yyyy_mm_dd_date(term['end_date'])
+        if search_term.lower() in term['long_name'].lower() and start_date <= datetime.datetime.now() <= end_date:
+            logging.info(f"Found term {term['long_name']} - {term['term_bin_id']}")
+            return term['term_bin_id']
