@@ -1,5 +1,6 @@
 import base64, requests, datetime, pprint, json, csv, logging, sys, string, inspect
 from pathlib import Path
+from fpdf import FPDF
 
 
 pp = pprint.PrettyPrinter(indent=2)
