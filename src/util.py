@@ -44,10 +44,10 @@ logging.basicConfig(
     filemode='w'
 )
 
-attendance_letter3_blocks = [
+attendance_letter3_blocks_page1 = [
     {
         'name': 'attendance_policy_header',
-        'text': "###school_name### Attendance Policy",
+        'text': "**###school_name### Attendance Policy**",
     },
     {
         'name': 'attendance_policy_explainer',
@@ -55,11 +55,11 @@ attendance_letter3_blocks = [
     },
     {
         'name': 'attendance_policy_warning',
-        'text': "If a student is absent without excuse for more than 9 days of the semester, the student will not receive credit for any courses they are taking during that semester.",
+        'text': "**If a student is absent without excuse for more than 9 days of the semester, the student will not receive credit for any courses they are taking during that semester.**",
     },
     {
         'name': 'attendance_requirements_header',
-        'text': 'Attendance Requirements',
+        'text': '**Attendance Requirements**',
     },
     {
         'name': 'attendance_requirement1',
@@ -73,7 +73,7 @@ attendance_letter3_blocks = [
     },
     {
         'name': 'attendance_requirement3',
-        'text': 'Based on our schedule, a student must miss no more than 9 days per semester to earn credit for their courses',
+        'text': '**Based on our schedule, a student must miss no more than 9 days per semester to earn credit for their courses**',
         'bullet_level': 1,
     },
     {
@@ -82,7 +82,7 @@ attendance_letter3_blocks = [
     },
     {
         'name': 'excuse_policy1',
-        'text': 'Absences will be considered excused if they fall into one of the following categories and documentation is submitted to the school: illness, hospital stay, medical appointments, observation of holidays of the student\'s own faith, visitation with a parent who is a member of the armed forces, death in the immediate family.',
+        'text': 'Absences will be considered **excused** if they fall into one of the following categories and documentation is submitted to the school: illness, hospital stay, medical appointments, observation of holidays of the student\'s own faith, visitation with a parent who is a member of the armed forces, death in the immediate family.',
         'bullet_level': 1,
     },
     {
@@ -107,12 +107,12 @@ attendance_letter3_blocks = [
     },
     {
         'name': 'excuse_policy3',
-        'text': 'Absences will be considered unexcused if they do not fall into a category outlined above or if documentation is not provided.',
+        'text': 'Absences will be considered **unexcused** if they do not fall into a category outlined above or if documentation is not provided.',
         'bullet_level': 1,
     },
     {
         'name': 'comms_and_ints_header',
-        'text': 'Attendance Communication and Interventions',
+        'text': '**Attendance Communication and Interventions**',
     },
     {
         'name': 'comms_and_ints_explainer',
@@ -133,16 +133,16 @@ attendance_letter3_blocks = [
         'text': '6+ absences: A school official or representative may conduct a home visit, review the attendance plan, enforce compulsory attendance law, and make recommendations to improve attendance.',
         'bullet_level': 1,
     },
-    {
-        'name': 'PAGE_BREAK'
-    },
+]
+
+attendance_letter3_blocks_page2 = [
     {
         'name': 'page2_header',
         'text': 'Re: Attendance Warning',
     },
     {
         'name': 'page2_paragraph1',
-        'text': 'You are receiving this letter because your child has 3 or more Unexcused Absences and/or Tardies.  Under the law, students are required to attend school regularly and must attend a minimum number of days of school to earn credit and be eligible for promotion to the next grade.  Your child is in danger of not being promoted to the next grade.',
+        'text': '**You are receiving this letter because your child has 3 or more Unexcused Absences and/or Tardies.** Under the law, students are required to attend school regularly and must attend a minimum number of days of school to earn credit and be eligible for promotion to the next grade.  Your child is in danger of not being promoted to the next grade.',
     },
     {
         'name': 'page2_paragraph2',
@@ -150,7 +150,7 @@ attendance_letter3_blocks = [
     },
     {
         'name': 'page2_paragraph3',
-        'text': 'If your child does not meet the school\'s attendance requirements, they may not earn credit for their courses and may have to complete the same grade next year.  Failure to adhere to the requirements of your scholar\'s attendance plan will also result in a referral to Municipal Court.',
+        'text': '**If your child does not meet the school\'s attendance requirements, they may not earn credit for their courses and may have to complete the same grade next year.  Failure to adhere to the requirements of your scholar\'s attendance plan will also result in a referral to Municipal Court.**',
     },
     {
         'name': 'page2_paragraph4',
