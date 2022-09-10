@@ -1,6 +1,6 @@
 import base64, requests, datetime, pprint, json, csv, logging, sys, string, inspect
 from pathlib import Path
-from fpdf import FPDF
+from fpdf import FPDF, HTMLMixin
 
 
 pp = pprint.PrettyPrinter(indent=2)
@@ -43,6 +43,120 @@ logging.basicConfig(
     filename=f"../logs/{Path(__file__).stem}.log",
     filemode='w'
 )
+
+attendance_letter3_blocks = [
+    {
+        'name': 'attendance_policy_header',
+        'text': "###school_name### Attendance Policy",
+    },
+    {
+        'name': 'attendance_policy_explainer',
+        'text': "Students can only be successful if they are present and prepared in school every day. Our curriculum is an ambitious one; every day is essential for students to keep pace.  At ###school_name###, excessive absences will not be tolerated.",
+    },
+    {
+        'name': 'attendance_policy_warning',
+        'text': "If a student is absent without excuse for more than 9 days of the semester, the student will not receive credit for any courses they are taking during that semester.",
+    },
+    {
+        'name': 'attendance_requirements_header',
+        'text': 'Attendance Requirements',
+    },
+    {
+        'name': 'attendance_requirement1',
+        'text': 'Students must be present for \"60,120 minutes (equivalent to 167 six-hour school days)\" per year and 30,060 per semester',
+        'bullet_level': 1,
+    },
+    {
+        'name': 'attendance_requirement2',
+        'text': 'Because our classes are semester based, students must meet attendance requirements per semester',
+        'bullet_level': 1,
+    },
+    {
+        'name': 'attendance_requirement3',
+        'text': 'Based on our schedule, a student must miss no more than 9 days per semester to earn credit for their courses',
+        'bullet_level': 1,
+    },
+    {
+        'name': 'excuse_policy_header',
+        'text': 'Absences will be recorded as excused or unexcused, in accordance with our policies:',
+    },
+    {
+        'name': 'excuse_policy1',
+        'text': 'Absences will be considered excused if they fall into one of the following categories and documentation is submitted to the school: illness, hospital stay, medical appointments, observation of holidays of the student\'s own faith, visitation with a parent who is a member of the armed forces, death in the immediate family.',
+        'bullet_level': 1,
+    },
+    {
+        'name': 'excuse_policy2',
+        'text': 'You can submit documentation by:',
+        'bullet_level': 1,
+    },
+    {
+        'name': 'excuse_policy2a',
+        'text': 'Emailing it to [email address].',
+        'bullet_level': 2,
+    },
+    {
+        'name': 'excuse_policy2b',
+        'text': 'Faxing it to [fax number].',
+        'bullet_level': 2,
+    },
+    {
+        'name': 'excuse_policy2c',
+        'text': 'Bringing it to the front office.',
+        'bullet_level': 2,
+    },
+    {
+        'name': 'excuse_policy3',
+        'text': 'Absences will be considered unexcused if they do not fall into a category outlined above or if documentation is not provided.',
+        'bullet_level': 1,
+    },
+    {
+        'name': 'comms_and_ints_header',
+        'text': 'Attendance Communication and Interventions',
+    },
+    {
+        'name': 'comms_and_ints_explainer',
+        'text': 'We believe that it is important for our school staff, families, and students to have open communication around attendance. Our school will take the following steps upon each absence:',
+    },
+    {
+        'name': 'comms_and_ints1',
+        'text': '3-4 absences: The school will send a letter to the parent/guardian notifying the parent of the student\'s status and recommending a conference to develop an attendance plan in accordance with LRS 17:233.  The student\'s parent/guardian will be contacted by school staff to schedule a mandatory Attendance Conference to develop an attendance plan for the student.  All notes from the meeting and the details of the attendance plan will be documented.',
+        'bullet_level': 1,
+    },
+    {
+        'name': 'comms_and_ints2',
+        'text': '5 absences: The student is considered as truant as pursuant to LRS 17:233.  A letter will be sent to the home of the student informing the parent/guardian of violation of compulsory attendance law. Supervisor of Child Welfare and Attendance may file report(s) to Municipal Court for Truancy and/or the NOLA Public Schools Office of Student Support and Attendance.',
+        'bullet_level': 1,
+    },
+    {
+        'name': 'comms_and_ints3',
+        'text': '6+ absences: A school official or representative may conduct a home visit, review the attendance plan, enforce compulsory attendance law, and make recommendations to improve attendance.',
+        'bullet_level': 1,
+    },
+    {
+        'name': 'PAGE_BREAK'
+    },
+    {
+        'name': 'page2_header',
+        'text': 'Re: Attendance Warning',
+    },
+    {
+        'name': 'page2_paragraph1',
+        'text': 'You are receiving this letter because your child has 3 or more Unexcused Absences and/or Tardies.  Under the law, students are required to attend school regularly and must attend a minimum number of days of school to earn credit and be eligible for promotion to the next grade.  Your child is in danger of not being promoted to the next grade.',
+    },
+    {
+        'name': 'page2_paragraph2',
+        'text': 'A representative from the school will contact you via phone to schedule a mandatory attendance conference.  In this conference, your child\'s attendance record will be reviewed and a plan will be put into place that they must follow in order to be eligible for promotion or graduation.',
+    },
+    {
+        'name': 'page2_paragraph3',
+        'text': 'If your child does not meet the school\'s attendance requirements, they may not earn credit for their courses and may have to complete the same grade next year.  Failure to adhere to the requirements of your scholar\'s attendance plan will also result in a referral to Municipal Court.',
+    },
+    {
+        'name': 'page2_paragraph4',
+        'text': 'Please review our attendance policy on the reverse of this letter.  You can contact [school name] at [phone number] to discuss your child\'s attendance and your next steps. We look forward to having your student attend school on a daily basis so we can continue their pathway to college success.',
+    }
+]
 
 
 with open('../creds.json') as file:
