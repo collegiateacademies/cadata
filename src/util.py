@@ -229,3 +229,38 @@ def return_this_sr_term(search_term: string, school: string) -> string:
         if search_term.lower() in term['long_name'].lower() and start_date <= datetime.datetime.now() <= end_date:
             logging.info(f"Found term {term['long_name']} - {term['term_bin_id']}")
             return term['term_bin_id']
+
+def log_communication(student_id, communication_method_id, communication_type_id, staff_member_id, school_id, contact_person='',comments='', sandbox=False) -> dict:
+    """Used to log a communcation in Schoolrunner for any school. Will require
+    most parameters that Schoolrunner requires and will also take a comment &
+    person contacted just to make the log more useful. These are optional params"""
+    payload = {
+        'school_id': school_id,
+        'student_id': student_id,
+        'communication_method_id': communication_method_id,
+        'communication_type_id': communication_type_id,
+        'staff_member_id': staff_member_id,
+        'contact_person': contact_person,
+        'date': today_yyyy_mm_dd,
+        'comments': comments
+    }
+
+    params = {
+        'Content-Type': 'application/json'
+    }
+
+    headers = {'Authorization': 'Basic ' + base64.b64encode(bytes(f"{credentials['sr_email']}:{credentials['sr_pass']}", "UTF-8")).decode("ascii")}
+
+    logging.info(f'Logging communication for {student_id}')
+    
+    try:
+        if sandbox:
+            response = requests.post(f"https://ca.sandbox.schoolrunner.org/api/v1/communications", json=payload, params=params, headers=headers).json()
+            logging.info(f"Successful log for {student_id}")
+            return response
+        else:
+            response = requests.post(f"https://ca.schoolrunner.org/api/v1/communications", json=payload, params=params, headers=headers).json()
+            logging.info(f"Successful log for {student_id}")
+            return response
+    except Exception as error:
+        logging.error(f"Unsuccessful log for {student_id} - {error}", exc_info=True)
