@@ -1,4 +1,4 @@
-import base64, requests, datetime, pprint, json, csv, logging, sys, string
+import base64, requests, datetime, pprint, json, csv, logging, sys, string, inspect
 from pathlib import Path
 
 
@@ -37,7 +37,7 @@ sys.path.append("..")
 
 logging.basicConfig(
     level=logging.DEBUG,
-    format='%(asctime)s - %(levelname)s - %(message)s',
+    format="[%(levelname)s] %(asctime)s -- %(filename)s on line %(lineno)s\n\tFunction name: %(funcName)s\n\tMessage: %(message)s\n",
     datefmt='%B-%d-%Y %H:%M:%S',
     filename=f"../logs/{Path(__file__).stem}.log",
     filemode='w'
