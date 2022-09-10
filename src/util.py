@@ -10,7 +10,11 @@ today_yyyy_mm_dd = datetime.datetime.today().strftime('%Y-%m-%d')
 
 
 school_codes = {
-    'LCA' : '15'
+    'LCA' : '15',
+    'ASA': '1',
+    'CBR': '17',
+    'GWC': '2',
+    'RCA': '18',
 }
 
 
