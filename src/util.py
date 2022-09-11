@@ -222,7 +222,7 @@ def return_this_sr_term(search_term: string, school: string) -> string:
     terms = sr_api_pull(
         search_key='term-bins',
         parameters={
-            "school_ids": school_codes[school],
+            "school_ids": school_info[school]['sr_id'],
             'expand': 'term_bin_type'
         }
     )
@@ -260,7 +260,7 @@ def log_communication(student_id, communication_method_id, communication_type_id
     try:
         if sandbox:
             response = requests.post(f"https://ca.sandbox.schoolrunner.org/api/v1/communications", json=payload, params=params, headers=headers).json()
-            logging.info(f"Successful log for {student_id} -- {response}")
+            logging.info(f"Successful log for {student_id}")
             return response
         else:
             response = requests.post(f"https://ca.schoolrunner.org/api/v1/communications", json=payload, params=params, headers=headers).json()
