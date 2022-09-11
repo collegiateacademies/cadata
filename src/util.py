@@ -260,11 +260,11 @@ def log_communication(student_id, communication_method_id, communication_type_id
     try:
         if sandbox:
             response = requests.post(f"https://ca.sandbox.schoolrunner.org/api/v1/communications", json=payload, params=params, headers=headers).json()
-            logging.info(f"Successful log for {student_id}")
+            logging.info(f"Successful log for {student_id} -- {response}")
             return response
         else:
             response = requests.post(f"https://ca.schoolrunner.org/api/v1/communications", json=payload, params=params, headers=headers).json()
-            logging.info(f"Successful log for {student_id} -- {response}")
+            logging.info(f"Successful log for {student_id}")
             return response
     except Exception as error:
         logging.error(f"Unsuccessful log for {student_id} - {error}", exc_info=True)
