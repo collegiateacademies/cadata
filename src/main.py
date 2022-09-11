@@ -192,4 +192,84 @@ def generate_attendance_letters(school: string, min_date: string, repeated_lette
     # TODO confirm fax numbers
     # TODO confirm who they want things logged as (data admin right?)
     # TODO confirm whether or not people want repeat letters functionality
-    # TODO add add sr log
+
+def daily_attendance_email(school: string) -> None:
+    database = {
+        '9': {
+            'total_students': 0,
+            'total_out_of_school': 0,
+            'names_list': ''
+        },
+        '10': {
+            'total_students': 0,
+            'total_out_of_school': 0,
+            'names_list': ''
+        },
+        '11': {
+            'total_students': 0,
+            'total_out_of_school': 0,
+            'names_list': ''
+        },
+        '12': {
+            'total_students': 0,
+            'total_out_of_school': 0,
+            'names_list': ''
+        },
+        'totals': {
+            'students': 0,
+            'absences': 0
+        }
+    }
+
+    student_list = sr_api_pull(
+        search_key='students',
+        parameters={
+            'active': '1',
+            'school_ids': school_info[school]['sr_id'],
+            'expand': 'grade_level'
+        }
+    )
+
+    for student in student_list:
+        if student['grade_level']['order_key'] in database:
+            database[student['grade_level']['order_key']]['total_students'] += 1
+            database['totals']['students'] += 1
+
+    absence_list = sr_api_pull(
+        search_key='absences',
+        parameters={
+            'min_date': '2022-09-09',# today_yyyy_mm_dd,
+            'max_date': '2022-09-09',# today_yyyy_mm_dd,
+            'active': '1',
+            'school_ids': school_info[school]['sr_id'],
+            'out_of_school_only': '1',
+            'expand': 'absence_type, student.grade_level, student.student_attrs.student_attr_type'
+        }
+    )
+
+    for absence in absence_list:
+        if absence['student']['grade_level']['order_key'] in database:
+            database[absence['student']['grade_level']['order_key']]['total_out_of_school'] += 1
+            database[absence['student']['grade_level']['order_key']]['names_list'] += f"{absence['student']['display_name']} - {extract_sr_student_attribute(absence['student']['student_attrs'], 'Advisor')} - ({absence['absence_type']['code']})<br>"
+            database['totals']['absences'] += 1
+
+    with open('../logs/json/testingtesting.json', 'w') as file:
+        json.dump(database, file, indent=4)
+
+    with open('../html/daily_attendance.html', 'r') as file:
+        html_email = file.read()
+    
+    send_email(
+        recipient='tophermckee@gmail.com',
+        subject_line='hey there',
+        html_body=html_email
+            .replace('###9th_list###', database['9']['names_list'])
+            .replace('###10th_list###', database['10']['names_list'])
+            .replace('###11th_list###', database['11']['names_list'])
+            .replace('###12th_list###', database['12']['names_list'])
+            .replace( '###total###',      str( round((int(database['totals']['students'])   - int(database['totals']['absences']))        / int(database['totals']['students'])   * 100 , 2)))
+            .replace( '###9th_total###',  str( round((int(database['9']['total_students'])  - int(database['9']['total_out_of_school']))  / int(database['9']['total_students'])  * 100 , 2)))
+            .replace( '###10th_total###', str( round((int(database['10']['total_students']) - int(database['10']['total_out_of_school'])) / int(database['10']['total_students']) * 100 , 2)))
+            .replace( '###11th_total###', str( round((int(database['11']['total_students']) - int(database['11']['total_out_of_school'])) / int(database['11']['total_students']) * 100 , 2)))
+            .replace( '###12th_total###', str( round((int(database['12']['total_students']) - int(database['12']['total_out_of_school'])) / int(database['12']['total_students']) * 100 , 2)))
+    )
