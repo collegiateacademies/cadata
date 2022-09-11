@@ -1,6 +1,7 @@
-import base64, requests, datetime, pprint, json, csv, logging, sys, string, inspect
+import base64, requests, datetime, pprint, json, csv, logging, sys, string, inspect, smtplib
 from pathlib import Path
 from fpdf import FPDF, HTMLMixin
+from email.message import EmailMessage
 
 
 pp = pprint.PrettyPrinter(indent=2)
@@ -318,3 +319,45 @@ def log_communication(student_id, communication_method_id, communication_type_id
             return response
     except Exception as error:
         logging.error(f"Unsuccessful log for {student_id} - {error}", exc_info=True)
+
+def send_email(recipient='', text_body='', subject_line='', html_body='', bcc='', cc='', reply_to='', attachment=''):
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+        try:
+            smtp.login(credentials['cadata_email_addr'], credentials['python_gmail_app_password'])
+        except Exception as error:
+            logging.error(f"Error at SSL login for {recipient} -- {error}", exc_info=True)
+            smtp.quit()
+
+        msg = EmailMessage()
+        msg['Subject'] = subject_line
+        msg['From'] = credentials['cadata_email_addr']
+        msg['To'] = recipient
+        if cc != '':
+            msg['Cc'] = cc
+        if bcc != '':
+            msg['Bcc'] = bcc
+        msg.set_content(text_body)
+        if html_body != '':
+            msg.add_alternative(html_body, subtype='html')
+        if reply_to != '':
+            msg['reply-to'] = reply_to
+        if attachment != '':
+            with open(attachment, 'rb') as content_file:
+                content = content_file.read()
+                msg.add_attachment(content, maintype='application', subtype='pdf', filename=attachment)
+
+        logging.info(f"\n🤞 Attempting email for to:{recipient} 🤞")
+        try:
+            smtp.send_message(msg)
+            logging.info(f"🍾 Email sent for to:{recipient} 🍾")
+            smtp.quit()
+        except Exception as error_inside:
+            logging.error(f"Error at send for to:{recipient} -- error: {error_inside}", exc_info=True)
+            smtp.quit()
+
+def extract_sr_student_attribute(attr_list: list, attr_key: str):
+    """Takes the nasy list of student attributes that is attached to students
+    and will return the currently active version for the provided key"""
+    for attr in attr_list:
+        if attr['active'] == '1' and attr['student_attr_type']['attr_key'] == attr_key:
+            return attr['display_name']
