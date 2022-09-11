@@ -9,12 +9,63 @@ pp = pprint.PrettyPrinter(indent=2)
 today_yyyy_mm_dd = datetime.datetime.today().strftime('%Y-%m-%d')
 
 
-school_codes = {
-    'LCA' : '15',
-    'ASA': '1',
-    'CBR': '17',
-    'GWC': '2',
-    'RCA': '18',
+school_info = {
+    'LCA' : {
+        'short_name': 'LCA',
+        'long_name': 'Livingston Collegiate Academy',
+        'sr_id': '15',
+        'street': '7301 Dwyer Rd',
+        'city': 'New Orleans',
+        'state': 'LA',
+        'zip': '70126',
+        'principal': 'Akeem Langham',
+        'fax': '555-555-5555',
+        'attendance_logger_sr_id': '11965'
+    },
+    'ASA': {
+        'short_name': 'ASA',
+        'long_name': 'Abramson Sci Academy',
+        'sr_id': '1',
+        'street': '5552 Read Blvd',
+        'city': 'New Orleans',
+        'state': 'LA',
+        'zip': '70127',
+        'principal': 'Anthony McElligott',
+        'fax': '504-324-0171'
+    },
+    'CBR': {
+        'short_name': 'CBR',
+        'long_name': 'Collegiate Baton Rouge',
+        'sr_id': '17',
+        'street': '282 Lobdell Blvd',
+        'city': 'Baton Rouge',
+        'state': 'LA',
+        'zip': '70806',
+        'principal': '',
+        'fax': '504-324-0171'
+    },
+    'GWC': {
+        'short_name': 'GWC',
+        'long_name': 'G.W. Carver High School',
+        'sr_id': '2',
+        'street': '3059 Higgins Blvd',
+        'city': 'New Orleans',
+        'state': 'LA',
+        'zip': '70126',
+        'principal': 'Jerel Bryant',
+        'fax': '504-324-0171'
+    },
+    'RCA': {
+        'short_name': 'RCA',
+        'long_name': 'Rosenwald Collegiate Academy',
+        'sr_id': '18',
+        'street': '1801 L B Landry Ave',
+        'city': 'New Orleans',
+        'state': 'LA',
+        'zip': '70114',
+        'principal': 'Benjamin Davis',
+        'fax': '504-324-0171'
+    },
 }
 
 
@@ -222,7 +273,7 @@ def return_this_sr_term(search_term: string, school: string) -> string:
     terms = sr_api_pull(
         search_key='term-bins',
         parameters={
-            "school_ids": school_info[school]['sr_id'],
+            "school_ids": school_codes[school],
             'expand': 'term_bin_type'
         }
     )
