@@ -20,7 +20,6 @@ school_info = {
         'zip': '70126',
         'principal': 'Akeem Langham',
         'fax': '555-555-5555',
-        'attendance_logger_sr_id': '11965'
     },
     'ASA': {
         'short_name': 'ASA',
