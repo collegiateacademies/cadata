@@ -10,7 +10,7 @@ logging.basicConfig(
     filemode='w'
 )
 
-def generate_attendance_letters(school: string, min_date: string, repeated_letters: bool) -> None:
+def generate_attendance_letters(school: str, min_date: str, repeated_letters: bool) -> None:
     
     if today_is_a_school_day(school, school_info[school]['sr_id']):
         pass
@@ -382,7 +382,7 @@ def generate_attendance_letters(school: string, min_date: string, repeated_lette
 
     pdf.output(f"../pdf/{school}_{today_yyyy_mm_dd}_attendance_letter.pdf")
 
-def daily_attendance_email(school: string) -> None:
+def daily_attendance_email(school: str) -> None:
     database = {
         '9': {
             'total_students': 0,

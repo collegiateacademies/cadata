@@ -1,4 +1,4 @@
-import base64, requests, datetime, pprint, json, csv, logging, sys, string, inspect, smtplib
+import base64, requests, datetime, pprint, json, logging, sys, smtplib
 from pathlib import Path
 from fpdf import FPDF, HTMLMixin
 from email.message import EmailMessage
@@ -279,7 +279,7 @@ def sr_api_pull(search_key, parameters={}, page_limit='') -> list:
     return items
 
 
-def convert_yyyy_mm_dd_date(date_string: string) -> datetime.date:
+def convert_yyyy_mm_dd_date(date_string: str) -> datetime.date:
     year = int(date_string[0:4])
     month = int(date_string[5:7])
     day = int(date_string[8:10])
@@ -287,7 +287,7 @@ def convert_yyyy_mm_dd_date(date_string: string) -> datetime.date:
     return datetime.datetime(year, month, day)
 
 
-def return_term_dates(term_bin_id: string) -> string:
+def return_term_dates(term_bin_id: str) -> str:
     """Returns the start and end dates of a given term in Schoolrunner."""
     term_bins = sr_api_pull(
         search_key='term-bins',
@@ -300,7 +300,7 @@ def return_term_dates(term_bin_id: string) -> string:
     return term_bins[0]['start_date'], term_bins[0]['end_date']
 
 
-def return_this_sr_term(search_term: string, school: string) -> string:
+def return_this_sr_term(search_term: str, school: str) -> str:
     """Finds the term based on the type of term you look up (semester, quuarter, etc.)"""
     terms = sr_api_pull(
         search_key='term-bins',
