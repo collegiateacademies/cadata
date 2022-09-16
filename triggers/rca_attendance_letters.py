@@ -10,4 +10,4 @@ logging.basicConfig(
     filemode='w'
 )
 
-generate_attendance_letters('LCA', '2022-08-01', repeated_letters=True)
+generate_attendance_letters('RCA', '2022-08-08', repeated_letters=True)
