@@ -3,7 +3,7 @@ sys.path.append("..")
 from src.util import *
 
 logging.basicConfig(
-    level=logging.DEBUG,
+    level=logging.INFO,
     format="[%(levelname)s] %(asctime)s -- %(filename)s on line %(lineno)s\n\tFunction name: %(funcName)s\n\tMessage: %(message)s\n",
     datefmt='%B-%d-%Y %H:%M:%S',
     filename=f"../logs/{Path(__file__).stem}.log",
@@ -71,6 +71,7 @@ def generate_attendance_letters(school: string, min_date: string, repeated_lette
     for student in database:
         if database[student]['au'] >= 3:
             pdf.add_page()
+            pdf.image(f"../assets/{school.lower()}_letterhead.png", x=125, y=5, h=8)
             pdf.multi_cell(
                 w=0,
                 h=5,
@@ -90,7 +91,11 @@ def generate_attendance_letters(school: string, min_date: string, repeated_lette
                             h=5,
                             new_x="LMARGIN",
                             new_y="NEXT",
-                            txt=block['text'].replace("###school_name###", school_info[school]['long_name']),
+                            txt=block['text']
+                                .replace("###school_name###", school_info[school]['long_name'])
+                                .replace('###school_phone###', school_info[school]['phone'])
+                                .replace('###attendace_email###', school_info[school]['attendance_email'])
+                                .replace('###fax_number###', school_info[school]['fax']),
                             markdown=True
                         )
                         pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
@@ -102,7 +107,11 @@ def generate_attendance_letters(school: string, min_date: string, repeated_lette
                             h=5,
                             new_x="LMARGIN",
                             new_y="NEXT",
-                            txt=block['text'].replace("###school_name###", school_info[school]['long_name']),
+                            txt=block['text']
+                                .replace("###school_name###", school_info[school]['long_name'])
+                                .replace('###school_phone###', school_info[school]['phone'])
+                                .replace('###attendace_email###', school_info[school]['attendance_email'])
+                                .replace('###fax_number###', school_info[school]['fax']),
                             markdown=True
                         )
                         pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
@@ -112,7 +121,11 @@ def generate_attendance_letters(school: string, min_date: string, repeated_lette
                         h=5,
                         new_x="LMARGIN",
                         new_y="NEXT",
-                        txt=block['text'].replace("###school_name###", school_info[school]['long_name']),
+                        txt=block['text']
+                                .replace("###school_name###", school_info[school]['long_name'])
+                                .replace('###school_phone###', school_info[school]['phone'])
+                                .replace('###attendace_email###', school_info[school]['attendance_email'])
+                                .replace('###fax_number###', school_info[school]['fax']),
                         markdown=True
                     )
                     pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
@@ -143,7 +156,11 @@ def generate_attendance_letters(school: string, min_date: string, repeated_lette
                             h=5,
                             new_x="LMARGIN",
                             new_y="NEXT",
-                            txt=block['text'].replace("###school_name###", school_info[school]['long_name']),
+                            txt=block['text']
+                                .replace("###school_name###", school_info[school]['long_name'])
+                                .replace('###school_phone###', school_info[school]['phone'])
+                                .replace('###attendace_email###', school_info[school]['attendance_email'])
+                                .replace('###fax_number###', school_info[school]['fax']),
                             markdown=True
                         )
                         pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
@@ -155,7 +172,11 @@ def generate_attendance_letters(school: string, min_date: string, repeated_lette
                             h=5,
                             new_x="LMARGIN",
                             new_y="NEXT",
-                            txt=block['text'].replace("###school_name###", school_info[school]['long_name']),
+                            txt=block['text']
+                                .replace("###school_name###", school_info[school]['long_name'])
+                                .replace('###school_phone###', school_info[school]['phone'])
+                                .replace('###attendace_email###', school_info[school]['attendance_email'])
+                                .replace('###fax_number###', school_info[school]['fax']),
                             markdown=True
                         )
                         pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
@@ -165,7 +186,11 @@ def generate_attendance_letters(school: string, min_date: string, repeated_lette
                         h=5,
                         new_x="LMARGIN",
                         new_y="NEXT",
-                        txt=block['text'].replace("###school_name###", school_info[school]['long_name']),
+                        txt=block['text']
+                                .replace("###school_name###", school_info[school]['long_name'])
+                                .replace('###school_phone###', school_info[school]['phone'])
+                                .replace('###attendace_email###', school_info[school]['attendance_email'])
+                                .replace('###fax_number###', school_info[school]['fax']),
                         markdown=True
                     )
                     pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
@@ -183,15 +208,11 @@ def generate_attendance_letters(school: string, min_date: string, repeated_lette
                 staff_member_id = '11690',
                 school_id = school_info[school]['sr_id'],
                 contact_person = 'Parent/Guardian letter',
-                comments = '3+ AU Letter'
+                comments = '3+ AU Letter',
+                sandbox=False
             )
 
     pdf.output(f"../pdf/{school}_{today_yyyy_mm_dd}_attendance_letter.pdf")
-
-    # TODO get email addresses from felter (attendance contacts)
-    # TODO confirm fax numbers
-    # TODO confirm who they want things logged as (data admin right?)
-    # TODO confirm whether or not people want repeat letters functionality
 
 def daily_attendance_email(school: string) -> None:
     database = {

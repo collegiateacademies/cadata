@@ -20,7 +20,9 @@ school_info = {
         'state': 'LA',
         'zip': '70126',
         'principal': 'Akeem Langham',
-        'fax': '555-555-5555',
+        'phone': '504-503-0004',
+        'fax': '504-342-0322',
+        'attendance_email': 'hello@livingstoncollegiate.org',
     },
     'ASA': {
         'short_name': 'ASA',
@@ -31,7 +33,9 @@ school_info = {
         'state': 'LA',
         'zip': '70127',
         'principal': 'Anthony McElligott',
-        'fax': '504-324-0171'
+        'fax': '504-324-0171',
+        'phone': '504-373-6264',
+        'attendance_email': 'frontdesk@sciacademy.org',
     },
     'CBR': {
         'short_name': 'CBR',
@@ -42,7 +46,9 @@ school_info = {
         'state': 'LA',
         'zip': '70806',
         'principal': '',
-        'fax': '504-324-0171'
+        'fax': '225-286-7808',
+        'phone': '225-892-6962',
+        'attendance_email': 'info@collegiatebr.org',
     },
     'GWC': {
         'short_name': 'GWC',
@@ -53,7 +59,9 @@ school_info = {
         'state': 'LA',
         'zip': '70126',
         'principal': 'Jerel Bryant',
-        'fax': '504-324-0171'
+        'fax': '504-754-7980',
+        'phone': '504-308-3660',
+        'attendance_email': 'info@carvercollegiate.org',
     },
     'RCA': {
         'short_name': 'RCA',
@@ -64,7 +72,9 @@ school_info = {
         'state': 'LA',
         'zip': '70114',
         'principal': 'Benjamin Davis',
-        'fax': '504-324-0171'
+        'fax': '504-814-9296',
+        'phone': '504-503-1400',
+        'attendance_email': 'info@rosenwaldcollegiate.org',
     },
 }
 
@@ -92,7 +102,7 @@ sys.path.append("..")
 
 
 logging.basicConfig(
-    level=logging.DEBUG,
+    level=logging.INFO,
     format="[%(levelname)s] %(asctime)s -- %(filename)s on line %(lineno)s\n\tFunction name: %(funcName)s\n\tMessage: %(message)s\n",
     datefmt='%B-%d-%Y %H:%M:%S',
     filename=f"../logs/{Path(__file__).stem}.log",
@@ -147,17 +157,17 @@ attendance_letter3_blocks_page1 = [
     },
     {
         'name': 'excuse_policy2a',
-        'text': 'Emailing it to [email address].',
+        'text': 'Emailing it to ###attendace_email###',
         'bullet_level': 2,
     },
     {
         'name': 'excuse_policy2b',
-        'text': 'Faxing it to [fax number].',
+        'text': 'Faxing it to ###fax_number###',
         'bullet_level': 2,
     },
     {
         'name': 'excuse_policy2c',
-        'text': 'Bringing it to the front office.',
+        'text': 'Bringing it to the front office',
         'bullet_level': 2,
     },
     {
@@ -209,7 +219,7 @@ attendance_letter3_blocks_page2 = [
     },
     {
         'name': 'page2_paragraph4',
-        'text': 'Please review our attendance policy on the reverse of this letter.  You can contact [school name] at [phone number] to discuss your child\'s attendance and your next steps. We look forward to having your student attend school on a daily basis so we can continue their pathway to college success.',
+        'text': 'Please review our attendance policy on the reverse of this letter.  You can contact ###school_name### at ###school_phone### to discuss your child\'s attendance and your next steps. We look forward to having your student attend school on a daily basis so we can continue their pathway to college success.',
     }
 ]
 
