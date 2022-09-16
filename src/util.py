@@ -109,7 +109,7 @@ logging.basicConfig(
     filemode='w'
 )
 
-attendance_letter3_blocks_page1 = [
+attendance_letter_blocks_page1 = [
     {
         'name': 'attendance_policy_header',
         'text': "**###school_name### Attendance Policy**",

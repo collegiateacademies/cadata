@@ -81,7 +81,7 @@ def generate_attendance_letters(school: string, min_date: string, repeated_lette
                 markdown=True
             )
             pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
-            for block in attendance_letter3_blocks_page1:
+            for block in attendance_letter_blocks_page1:
                 if 'bullet_level' in block:
                     if block['bullet_level'] == 1:
                         pdf.set_x(10)
