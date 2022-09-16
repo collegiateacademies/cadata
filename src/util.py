@@ -47,11 +47,11 @@ school_info = {
         'city': 'Baton Rouge',
         'state': 'LA',
         'zip': '70806',
-        'principal': '',
+        'principal': 'Samantha Johnson',
         'fax': '225-286-7808',
         'phone': '225-892-6962',
         'attendance_email': 'info@collegiatebr.org',
-        'attendance_letter_recipient': 'cpuliafico@collegiateacademies.org',
+        'attendance_letter_recipient': 'amiles@collegiateacademies.org',
     },
     'GWC': {
         'short_name': 'GWC',
@@ -65,7 +65,7 @@ school_info = {
         'fax': '504-754-7980',
         'phone': '504-308-3660',
         'attendance_email': 'info@carvercollegiate.org',
-        'attendance_letter_recipient': 'cpuliafico@collegiateacademies.org',
+        'attendance_letter_recipient': 'amueller@collegiateacademies.org',
     },
     'RCA': {
         'short_name': 'RCA',
@@ -75,11 +75,11 @@ school_info = {
         'city': 'New Orleans',
         'state': 'LA',
         'zip': '70114',
-        'principal': 'Benjamin Davis',
+        'principal': 'Rhonda Dale',
         'fax': '504-814-9296',
         'phone': '504-503-1400',
         'attendance_email': 'info@rosenwaldcollegiate.org',
-        'attendance_letter_recipient': 'cpuliafico@collegiateacademies.org',
+        'attendance_letter_recipient': 'sscott1@collegiateacademies.org',
     },
 }
 
