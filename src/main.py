@@ -34,6 +34,17 @@ def generate_attendance_letters(school: string, min_date: string, repeated_lette
         }
     )
 
+    communications_list = sr_api_pull(
+        'communications',
+        parameters = {
+            'active': '1',
+            'school_ids': school_info[school]['sr_id'],
+            'min_date': min_date,
+            'max_date': today_yyyy_mm_dd,
+            'expand': 'communication_method, communication_type, student'
+        }
+    )
+
     for student in student_list:
         if student['student_id'] in database:
             continue
@@ -50,6 +61,8 @@ def generate_attendance_letters(school: string, min_date: string, repeated_lette
                 'sr_id': student['student_id'],
                 'au': 0,
                 'tu': 0,
+                '3au_letters_logged': 0,
+                '5au_letters_logged': 0,
             }
     
     for absence in absence_list:
@@ -57,6 +70,12 @@ def generate_attendance_letters(school: string, min_date: string, repeated_lette
             database[absence['student_id']]['au'] += 1
         elif absence['absence_type']['code'] == 'TU' and absence['student']['active'] == '1' and absence['student']['school_id'] == school_info[school]['sr_id']:
             database[absence['student_id']]['tu'] += 1
+    
+    for communication in communications_list:
+        if communication['student']['active'] == '1' and communication['communication_method']['name'] == "Letter" and communication['communication_type']['name'] == 'Attendance' and communication['comments'] == '3+ AU Letter':
+            database[communication['student_id']]['3au_letters_logged'] += 1
+        elif communication['student']['active'] == '1' and communication['communication_method']['name'] == "Letter" and communication['communication_type']['name'] == 'Attendance' and communication['comments'] == '5+ AU Letter':
+            database[communication['student_id']]['5au_letters_logged'] += 1
 
     ##########################################################################
     ########                PDF GENERATION STARTS HERE              ##########
@@ -69,7 +88,7 @@ def generate_attendance_letters(school: string, min_date: string, repeated_lette
     pdf.set_font('helvetica', size=10)
 
     for student in database:
-        if database[student]['au'] >= 3:
+        if database[student]['au'] >= 3 and database[student]['3au_letters_logged'] == 0:
             pdf.add_page()
             pdf.image(f"../assets/{school.lower()}_letterhead.png", x=125, y=5, h=8)
             pdf.multi_cell(
@@ -77,7 +96,7 @@ def generate_attendance_letters(school: string, min_date: string, repeated_lette
                 h=5,
                 new_x="LMARGIN",
                 new_y="NEXT",
-                txt=f"{database[student]['first_name']} {database[student]['last_name']} - {datetime.datetime.today().strftime('%A, %B %-d, %Y')}",
+                txt=f"{database[student]['first_name']} {database[student]['last_name']} - {datetime.datetime.today().strftime('%A, %B %-d, %Y')} (3 Absence Letter)",
                 markdown=True
             )
             pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
@@ -201,16 +220,159 @@ def generate_attendance_letters(school: string, min_date: string, repeated_lette
             pdf.text(15, 255, database[student]['street'])
             pdf.text(15, 260, f"{database[student]['city']}, {database[student]['state']} {database[student]['zip']}")
 
-            log_communication(
-                student_id = database[student]['sr_id'],
-                communication_method_id = '17',
-                communication_type_id = '2',
-                staff_member_id = '11690',
-                school_id = school_info[school]['sr_id'],
-                contact_person = 'Parent/Guardian letter',
-                comments = '3+ AU Letter',
-                sandbox=False
+            # log_communication(
+            #     student_id = database[student]['sr_id'],
+            #     communication_method_id = '17',
+            #     communication_type_id = '2',
+            #     staff_member_id = '11690',
+            #     school_id = school_info[school]['sr_id'],
+            #     contact_person = 'Parent/Guardian letter',
+            #     comments = '3+ AU Letter',
+            #     sandbox=True
+            # )
+        
+        if database[student]['au'] >= 5 and database[student]['5au_letters_logged'] == 0:
+            pdf.add_page()
+            pdf.image(f"../assets/{school.lower()}_letterhead.png", x=125, y=5, h=8)
+            pdf.multi_cell(
+                w=0,
+                h=5,
+                new_x="LMARGIN",
+                new_y="NEXT",
+                txt=f"{database[student]['first_name']} {database[student]['last_name']} - {datetime.datetime.today().strftime('%A, %B %-d, %Y')} (5 Absence Letter)",
+                markdown=True
             )
+            pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
+            for block in attendance_letter_blocks_page1:
+                if 'bullet_level' in block:
+                    if block['bullet_level'] == 1:
+                        pdf.set_x(10)
+                        pdf.multi_cell(w=5, h=5, txt="\x95", new_x="END", new_y="LAST")
+                        pdf.multi_cell(
+                            w=0,
+                            h=5,
+                            new_x="LMARGIN",
+                            new_y="NEXT",
+                            txt=block['text']
+                                .replace("###school_name###", school_info[school]['long_name'])
+                                .replace('###school_phone###', school_info[school]['phone'])
+                                .replace('###attendace_email###', school_info[school]['attendance_email'])
+                                .replace('###fax_number###', school_info[school]['fax']),
+                            markdown=True
+                        )
+                        pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
+                    elif block['bullet_level'] == 2:
+                        pdf.set_x(20)
+                        pdf.multi_cell(w=5, h=5, txt="\x95", new_x="END", new_y="LAST")
+                        pdf.multi_cell(
+                            w=0,
+                            h=5,
+                            new_x="LMARGIN",
+                            new_y="NEXT",
+                            txt=block['text']
+                                .replace("###school_name###", school_info[school]['long_name'])
+                                .replace('###school_phone###', school_info[school]['phone'])
+                                .replace('###attendace_email###', school_info[school]['attendance_email'])
+                                .replace('###fax_number###', school_info[school]['fax']),
+                            markdown=True
+                        )
+                        pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
+                else:
+                    pdf.multi_cell(
+                        w=0,
+                        h=5,
+                        new_x="LMARGIN",
+                        new_y="NEXT",
+                        txt=block['text']
+                                .replace("###school_name###", school_info[school]['long_name'])
+                                .replace('###school_phone###', school_info[school]['phone'])
+                                .replace('###attendace_email###', school_info[school]['attendance_email'])
+                                .replace('###fax_number###', school_info[school]['fax']),
+                        markdown=True
+                    )
+                    pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
+            
+            pdf.add_page()
+
+            data = (
+                ("Scholar Attendance Summary", f"{database[student]['first_name']} {database[student]['last_name']}"),
+                ("Unexcused Absences", str(database[student]['au'])),
+                ("Unexcused Tardies", str(database[student]['tu'])),
+            )
+            line_height = pdf.font_size * 2.5
+            col_width = pdf.epw / 3  # distribute content evenly
+            for row in data:
+                for datum in row:
+                    pdf.multi_cell(col_width, line_height, datum, border=1, new_x="RIGHT", new_y="TOP", max_line_height=pdf.font_size)
+                pdf.ln(line_height)
+
+            pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
+
+            for block in attendance_letter5_blocks_page2:
+                if 'bullet_level' in block:
+                    if block['bullet_level'] == 1:
+                        pdf.set_x(10)
+                        pdf.multi_cell(w=5, h=5, txt="\x95", new_x="END", new_y="LAST")
+                        pdf.multi_cell(
+                            w=0,
+                            h=5,
+                            new_x="LMARGIN",
+                            new_y="NEXT",
+                            txt=block['text']
+                                .replace("###school_name###", school_info[school]['long_name'])
+                                .replace('###school_phone###', school_info[school]['phone'])
+                                .replace('###attendace_email###', school_info[school]['attendance_email'])
+                                .replace('###fax_number###', school_info[school]['fax']),
+                            markdown=True
+                        )
+                        pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
+                    elif block['bullet_level'] == 2:
+                        pdf.set_x(20)
+                        pdf.multi_cell(w=5, h=5, txt="\x95", new_x="END", new_y="LAST")
+                        pdf.multi_cell(
+                            w=0,
+                            h=5,
+                            new_x="LMARGIN",
+                            new_y="NEXT",
+                            txt=block['text']
+                                .replace("###school_name###", school_info[school]['long_name'])
+                                .replace('###school_phone###', school_info[school]['phone'])
+                                .replace('###attendace_email###', school_info[school]['attendance_email'])
+                                .replace('###fax_number###', school_info[school]['fax']),
+                            markdown=True
+                        )
+                        pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
+                else:
+                    pdf.multi_cell(
+                        w=0,
+                        h=5,
+                        new_x="LMARGIN",
+                        new_y="NEXT",
+                        txt=block['text']
+                                .replace("###school_name###", school_info[school]['long_name'])
+                                .replace('###school_phone###', school_info[school]['phone'])
+                                .replace('###attendace_email###', school_info[school]['attendance_email'])
+                                .replace('###fax_number###', school_info[school]['fax']),
+                        markdown=True
+                    )
+                    pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
+            pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='Sincerely,')
+            pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt=school_info[school]['principal'])
+
+            pdf.text(15, 250, f"Parents/Guardians of {database[student]['first_name']} {database[student]['last_name']}")
+            pdf.text(15, 255, database[student]['street'])
+            pdf.text(15, 260, f"{database[student]['city']}, {database[student]['state']} {database[student]['zip']}")
+
+            # log_communication(
+            #     student_id = database[student]['sr_id'],
+            #     communication_method_id = '17',
+            #     communication_type_id = '2',
+            #     staff_member_id = '11690',
+            #     school_id = school_info[school]['sr_id'],
+            #     contact_person = 'Parent/Guardian letter',
+            #     comments = '5+ AU Letter',
+            #     sandbox=True
+            # )
 
     pdf.output(f"../pdf/{school}_{today_yyyy_mm_dd}_attendance_letter.pdf")
 

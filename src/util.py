@@ -223,6 +223,28 @@ attendance_letter3_blocks_page2 = [
     }
 ]
 
+attendance_letter5_blocks_page2 = [
+    {
+        'name': 'page2_header',
+        'text': 'Re: Attendance Warning',
+    },
+    {
+        'name': 'page2_paragraph1',
+        'text': '**You are receiving this letter because your child has 3 or more Unexcused Absences and/or Tardies.** Under the law, students are required to attend school regularly and must attend a minimum number of days of school to earn credit and be eligible for promotion to the next grade.  Your child is in danger of not being promoted to the next grade.',
+    },
+    {
+        'name': 'page2_paragraph2',
+        'text': 'A representative from the school will contact you via phone to schedule a mandatory attendance conference.  In this conference, your child\'s attendance record will be reviewed and a plan will be put into place that they must follow in order to be eligible for promotion or graduation.',
+    },
+    {
+        'name': 'page2_paragraph3',
+        'text': '**If your child does not meet the school\'s attendance requirements, they may not earn credit for their courses and may have to complete the same grade next year.  Failure to adhere to the requirements of your scholar\'s attendance plan will also result in a referral to Municipal Court.**',
+    },
+    {
+        'name': 'page2_paragraph4',
+        'text': 'Please review our attendance policy on the reverse of this letter.  You can contact ###school_name### at ###school_phone### to discuss your child\'s attendance and your next steps. We look forward to having your student attend school on a daily basis so we can continue their pathway to college success.',
+    }
+]
 
 with open('../creds.json') as file:
     credentials = json.load(file)
