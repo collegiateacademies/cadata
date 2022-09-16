@@ -393,3 +393,21 @@ def extract_sr_student_attribute(attr_list: list, attr_key: str):
     for attr in attr_list:
         if attr['active'] == '1' and attr['student_attr_type']['attr_key'] == attr_key:
             return attr['display_name']
+
+
+def today_is_a_school_day(school, school_id):
+    params = {
+        'school_ids': school_id,
+        'max_date': datetime.datetime.now().strftime('%Y-%m-%d'),
+        'min_date': datetime.datetime.now().strftime('%Y-%m-%d')
+    }
+
+    headers = {'Authorization': 'Basic ' + base64.b64encode(bytes(f"{credentials['sr_email']}:{credentials['sr_pass']}", "UTF-8")).decode("ascii")}
+    response = requests.get('https://ca.schoolrunner.org/api/v1/calendar_days?', params=params, headers=headers).json()
+
+    if response['results']['calendar_days'][0]['in_session'] == '0':
+        logging.info(f"Today is not a school day at {school.upper()}")
+        return False
+    else:
+        logging.info(f"Today is a school day at {school.upper()}")
+        return True
