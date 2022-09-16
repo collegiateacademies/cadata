@@ -381,6 +381,13 @@ def generate_attendance_letters(school: str, min_date: str, repeated_letters: bo
             # )
 
     pdf.output(f"../pdf/{school}_{today_yyyy_mm_dd}_attendance_letter.pdf")
+    
+    send_email(
+        recipient=school_info[school]['attendance_letter_recipient'],
+        text_body='The following letters have already been logged in Schoolrunner for you. All you need to do is send them out (:',
+        subject_line=f'{school} Attendance Letters {today_yyyy_mm_dd}',
+        attachment=f"../pdf/{school}_{today_yyyy_mm_dd}_attendance_letter.pdf"
+    )
 
 def daily_attendance_email(school: str) -> None:
     database = {
