@@ -230,11 +230,11 @@ attendance_letter5_blocks_page2 = [
     },
     {
         'name': 'page2_paragraph1',
-        'text': '**You are receiving this letter because your child has 3 or more Unexcused Absences and/or Tardies.** Under the law, students are required to attend school regularly and must attend a minimum number of days of school to earn credit and be eligible for promotion to the next grade.  Your child is in danger of not being promoted to the next grade.',
+        'text': '**You are receiving this letter because your child has exceeded the maximum number of Unexcused Absences and/or Tardies allowed by law and is now considered truant.**  Louisiana requires students to attend school for a certain number of days to be promoted to the next grade and earn credit for a course. Under the law, students are required to attend school regularly and must attend a minimum number of days of school to earn credit and be eligible for promotion to the next grade.  Your child is in danger of not being promoted to the next grade because he or she has been absent more than the time allotted by the state.',
     },
     {
         'name': 'page2_paragraph2',
-        'text': 'A representative from the school will contact you via phone to schedule a mandatory attendance conference.  In this conference, your child\'s attendance record will be reviewed and a plan will be put into place that they must follow in order to be eligible for promotion or graduation.',
+        'text': 'A representative from the school will contact you via phone to schedule a mandatory attendance hearing.  In this hearing, your child\'s attendance record will be reviewed and a plan will be put into place that they must follow in order to be eligible for promotion or graduation.',
     },
     {
         'name': 'page2_paragraph3',
