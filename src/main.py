@@ -11,6 +11,12 @@ logging.basicConfig(
 )
 
 def generate_attendance_letters(school: string, min_date: string, repeated_letters: bool) -> None:
+    
+    if today_is_a_school_day(school, school_info[school]['sr_id']):
+        pass
+    else:
+        return
+
     database = {}
 
     student_list = sr_api_pull(
