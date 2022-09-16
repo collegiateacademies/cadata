@@ -23,6 +23,7 @@ school_info = {
         'phone': '504-503-0004',
         'fax': '504-342-0322',
         'attendance_email': 'hello@livingstoncollegiate.org',
+        'attendance_letter_recipient': 'cpuliafico@collegiateacademies.org',
     },
     'ASA': {
         'short_name': 'ASA',
@@ -36,6 +37,7 @@ school_info = {
         'fax': '504-324-0171',
         'phone': '504-373-6264',
         'attendance_email': 'frontdesk@sciacademy.org',
+        'attendance_letter_recipient': 'ncowlin@collegiateacademies.org',
     },
     'CBR': {
         'short_name': 'CBR',
@@ -49,6 +51,7 @@ school_info = {
         'fax': '225-286-7808',
         'phone': '225-892-6962',
         'attendance_email': 'info@collegiatebr.org',
+        'attendance_letter_recipient': 'cpuliafico@collegiateacademies.org',
     },
     'GWC': {
         'short_name': 'GWC',
@@ -62,6 +65,7 @@ school_info = {
         'fax': '504-754-7980',
         'phone': '504-308-3660',
         'attendance_email': 'info@carvercollegiate.org',
+        'attendance_letter_recipient': 'cpuliafico@collegiateacademies.org',
     },
     'RCA': {
         'short_name': 'RCA',
@@ -75,6 +79,7 @@ school_info = {
         'fax': '504-814-9296',
         'phone': '504-503-1400',
         'attendance_email': 'info@rosenwaldcollegiate.org',
+        'attendance_letter_recipient': 'cpuliafico@collegiateacademies.org',
     },
 }
 
