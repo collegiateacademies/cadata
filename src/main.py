@@ -2,14 +2,6 @@ import sys
 sys.path.append("..")
 from src.util import *
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="[%(levelname)s] %(asctime)s -- %(filename)s on line %(lineno)s\n\tFunction name: %(funcName)s\n\tMessage: %(message)s\n",
-    datefmt='%B-%d-%Y %H:%M:%S',
-    filename=f"../logs/{Path(__file__).stem}.log",
-    filemode='w'
-)
-
 def generate_attendance_letters(school: str, min_date: str, repeated_letters: bool) -> None:
     
     if today_is_a_school_day(school, school_info[school]['sr_id']):
