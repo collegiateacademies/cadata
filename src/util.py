@@ -1,4 +1,5 @@
 import base64, requests, datetime, pprint, json, logging, sys, smtplib
+from xml.dom.minidom import Attr
 from pathlib import Path
 from fpdf import FPDF, HTMLMixin
 from email.message import EmailMessage
@@ -122,7 +123,7 @@ sys.path.append("..")
 
 logging.basicConfig(
     level=logging.INFO,
-    format="[%(levelname)s] %(asctime)s -- %(filename)s on line %(lineno)s\n\tFunction name: %(funcName)s\n\tMessage: %(message)s\n",
+    format="\n[%(levelname)s] %(asctime)s -- %(filename)s on line %(lineno)s\n\tFunction name: %(funcName)s\n\tMessage: %(message)s\n",
     datefmt='%B-%d-%Y %H:%M:%S',
     filename=f"../logs/{Path(__main__.__file__).stem}.log",
     filemode='w'
@@ -441,11 +442,18 @@ def return_current_sr_term(term_type: str, school: str) -> str:
     )
 
     for term in terms:
-        start_date = convert_yyyy_mm_dd_date(term['start_date'])
-        end_date = convert_yyyy_mm_dd_date(term['end_date'])
-        if term_type.lower() in term['long_name'].lower() and start_date <= datetime.datetime.now() <= end_date:
-            logging.info(f"Found term {term['long_name']} - {term['term_bin_id']}")
-            return term['term_bin_id']
+        try:
+            start_date = convert_yyyy_mm_dd_date(term['start_date'])
+            end_date = convert_yyyy_mm_dd_date(term['end_date'])
+            if term_type.lower() in term['long_name'].lower() and start_date <= datetime.datetime.now() <= end_date:
+                logging.info(f"Found term {term['long_name']} - {term['term_bin_id']}")
+                return term['term_bin_id']
+        except AttributeError as attr_error:
+            logging.error(f"Error with a term -- it probably doesn\'t have a long name -- {attr_error}", exc_info=True)
+        except TypeError as type_error:
+            logging.error(f"Error with a termin -- its dates are wonky -- {type_error}", exc_info=True)
+        except Exception as error:
+            logging.error(f"Error with a term -- {error}", exc_info=True)
 
 def return_term_dates(term_bin_id: str) -> str:
     term_bins = sr_api_pull(
