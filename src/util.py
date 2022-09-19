@@ -2,7 +2,7 @@ import base64, requests, datetime, pprint, json, logging, sys, smtplib
 from pathlib import Path
 from fpdf import FPDF, HTMLMixin
 from email.message import EmailMessage
-
+import __main__
 
 pp = pprint.PrettyPrinter(indent=2)
 
@@ -124,7 +124,7 @@ logging.basicConfig(
     level=logging.INFO,
     format="[%(levelname)s] %(asctime)s -- %(filename)s on line %(lineno)s\n\tFunction name: %(funcName)s\n\tMessage: %(message)s\n",
     datefmt='%B-%d-%Y %H:%M:%S',
-    filename=f"../logs/{Path(__file__).stem}.log",
+    filename=f"../logs/{Path(__main__.__file__).stem}.log",
     filemode='w'
 )
 
