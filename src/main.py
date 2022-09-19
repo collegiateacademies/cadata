@@ -384,7 +384,7 @@ def generate_attendance_letters(school: str, min_date: str, repeated_letters: bo
     
     send_email(
         recipient=school_info[school]['attendance_letter_recipient'],
-        text_body='The following letters have already been logged in Schoolrunner for you. All you need to do is send them out (:',
+        text_body='Good morning,\n\nThe following letters have already been logged in Schoolrunner for you. All you need to do is fold, stuff, stamp, and send them out!\n\n- The CA Data Robot 🤖',
         subject_line=f'{school} Attendance Letters {today_yyyy_mm_dd}',
         attachment=f"../pdf/{school}_{today_yyyy_mm_dd}_attendance_letter.pdf",
         cc="shogarty@collegiateacademies.org"
