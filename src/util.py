@@ -81,6 +81,20 @@ school_info = {
         'attendance_email': 'info@rosenwaldcollegiate.org',
         'attendance_letter_recipient': 'sscott1@collegiateacademies.org',
     },
+    'OA': {
+        'short_name': 'OA',
+        'long_name': 'Opportunities Academy',
+        'sr_id': '19',
+        'street': '2625 Thalia St',
+        'city': 'New Orleans',
+        'state': 'LA',
+        'zip': '70113',
+        'principal': 'Sophia Scott',
+        'fax': '504-814-1721',
+        'phone': '504-503-1421',
+        'attendance_email': 'info@opportunitiesacademy.org',
+        'attendance_letter_recipient': 'djones1@collegiateacademies.org',
+    },
 }
 
 
