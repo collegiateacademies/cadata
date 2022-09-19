@@ -3,4 +3,4 @@ sys.path.append("..")
 from src.main import *
 
 if __name__ == '__main__':
-    generate_attendance_letters('ASA', '2022-08-02', repeated_letters=True)
+    generate_attendance_letters('ASA', return_term_start_date('semester', 'ASA'), repeated_letters=True)
