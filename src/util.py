@@ -456,3 +456,9 @@ def return_term_dates(term_bin_id: str) -> str:
     )
 
     return term_bins[0]['start_date'], term_bins[0]['end_date']
+
+def return_term_start_date(term_type: str, school: str) -> str:
+    return return_term_dates(return_current_sr_term(term_type, school))[0]
+
+def return_term_end_date(term_type: str, school: str) -> str:
+    return return_term_dates(return_current_sr_term(term_type, school))[1]
