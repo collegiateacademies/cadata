@@ -222,9 +222,9 @@ def generate_attendance_letters(school: str, min_date: str, repeated_letters: bo
             pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='Sincerely,')
             pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt=school_info[school]['principal'])
 
-            pdf.text(15, 250, f"Parents/Guardians of {database[student]['first_name']} {database[student]['last_name']}")
-            pdf.text(15, 255, database[student]['street'])
-            pdf.text(15, 260, f"{database[student]['city']}, {database[student]['state']} {database[student]['zip']}")
+            pdf.text(15, 255, f"Parents/Guardians of {database[student]['first_name']} {database[student]['last_name']}")
+            pdf.text(15, 260, database[student]['street'])
+            pdf.text(15, 265, f"{database[student]['city']}, {database[student]['state']} {database[student]['zip']}")
 
             # log_communication(
             #     student_id = database[student]['sr_id'],
@@ -365,9 +365,9 @@ def generate_attendance_letters(school: str, min_date: str, repeated_letters: bo
             pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='Sincerely,')
             pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt=school_info[school]['principal'])
 
-            pdf.text(15, 250, f"Parents/Guardians of {database[student]['first_name']} {database[student]['last_name']}")
-            pdf.text(15, 255, database[student]['street'])
-            pdf.text(15, 260, f"{database[student]['city']}, {database[student]['state']} {database[student]['zip']}")
+            pdf.text(15, 255, f"Parents/Guardians of {database[student]['first_name']} {database[student]['last_name']}")
+            pdf.text(15, 260, database[student]['street'])
+            pdf.text(15, 265, f"{database[student]['city']}, {database[student]['state']} {database[student]['zip']}")
 
             # log_communication(
             #     student_id = database[student]['sr_id'],
