@@ -226,16 +226,16 @@ def generate_attendance_letters(school: str, min_date: str, repeated_letters: bo
             pdf.text(15, 260, database[student]['street'])
             pdf.text(15, 265, f"{database[student]['city']}, {database[student]['state']} {database[student]['zip']}")
 
-            # log_communication(
-            #     student_id = database[student]['sr_id'],
-            #     communication_method_id = '17',
-            #     communication_type_id = '2',
-            #     staff_member_id = '11690',
-            #     school_id = school_info[school]['sr_id'],
-            #     contact_person = 'Parent/Guardian letter',
-            #     comments = '3+ AU Letter',
-            #     sandbox=True
-            # )
+            log_communication(
+                student_id = database[student]['sr_id'],
+                communication_method_id = '17',
+                communication_type_id = '2',
+                staff_member_id = '11690',
+                school_id = school_info[school]['sr_id'],
+                contact_person = 'Parent/Guardian letter',
+                comments = '3+ AU Letter',
+                sandbox=True
+            )
         
         if database[student]['au'] >= 5 and database[student]['5au_letters_logged'] == 0:
             pdf.add_page()
@@ -369,16 +369,16 @@ def generate_attendance_letters(school: str, min_date: str, repeated_letters: bo
             pdf.text(15, 260, database[student]['street'])
             pdf.text(15, 265, f"{database[student]['city']}, {database[student]['state']} {database[student]['zip']}")
 
-            # log_communication(
-            #     student_id = database[student]['sr_id'],
-            #     communication_method_id = '17',
-            #     communication_type_id = '2',
-            #     staff_member_id = '11690',
-            #     school_id = school_info[school]['sr_id'],
-            #     contact_person = 'Parent/Guardian letter',
-            #     comments = '5+ AU Letter',
-            #     sandbox=True
-            # )
+            log_communication(
+                student_id = database[student]['sr_id'],
+                communication_method_id = '17',
+                communication_type_id = '2',
+                staff_member_id = '11690',
+                school_id = school_info[school]['sr_id'],
+                contact_person = 'Parent/Guardian letter',
+                comments = '5+ AU Letter',
+                sandbox=True
+            )
 
     pdf.output(f"../pdf/{school}_{today_yyyy_mm_dd}_attendance_letter.pdf")
     
