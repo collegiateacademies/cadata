@@ -430,3 +430,29 @@ def today_is_a_school_day(school, school_id):
     else:
         logging.info(f"Today is a school day at {school.upper()}")
         return True
+
+def return_current_sr_term(term_type: str, school: str) -> str:
+    terms = sr_api_pull(
+        search_key='term-bins',
+        parameters={
+            'school_ids': school_info[school]['sr_id'],
+            'expand': 'term_bin_type'
+        }
+    )
+
+    for term in terms:
+        start_date = convert_yyyy_mm_dd_date(term['start_date'])
+        end_date = convert_yyyy_mm_dd_date(term['end_date'])
+        if term_type.lower() in term['long_name'].lower() and start_date <= datetime.datetime.now() <= end_date:
+            logging.info(f"Found term {term['long_name']} - {term['term_bin_id']}")
+            return term['term_bin_id']
+
+def return_term_dates(term_bin_id: str) -> str:
+    term_bins = sr_api_pull(
+        search_key='term-bins',
+        parameters={
+            'term_bin_ids': term_bin_id
+        }
+    )
+
+    return term_bins[0]['start_date'], term_bins[0]['end_date']
