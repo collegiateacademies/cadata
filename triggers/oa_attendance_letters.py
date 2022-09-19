@@ -4,6 +4,10 @@ from src.main import *
 
 if __name__ == '__main__':
     try:
-        generate_attendance_letters('OA', return_term_start_date('year', 'OA'), repeated_letters=True)
+        generate_attendance_letters(
+            school = 'OA', 
+            start_date = return_term_start_date('year', 'OA'),
+            repeated_letters = True
+        )
     except Exception as error:
         logging.error(f"Error for OA Attendance letters -- {error}", exc_info=True)
