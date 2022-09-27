@@ -3,4 +3,4 @@ sys.path.append("..")
 from src.main import *
 
 if __name__ == '__main__':
-    daily_attendance_email('ASA')
+    daily_attendance_email('GWC')
