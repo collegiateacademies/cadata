@@ -439,7 +439,7 @@ def daily_attendance_email(school: str) -> None:
     for absence in absence_list:
         if absence['student']['grade_level']['order_key'] in database:
             database[absence['student']['grade_level']['order_key']]['total_out_of_school'] += 1
-            database[absence['student']['grade_level']['order_key']]['names_list'] += f"{absence['student']['display_name']} - {extract_sr_student_attribute(absence['student']['student_attrs'], 'Advisor')} - ({absence['absence_type']['code']})<br>"
+            database[absence['student']['grade_level']['order_key']]['names_list'] += f"{absence['student']['display_name']} - ({absence['absence_type']['code']})<br>" #  - {extract_sr_student_attribute(absence['student']['student_attrs'], 'Advisor')} SAVE THIS FOR WHEN ADVISORIES MAKE SENSE
             database['totals']['absences'] += 1
 
     with open('../logs/json/testingtesting.json', 'w') as file:
@@ -448,9 +448,18 @@ def daily_attendance_email(school: str) -> None:
     with open('../html/daily_attendance.html', 'r') as file:
         html_email = file.read()
     
+    current_hour = datetime.datetime.now().hour
+    match current_hour:
+        case _ if current_hour <= 11:
+            time_of_day = "Morning"
+        case _ if current_hour > 11 and current_hour <= 2:
+            time_of_day = "Mid-Day"
+        case _ if current_hour > 2:
+            time_of_day = "EOD"
+
     send_email(
-        recipient='tophermckee@gmail.com',
-        subject_line='hey there',
+        recipient='tophermckee@gmail.com',#recipient=school_info[school]['attendance_letter_recipient'],
+        subject_line=f"{today_yyyy_mm_dd} {time_of_day} Attendance Email",
         html_body=html_email
             .replace('###9th_list###', database['9']['names_list'])
             .replace('###10th_list###', database['10']['names_list'])
