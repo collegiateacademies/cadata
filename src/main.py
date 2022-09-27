@@ -458,7 +458,7 @@ def daily_attendance_email(school: str) -> None:
             time_of_day = "EOD"
 
     send_email(
-        recipient='tophermckee@gmail.com',#recipient=school_info[school]['attendance_letter_recipient'],
+        recipient=school_info[school]['attendance_letter_recipient'],
         subject_line=f"{today_yyyy_mm_dd} {time_of_day} Attendance Email",
         html_body=html_email
             .replace('###9th_list###', database['9']['names_list'])
