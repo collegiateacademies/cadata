@@ -433,8 +433,8 @@ def daily_attendance_email(school: str) -> None:
     absence_list = sr_api_pull(
         search_key='absences',
         parameters={
-            'min_date': '2022-09-09',# today_yyyy_mm_dd,
-            'max_date': '2022-09-09',# today_yyyy_mm_dd,
+            'min_date': today_yyyy_mm_dd,
+            'max_date': today_yyyy_mm_dd,
             'active': '1',
             'school_ids': school_info[school]['sr_id'],
             'out_of_school_only': '1',
