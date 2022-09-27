@@ -383,6 +383,12 @@ def generate_attendance_letters(school: str, min_date: str, repeated_letters: bo
     )
 
 def daily_attendance_email(school: str) -> None:
+    
+    if today_is_a_school_day(school, school_info[school]['sr_id']):
+        pass
+    else:
+        return
+        
     database = {
         '9': {
             'total_students': 0,
