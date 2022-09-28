@@ -94,7 +94,7 @@ school_info = {
         'fax': '504-814-1721',
         'phone': '504-503-1421',
         'attendance_email': 'hello@opportunitiesacademy.org',
-        'attendance_letter_recipient': 'djones1@collegiateacademies.org',
+        'attendance_letter_recipient': 'hello@opportunitiesacademy.org',
     },
 }
 
