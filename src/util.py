@@ -407,7 +407,7 @@ def send_email(recipient='', text_body='', subject_line='', html_body='', bcc=''
             smtp.quit()
 
 def extract_sr_student_attribute(attr_list: list, attr_key: str):
-    """Takes the nasy list of student attributes that is attached to students
+    """Takes the nasty list of student attributes that is attached to students
     and will return the currently active version for the provided key"""
     for attr in attr_list:
         if attr['active'] == '1' and attr['student_attr_type']['attr_key'] == attr_key:
