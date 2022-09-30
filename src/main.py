@@ -37,7 +37,7 @@ def generate_attendance_letters(school: str, min_date: str, repeated_letters: bo
         parameters = {
             'active': '1',
             'school_ids': school_info[school]['sr_id'],
-            'min_date': min_date,
+            'min_date': start_date,
             'max_date': today_yyyy_mm_dd,
             'expand': 'communication_method, communication_type, student'
         }
