@@ -413,6 +413,13 @@ def extract_sr_student_attribute(attr_list: list, attr_key: str):
         if attr['active'] == '1' and attr['student_attr_type']['attr_key'] == attr_key:
             return attr['display_name']
 
+def extract_sr_student_detail(detail_list: list, detail_key: str):
+    """Takes the nasty list of student details that is attached to students
+    and will return the currently active version for the provided key"""
+    for detail in detail_list:
+        if detail['active'] == '1' and detail_key in detail:
+            return detail[detail_key]
+
 
 def today_is_a_school_day(school, school_id):
     params = {
