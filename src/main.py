@@ -70,9 +70,9 @@ def generate_attendance_letters(school: str, min_date: str, repeated_letters: bo
             database[absence['student_id']]['tu'] += 1
     
     for communication in communications_list:
-        if communication['student']['active'] == '1' and communication['communication_method']['name'] == "Letter" and communication['communication_type']['name'] == 'Attendance' and communication['comments'] == '3+ AU Letter':
+        if communication['student_id'] in database and communication['student']['active'] == '1' and communication['communication_method']['name'] == "Letter" and communication['communication_type']['name'] == 'Attendance' and communication['comments'] == '3+ AU Letter':
             database[communication['student_id']]['3au_letters_logged'] += 1
-        elif communication['student']['active'] == '1' and communication['communication_method']['name'] == "Letter" and communication['communication_type']['name'] == 'Attendance' and communication['comments'] == '5+ AU Letter':
+        elif communication['student_id'] in database and communication['student']['active'] == '1' and communication['communication_method']['name'] == "Letter" and communication['communication_type']['name'] == 'Attendance' and communication['comments'] == '5+ AU Letter':
             database[communication['student_id']]['5au_letters_logged'] += 1
 
     ##########################################################################
