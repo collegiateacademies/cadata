@@ -2,7 +2,7 @@ import sys
 sys.path.append("..")
 from src.util import *
 
-def generate_attendance_letters(school: str, min_date: str, repeated_letters: bool) -> None:
+def generate_attendance_letters(school: str, start_date: str, repeated_letters: bool) -> None:
     
     if today_is_a_school_day(school, school_info[school]['sr_id']):
         pass
