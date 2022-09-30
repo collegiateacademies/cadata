@@ -270,7 +270,7 @@ with open('../creds.json') as file:
     credentials = json.load(file)
 
 
-def sr_api_pull(search_key, parameters={}, page_limit='') -> list:
+def sr_api_pull(search_key: str, parameters: dict = {}, page_limit: str = '') -> list:
     """A blank function for returning an endpoint for Schoolrunner. Logs its progress in the logs folder and logs its outputs as a json file."""
     items = []
     headers = {'Authorization': 'Basic ' + base64.b64encode(bytes(f"{credentials['sr_email']}:{credentials['sr_pass']}", "UTF-8")).decode("ascii")}
