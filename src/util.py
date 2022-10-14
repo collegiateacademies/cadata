@@ -306,7 +306,7 @@ def convert_yyyy_mm_dd_date(date_string: str) -> datetime.date:
     return datetime.datetime(year, month, day)
 
 
-def return_term_dates(term_bin_id: str) -> str:
+def return_term_dates(term_bin_id: str) -> tuple:
     """Returns the start and end dates of a given term in Schoolrunner."""
     term_bins = sr_api_pull(
         search_key='term-bins',
@@ -320,7 +320,7 @@ def return_term_dates(term_bin_id: str) -> str:
 
 
 def return_this_sr_term(search_term: str, school: str) -> str:
-    """Finds the term based on the type of term you look up (semester, quuarter, etc.)"""
+    """Finds the term based on the type of term you look up (semester, quarter, etc.)"""
     terms = sr_api_pull(
         search_key='term-bins',
         parameters={
@@ -336,8 +336,17 @@ def return_this_sr_term(search_term: str, school: str) -> str:
             logging.info(f"Found term {term['long_name']} - {term['term_bin_id']}")
             return term['term_bin_id']
 
-def log_communication(student_id, communication_method_id, communication_type_id, staff_member_id, school_id, contact_person='',comments='', sandbox=False) -> dict:
-    """Used to log a communcation in Schoolrunner for any school. Will require
+
+def log_communication(
+        student_id: str,
+        communication_method_id: str,
+        communication_type_id: str,
+        staff_member_id: str,
+        school_id: str,
+        contact_person: str = '',
+        comments: str = '',
+        sandbox: bool = False) -> dict:
+    """Used to log a communication in Schoolrunner for any school. Will require
     most parameters that Schoolrunner requires and will also take a comment &
     person contacted just to make the log more useful. These are optional params"""
     payload = {
@@ -371,7 +380,16 @@ def log_communication(student_id, communication_method_id, communication_type_id
     except Exception as error:
         logging.error(f"Unsuccessful log for {student_id} - {error}", exc_info=True)
 
-def send_email(recipient='', text_body='', subject_line='', html_body='', bcc='', cc='', reply_to='', attachment=''):
+
+def send_email(
+        recipient: str = '',
+        text_body: str = '',
+        subject_line: str = '',
+        html_body: str = '',
+        bcc: str = '',
+        cc: str = '',
+        reply_to: str = '',
+        attachment: str = '') -> None:
     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
         try:
             smtp.login(credentials['cadata_email_addr'], credentials['python_gmail_app_password'])
@@ -406,12 +424,14 @@ def send_email(recipient='', text_body='', subject_line='', html_body='', bcc=''
             logging.error(f"Error at send for to:{recipient} -- error: {error_inside}", exc_info=True)
             smtp.quit()
 
+
 def extract_sr_student_attribute(attr_list: list, attr_key: str):
     """Takes the nasty list of student attributes that is attached to students
     and will return the currently active version for the provided key"""
     for attr in attr_list:
         if attr['active'] == '1' and attr['student_attr_type']['attr_key'] == attr_key:
             return attr['display_name']
+
 
 def extract_sr_student_detail(detail_list: list, detail_key: str):
     """Takes the nasty list of student details that is attached to students
@@ -421,7 +441,7 @@ def extract_sr_student_detail(detail_list: list, detail_key: str):
             return detail[detail_key]
 
 
-def today_is_a_school_day(school, school_id):
+def today_is_a_school_day(school: str, school_id: str) -> bool:
     params = {
         'school_ids': school_id,
         'max_date': datetime.datetime.now().strftime('%Y-%m-%d'),
@@ -437,6 +457,7 @@ def today_is_a_school_day(school, school_id):
     else:
         logging.info(f"Today is a school day at {school.upper()}")
         return True
+
 
 def return_current_sr_term(term_type: str, school: str) -> str:
     terms = sr_api_pull(
@@ -461,18 +482,10 @@ def return_current_sr_term(term_type: str, school: str) -> str:
         except Exception as error:
             logging.error(f"Error with a term -- {error}", exc_info=True)
 
-def return_term_dates(term_bin_id: str) -> str:
-    term_bins = sr_api_pull(
-        search_key='term-bins',
-        parameters={
-            'term_bin_ids': term_bin_id
-        }
-    )
-
-    return term_bins[0]['start_date'], term_bins[0]['end_date']
 
 def return_term_start_date(term_type: str, school: str) -> str:
     return return_term_dates(return_current_sr_term(term_type, school))[0]
+
 
 def return_term_end_date(term_type: str, school: str) -> str:
     return return_term_dates(return_current_sr_term(term_type, school))[1]
