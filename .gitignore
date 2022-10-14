@@ -133,3 +133,4 @@ pdf/*.pdf
 .vscode
 .DS_Store
 *test*
+/.idea
