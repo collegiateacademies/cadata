@@ -1,4 +1,4 @@
-import base64, requests, datetime, pprint, json, logging, sys, smtplib
+import base64, requests, datetime, pprint, json, logging, sys, smtplib, gspread, math
 from pathlib import Path
 from fpdf import FPDF, HTMLMixin
 from email.message import EmailMessage
@@ -489,3 +489,35 @@ def return_term_start_date(term_type: str, school: str) -> str:
 
 def return_term_end_date(term_type: str, school: str) -> str:
     return return_term_dates(return_current_sr_term(term_type, school))[1]
+
+
+def return_numeric_column(num):
+    alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+    if num > 26:
+        return f"{alphabet[math.ceil(num / 26) - 2]}{alphabet[(num % 26) - 1]}".upper()
+    else:
+        return alphabet[num - 1].upper()
+
+
+def return_googlesheet_by_key(spreadsheet_key: str, sheet_name: str) -> gspread.Worksheet:
+    from oauth2client.service_account import ServiceAccountCredentials
+    scope = [
+        "https://spreadsheets.google.com/feeds",
+        'https://www.googleapis.com/auth/spreadsheets',
+        "https://www.googleapis.com/auth/drive.file",
+        "https://www.googleapis.com/auth/drive"
+    ]
+    creds = ServiceAccountCredentials.from_json_keyfile_name('../ca-data-administrator.json', scope)
+    client = gspread.authorize(creds)
+    return client.open_by_key(spreadsheet_key).worksheet(sheet_name)
+
+
+def update_googlesheet_by_key(spreadsheet_key:str = '', sheet_name: str = '', data: list = [], starting_cell: str = '') -> None:
+    try:
+        logging.info(f"🤞 Attempting to copy to {spreadsheet_key} {sheet_name}!{starting_cell}:{return_numeric_column(len(data[0]))} 🤞")
+        sheet_to_update = return_googlesheet_by_key(spreadsheet_key, sheet_name)
+        sheet_to_update.batch_clear([f"{starting_cell}:{return_numeric_column(len(data[0]))}"])
+        sheet_to_update.update(starting_cell, data, value_input_option='USER_ENTERED')
+        logging.info(f"🎉 Copy completed successfully! 🎉")
+    except Exception as error:
+        logging.error(f"Error copying -- {error}", exc_info=True)
