@@ -477,3 +477,37 @@ def daily_attendance_email(school: str) -> None:
             .replace( '###11th_total###', str( round((int(database['11']['total_students']) - int(database['11']['total_out_of_school'])) / int(database['11']['total_students']) * 100 , 2)))
             .replace( '###12th_total###', str( round((int(database['12']['total_students']) - int(database['12']['total_out_of_school'])) / int(database['12']['total_students']) * 100 , 2)))
     )
+
+def assessments_export():
+    assessments = sr_api_pull(
+        search_key="assessments",
+        parameters={
+            'min_date': '2022-06-01',
+            'active': '1',
+            'expand': 'school, staff_member, assessment_type, assessment_courses'
+        }
+    )
+
+    output = [['School', 'Course', 'Sections', 'Teacher ID', 'Teacher', 'Term Bin', 'Week of', 'Total']]
+
+    for assessment in assessments:
+        course_list = []
+        for course in assessment['assessment_courses']:
+            course_list.append(course['display_name'])
+        output.append([
+            assessment['school']['short_name'],
+            ','.join(course_list),
+            'Sections TBD',
+            assessment['staff_member']['sis_id'],
+            assessment['staff_member']['display_name'],
+            'Term Bin TBD',
+            'Week of TBD',
+            'Total TBD',
+        ])
+
+    update_googlesheet_by_key(
+        spreadsheet_key='1gaMzfvMbG1O7Nh1-sWc_UupVzKl5xFyyFZAHSodLMps',
+        sheet_name='Sheet1',
+        data=output,
+        starting_cell='A1'
+    )
