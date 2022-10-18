@@ -79,7 +79,7 @@ school_info = {
         'fax': '504-814-9296',
         'phone': '504-503-1400',
         'attendance_email': 'info@rosenwaldcollegiate.org',
-        'attendance_letter_recipient': 'sscott1@collegiateacademies.org',
+        'attendance_letter_recipient': 'sbrooks@collegiateacademies.org',
     },
     'OA': {
         'short_name': 'OA',
