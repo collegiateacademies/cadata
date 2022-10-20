@@ -488,26 +488,31 @@ def assessments_export():
         }
     )
 
-    output = [['School', 'Course', 'Sections', 'Teacher ID', 'Teacher', 'Term Bin', 'Week of', 'Total']]
+    output = [['School', 'Course', 'Sections', 'Teacher ID', 'Teacher', 'Term Bin', 'Week of', 'Name', 'Assessment ID']]
 
     for assessment in assessments:
         course_list = []
+        section_list = []
         for course in assessment['assessment_courses']:
             course_list.append(course['display_name'])
+        for section in assessment['assessment_section_period_links']:
+            if section['section_period']['section_id'] not in section_list:
+                section_list.append(f"{section['section_period']['section_id']}")
         output.append([
             assessment['school']['short_name'],
             ','.join(course_list),
-            'Sections TBD',
+            ','.join(section_list),
             assessment['staff_member']['sis_id'],
             assessment['staff_member']['display_name'],
             'Term Bin TBD',
-            'Week of TBD',
-            'Total TBD',
+            return_monday(assessment['date']),
+            assessment['display_name'],
+            assessment['assessment_id']
         ])
 
     update_googlesheet_by_key(
         spreadsheet_key='1gaMzfvMbG1O7Nh1-sWc_UupVzKl5xFyyFZAHSodLMps',
-        sheet_name='Sheet1',
+        sheet_name='assessments',
         data=output,
         starting_cell='A1'
     )
