@@ -2,6 +2,7 @@ import base64, requests, datetime, pprint, json, logging, sys, smtplib, gspread,
 from pathlib import Path
 from fpdf import FPDF, HTMLMixin
 from email.message import EmailMessage
+from datetime import timedelta
 import __main__
 
 pp = pprint.PrettyPrinter(indent=2)
@@ -521,3 +522,7 @@ def update_googlesheet_by_key(spreadsheet_key:str = '', sheet_name: str = '', da
         logging.info(f"🎉 Copy completed successfully! 🎉")
     except Exception as error:
         logging.error(f"Error copying -- {error}", exc_info=True)
+
+
+def return_monday(timestamp: str) -> datetime.date:
+    convert_yyyy_mm_dd_date(timestamp)
