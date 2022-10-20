@@ -1,3 +1,4 @@
 reportlab # attempting to phase this out in lieu of using fpdf (since fpdf has better text wrapping options)
 fpdf2
 gspread
+oauth2client
