@@ -524,5 +524,7 @@ def update_googlesheet_by_key(spreadsheet_key:str = '', sheet_name: str = '', da
         logging.error(f"Error copying -- {error}", exc_info=True)
 
 
-def return_monday(timestamp: str) -> datetime.date:
-    convert_yyyy_mm_dd_date(timestamp)
+def return_monday(timestamp: str) -> str:
+    date_to_convert = convert_yyyy_mm_dd_date(timestamp)
+    monday = (date_to_convert - timedelta(days = date_to_convert.weekday())).strftime('%Y-%m-%d')
+    return monday
