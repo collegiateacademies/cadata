@@ -270,7 +270,7 @@ with open('../creds.json') as file:
     credentials = json.load(file)
 
 
-def sr_api_pull(search_key: str, parameters: dict = {}, page_limit: str = '') -> list:
+def sr_api_pull(search_key: str, parameters: dict = {}, page_limit: int = None) -> list:
     """A blank function for returning an endpoint for Schoolrunner. Logs its progress in the logs folder and logs its outputs as a json file."""
     items = []
     headers = {'Authorization': 'Basic ' + base64.b64encode(bytes(f"{credentials['sr_email']}:{credentials['sr_pass']}", "UTF-8")).decode("ascii")}
@@ -278,7 +278,7 @@ def sr_api_pull(search_key: str, parameters: dict = {}, page_limit: str = '') ->
     logging.info(f"🤞 Finding number of pages for {' '.join(search_key.split('-'))} 🤞")
     response = requests.get(f"https://ca.schoolrunner.org/api/v1/{search_key}?", params=page_params,headers=headers).json()
     logging.info(f"There are {response['meta']['total_pages']} page(s) of {' '.join(search_key.split('-'))}.")
-    if page_limit == '':
+    if page_limit == None:
         for page in range(response['meta']['total_pages']):
             logging.info(f"Pulling page {page + 1} of {response['meta']['total_pages']} page(s)")
             this_response = requests.get(f"https://ca.schoolrunner.org/api/v1/{search_key}?page={page + 1}", params=parameters, headers=headers).json()
