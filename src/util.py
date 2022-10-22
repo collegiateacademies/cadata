@@ -287,7 +287,7 @@ def sr_api_pull(search_key: str, parameters: dict = {}, page_limit: str = '') ->
         logging.info(f"🎉 Done pulling {' '.join(search_key.split('-'))}! 🎉")
     else:
         for page in range(page_limit):
-            logging.info(f"Pulling page {yellow}{page + 1} of {page_limit} pages [limited]")
+            logging.info(f"Pulling page {page + 1} of {page_limit} pages [limited]")
             this_response = requests.get(f"https://ca.schoolrunner.org/api/v1/{search_key}?page={page + 1}",params=parameters, headers=headers).json()
             for item in this_response['results'][search_key.replace('-', '_')]:
                 items.append(item)
