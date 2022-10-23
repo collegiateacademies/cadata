@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        table, th, tr, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 10px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        body {
+            font-family: sans-serif;
+        }
+
+        li {
+            margin-top: 10px;
+        }
+
+        .red {
+            color: #ff0000;
+            background-color: #ffffad;
+        }
+    </style>
+</head>
+<body>
+    <p>
+        Good afternoon,
+    </p>
+    <p class="bold">
+        You have ###au### unexcused absence(s) currently.
+    </p>
+    <table>
+        <tr>
+            <th>Absence Date</th>
+            <th>Absence Code</th>
+        </tr>
+        ###table_data###
+    </table>
+
+    <p>
+        <a href="mailto:###attendance_email###?subject=Attendance%20Question">Click here</a> to email us or reply to this email if you have any questions about your attendance.
+    </p>
+        
+    <p>
+        <!-- <a href="https://docs.google.com/spreadsheets/d/1ht-0lXdnLXNsLCYxgkRcyDLAgFrv7FyHQ2vXmmdW634/edit?usp=sharing">You can find our seat time calendar here.</a> <span class="bold red">If you are at or above 5 absences, you are at risk of failing your semester classes.</span> --> If you would like more information on our Attendance Policy, <a href="https://drive.google.com/file/d/1tNj0-O8nhsXdKlCzFy03Z0MXF5INtkeo/view?usp=sharing">click here</a>.
+    </p>
+    <p>
+        Sincerely,<br>
+        The Collegiate Academies Attendance Robot 🤖
+    </p>
+</body>
+</html>
