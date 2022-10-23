@@ -1,4 +1,4 @@
-import base64, requests, datetime, pprint, json, logging, sys, smtplib, gspread, math
+import base64, requests, datetime, pprint, json, logging, sys, smtplib, gspread, math, time
 from pathlib import Path
 from fpdf import FPDF, HTMLMixin
 from email.message import EmailMessage
