@@ -431,7 +431,7 @@ def extract_sr_student_attribute(attr_list: list, attr_key: str):
     and will return the currently active version for the provided key"""
     for attr in attr_list:
         if attr['active'] == '1' and attr['student_attr_type']['attr_key'] == attr_key:
-            return attr['display_name']
+            return attr['value']
 
 
 def extract_sr_student_detail(detail_list: list, detail_key: str):
