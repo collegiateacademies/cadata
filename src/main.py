@@ -541,3 +541,72 @@ def assessments_export():
     
     # This little guy is for later down the line if we decide to sort this sheet
     # return_googlesheet_by_key(spreadsheet_key='1gaMzfvMbG1O7Nh1-sWc_UupVzKl5xFyyFZAHSodLMps', sheet_name='assessments').sort((6, 'asc'), (0, 'asc'), (4, 'asc'), range = f'A2:{return_numeric_column(len(output[0]))}{len(output)}')
+
+
+def individualized_attendance_reports(school: str) -> None:
+    
+    # if today_is_a_school_day(school, school_info[school]['sr_id']):
+    #     pass
+    # else:
+    #     return
+
+    student_list = sr_api_pull(
+        search_key="students",
+        parameters={
+            'active': '1',
+            'school_ids': school_info[school]['sr_id'],
+            'expand': 'grade_level, student_detail, student_attrs.student_attr_type',
+            'limit': '1'
+        },
+        page_limit=1
+    )
+
+    absence_list = sr_api_pull(
+        search_key='absences',
+        parameters={
+            'active': '1',
+            'school_ids': school_info[school]['sr_id'],
+            'min_date': return_term_start_date('semester', school),
+            'max_date': today_yyyy_mm_dd,
+            'expand': 'absence_type'
+        }
+    )
+
+    for student in student_list:
+        table_data = ''
+        au = 0
+        codes_to_send = ['AU', 'AEO', 'AEP']
+
+        logging.info(f"Processing for {student['first_name']} {student['last_name']} -- {datetime.datetime.now().strftime('%I:%M:%S')}")
+        email = extract_sr_student_attribute(student['student_attrs'], 'student_email')
+        p1_email = extract_sr_student_attribute(student['student_attrs'], 'Primary_1_Email')
+
+        for absence in absence_list:
+            absence_date = convert_yyyy_mm_dd_date(absence['date'])
+            
+            if absence['student_id'] == student['student_id'] and absence['absence_type']['code'] in codes_to_send:
+                table_data += f"<tr><td>{absence_date.strftime('%A, %B %-d, %Y')}</td><td>{absence['absence_type']['display_name']}</td></tr>"
+                if absence['student_id'] == student['student_id'] and absence['absence_type']['code'] == 'AU':
+                    au += 1
+
+            with open('../html/individualized_attendance_report.html', 'r') as file:
+                html_email = file.read().replace('###table_data###', table_data).replace('###au###', str(au)).replace('###attendance_email###', school_info[school]['attendance_email'])
+        
+        send_email(
+            recipient='tophermckee@gmail.com',#email,
+            subject_line=f"{today_yyyy_mm_dd} Attendance Update to:{email} cc:{p1_email}", 
+            html_body=html_email,
+            # cc=p1_email,
+            reply_to=school_info[school]['attendance_email']
+        )
+            
+        # log_communication(
+        #     student_id = student['student_id'],
+        #     communication_method_id = 9,
+        #     communication_type_id = 2,
+        #     staff_member_id = 10922,
+        #     contact_person = 'Student + parent cc\'d',
+        #     comments = f"Weekly Attendance Report (contents below) \n{BeautifulSoup(html_email, 'html.parser').body.get_text(separator='\n')}",
+        # )
+    
+        # time.sleep(10)
