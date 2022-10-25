@@ -3,6 +3,7 @@ from pathlib import Path
 from fpdf import FPDF, HTMLMixin
 from email.message import EmailMessage
 from datetime import timedelta
+from bs4 import BeautifulSoup
 import __main__
 
 pp = pprint.PrettyPrinter(indent=2)

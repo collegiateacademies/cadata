@@ -545,10 +545,10 @@ def assessments_export():
 
 def individualized_attendance_reports(school: str) -> None:
     
-    # if today_is_a_school_day(school, school_info[school]['sr_id']):
-    #     pass
-    # else:
-    #     return
+    if today_is_a_school_day(school, school_info[school]['sr_id']):
+        pass
+    else:
+        return
 
     student_list = sr_api_pull(
         search_key="students",
@@ -593,20 +593,23 @@ def individualized_attendance_reports(school: str) -> None:
                 html_email = file.read().replace('###table_data###', table_data).replace('###au###', str(au)).replace('###attendance_email###', school_info[school]['attendance_email'])
         
         send_email(
-            recipient='tophermckee@gmail.com',#email,
+            recipient=email,
             subject_line=f"{today_yyyy_mm_dd} Attendance Update to:{email} cc:{p1_email}", 
             html_body=html_email,
-            # cc=p1_email,
+            cc=p1_email,
             reply_to=school_info[school]['attendance_email']
         )
-            
-        # log_communication(
-        #     student_id = student['student_id'],
-        #     communication_method_id = 9,
-        #     communication_type_id = 2,
-        #     staff_member_id = 10922,
-        #     contact_person = 'Student + parent cc\'d',
-        #     comments = f"Weekly Attendance Report (contents below) \n{BeautifulSoup(html_email, 'html.parser').body.get_text(separator='\n')}",
-        # )
+        
+        newline="\n"
+        log_communication(
+            student_id = student['student_id'],
+            communication_method_id = '9',
+            communication_type_id = '2',
+            staff_member_id = '11690',
+            contact_person = 'Student + parent cc\'d',
+            comments = f"Weekly Attendance Report (contents below) {newline}{BeautifulSoup(html_email, 'html.parser').body.get_text(separator=newline)}",
+            school_id = school_info[school]['sr_id'],
+            sandbox=True
+        )
     
-        # time.sleep(10)
+        time.sleep(5)
