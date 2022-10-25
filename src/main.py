@@ -241,6 +241,9 @@ def generate_attendance_letters(school: str, start_date: str, repeated_letters: 
                 markdown=True
             )
             pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
+            if school == 'OA':
+                pass
+            else:
             for block in attendance_letter_blocks_page1:
                 if 'bullet_level' in block:
                     if block['bullet_level'] == 1:
@@ -356,7 +359,8 @@ def generate_attendance_letters(school: str, start_date: str, repeated_letters: 
                     pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
             pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='Sincerely,')
             pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt=school_info[school]['principal'])
-
+            if school == 'OA':
+                pdf.add_page()
             pdf.text(15, 255, f"Parents/Guardians of {database[student]['first_name']} {database[student]['last_name']}")
             pdf.text(15, 260, database[student]['street'])
             pdf.text(15, 265, f"{database[student]['city']}, {database[student]['state']} {database[student]['zip']}")
