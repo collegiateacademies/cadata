@@ -98,58 +98,11 @@ def generate_attendance_letters(school: str, start_date: str, repeated_letters: 
                 markdown=True
             )
             pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
+            
             if school == 'OA':
                 pass
             else:
-                for block in attendance_letter_blocks_page1:
-                    if 'bullet_level' in block:
-                        if block['bullet_level'] == 1:
-                            pdf.set_x(10)
-                            pdf.multi_cell(w=5, h=5, txt="\x95", new_x="END", new_y="LAST")
-                            pdf.multi_cell(
-                                w=0,
-                                h=5,
-                                new_x="LMARGIN",
-                                new_y="NEXT",
-                                txt=block['text']
-                                    .replace("###school_name###", school_info[school]['long_name'])
-                                    .replace('###school_phone###', school_info[school]['phone'])
-                                    .replace('###attendace_email###', school_info[school]['attendance_email'])
-                                    .replace('###fax_number###', school_info[school]['fax']),
-                                markdown=True
-                            )
-                            pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
-                        elif block['bullet_level'] == 2:
-                            pdf.set_x(20)
-                            pdf.multi_cell(w=5, h=5, txt="\x95", new_x="END", new_y="LAST")
-                            pdf.multi_cell(
-                                w=0,
-                                h=5,
-                                new_x="LMARGIN",
-                                new_y="NEXT",
-                                txt=block['text']
-                                    .replace("###school_name###", school_info[school]['long_name'])
-                                    .replace('###school_phone###', school_info[school]['phone'])
-                                    .replace('###attendace_email###', school_info[school]['attendance_email'])
-                                    .replace('###fax_number###', school_info[school]['fax']),
-                                markdown=True
-                            )
-                            pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
-                    else:
-                        pdf.multi_cell(
-                            w=0,
-                            h=5,
-                            new_x="LMARGIN",
-                            new_y="NEXT",
-                            txt=block['text']
-                                    .replace("###school_name###", school_info[school]['long_name'])
-                                    .replace('###school_phone###', school_info[school]['phone'])
-                                    .replace('###attendace_email###', school_info[school]['attendance_email'])
-                                    .replace('###fax_number###', school_info[school]['fax']),
-                            markdown=True
-                        )
-                        pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
-            
+                generate_page_content(pdf, school, attendance_letter_blocks_page1)
                 pdf.add_page()
 
             data = (
@@ -157,6 +110,7 @@ def generate_attendance_letters(school: str, start_date: str, repeated_letters: 
                 ("Unexcused Absences", str(database[student]['au'])),
                 ("Unexcused Tardies", str(database[student]['tu'])),
             )
+
             line_height = pdf.font_size * 2.5
             col_width = pdf.epw / 3  # distribute content evenly
             for row in data:
@@ -165,108 +119,19 @@ def generate_attendance_letters(school: str, start_date: str, repeated_letters: 
                 pdf.ln(line_height)
 
             pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
+
             if school == 'OA':
-                for block in oa_attendance_letter_blocks:
-                    if 'bullet_level' in block:
-                        if block['bullet_level'] == 1:
-                            pdf.set_x(10)
-                            pdf.multi_cell(w=5, h=5, txt="\x95", new_x="END", new_y="LAST")
-                            pdf.multi_cell(
-                                w=0,
-                                h=5,
-                                new_x="LMARGIN",
-                                new_y="NEXT",
-                                txt=block['text']
-                                    .replace("###school_name###", school_info[school]['long_name'])
-                                    .replace('###school_phone###', school_info[school]['phone'])
-                                    .replace('###attendace_email###', school_info[school]['attendance_email'])
-                                    .replace('###fax_number###', school_info[school]['fax']),
-                                markdown=True
-                            )
-                            pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
-                        elif block['bullet_level'] == 2:
-                            pdf.set_x(20)
-                            pdf.multi_cell(w=5, h=5, txt="\x95", new_x="END", new_y="LAST")
-                            pdf.multi_cell(
-                                w=0,
-                                h=5,
-                                new_x="LMARGIN",
-                                new_y="NEXT",
-                                txt=block['text']
-                                    .replace("###school_name###", school_info[school]['long_name'])
-                                    .replace('###school_phone###', school_info[school]['phone'])
-                                    .replace('###attendace_email###', school_info[school]['attendance_email'])
-                                    .replace('###fax_number###', school_info[school]['fax']),
-                                markdown=True
-                            )
-                            pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
-                    else:
-                        pdf.multi_cell(
-                            w=0,
-                            h=5,
-                            new_x="LMARGIN",
-                            new_y="NEXT",
-                            txt=block['text']
-                                    .replace("###school_name###", school_info[school]['long_name'])
-                                    .replace('###school_phone###', school_info[school]['phone'])
-                                    .replace('###attendace_email###', school_info[school]['attendance_email'])
-                                    .replace('###fax_number###', school_info[school]['fax']),
-                            markdown=True
-                        )
-                        pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
+                generate_page_content(pdf, school, oa_attendance_letter_blocks)
+                
             else:
-                for block in attendance_letter3_blocks_page2:
-                    if 'bullet_level' in block:
-                        if block['bullet_level'] == 1:
-                            pdf.set_x(10)
-                            pdf.multi_cell(w=5, h=5, txt="\x95", new_x="END", new_y="LAST")
-                            pdf.multi_cell(
-                                w=0,
-                                h=5,
-                                new_x="LMARGIN",
-                                new_y="NEXT",
-                                txt=block['text']
-                                    .replace("###school_name###", school_info[school]['long_name'])
-                                    .replace('###school_phone###', school_info[school]['phone'])
-                                    .replace('###attendace_email###', school_info[school]['attendance_email'])
-                                    .replace('###fax_number###', school_info[school]['fax']),
-                                markdown=True
-                            )
-                            pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
-                        elif block['bullet_level'] == 2:
-                            pdf.set_x(20)
-                            pdf.multi_cell(w=5, h=5, txt="\x95", new_x="END", new_y="LAST")
-                            pdf.multi_cell(
-                                w=0,
-                                h=5,
-                                new_x="LMARGIN",
-                                new_y="NEXT",
-                                txt=block['text']
-                                    .replace("###school_name###", school_info[school]['long_name'])
-                                    .replace('###school_phone###', school_info[school]['phone'])
-                                    .replace('###attendace_email###', school_info[school]['attendance_email'])
-                                    .replace('###fax_number###', school_info[school]['fax']),
-                                markdown=True
-                            )
-                            pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
-                    else:
-                        pdf.multi_cell(
-                            w=0,
-                            h=5,
-                            new_x="LMARGIN",
-                            new_y="NEXT",
-                            txt=block['text']
-                                    .replace("###school_name###", school_info[school]['long_name'])
-                                    .replace('###school_phone###', school_info[school]['phone'])
-                                    .replace('###attendace_email###', school_info[school]['attendance_email'])
-                                    .replace('###fax_number###', school_info[school]['fax']),
-                            markdown=True
-                        )
-                        pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
+                generate_page_content(pdf, school, attendance_letter3_blocks_page2)
+                
             pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='Sincerely,')
             pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt=school_info[school]['principal'])
+
             if school == 'OA':
                 pdf.add_page()
+
             pdf.text(15, 255, f"Parents/Guardians of {database[student]['first_name']} {database[student]['last_name']}")
             pdf.text(15, 260, database[student]['street'])
             pdf.text(15, 265, f"{database[student]['city']}, {database[student]['state']} {database[student]['zip']}")
@@ -294,58 +159,11 @@ def generate_attendance_letters(school: str, start_date: str, repeated_letters: 
                 markdown=True
             )
             pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
+            
             if school == 'OA':
                 pass
             else:
-                for block in attendance_letter_blocks_page1:
-                    if 'bullet_level' in block:
-                        if block['bullet_level'] == 1:
-                            pdf.set_x(10)
-                            pdf.multi_cell(w=5, h=5, txt="\x95", new_x="END", new_y="LAST")
-                            pdf.multi_cell(
-                                w=0,
-                                h=5,
-                                new_x="LMARGIN",
-                                new_y="NEXT",
-                                txt=block['text']
-                                    .replace("###school_name###", school_info[school]['long_name'])
-                                    .replace('###school_phone###', school_info[school]['phone'])
-                                    .replace('###attendace_email###', school_info[school]['attendance_email'])
-                                    .replace('###fax_number###', school_info[school]['fax']),
-                                markdown=True
-                            )
-                            pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
-                        elif block['bullet_level'] == 2:
-                            pdf.set_x(20)
-                            pdf.multi_cell(w=5, h=5, txt="\x95", new_x="END", new_y="LAST")
-                            pdf.multi_cell(
-                                w=0,
-                                h=5,
-                                new_x="LMARGIN",
-                                new_y="NEXT",
-                                txt=block['text']
-                                    .replace("###school_name###", school_info[school]['long_name'])
-                                    .replace('###school_phone###', school_info[school]['phone'])
-                                    .replace('###attendace_email###', school_info[school]['attendance_email'])
-                                    .replace('###fax_number###', school_info[school]['fax']),
-                                markdown=True
-                            )
-                            pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
-                    else:
-                        pdf.multi_cell(
-                            w=0,
-                            h=5,
-                            new_x="LMARGIN",
-                            new_y="NEXT",
-                            txt=block['text']
-                                    .replace("###school_name###", school_info[school]['long_name'])
-                                    .replace('###school_phone###', school_info[school]['phone'])
-                                    .replace('###attendace_email###', school_info[school]['attendance_email'])
-                                    .replace('###fax_number###', school_info[school]['fax']),
-                            markdown=True
-                        )
-                        pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
-                
+                generate_page_content(pdf, school, attendance_letter_blocks_page1)
                 pdf.add_page()
 
             data = (
@@ -361,108 +179,18 @@ def generate_attendance_letters(school: str, start_date: str, repeated_letters: 
                 pdf.ln(line_height)
 
             pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
+            
             if school == 'OA':
-                for block in oa_attendance_letter_blocks:
-                    if 'bullet_level' in block:
-                        if block['bullet_level'] == 1:
-                            pdf.set_x(10)
-                            pdf.multi_cell(w=5, h=5, txt="\x95", new_x="END", new_y="LAST")
-                            pdf.multi_cell(
-                                w=0,
-                                h=5,
-                                new_x="LMARGIN",
-                                new_y="NEXT",
-                                txt=block['text']
-                                    .replace("###school_name###", school_info[school]['long_name'])
-                                    .replace('###school_phone###', school_info[school]['phone'])
-                                    .replace('###attendace_email###', school_info[school]['attendance_email'])
-                                    .replace('###fax_number###', school_info[school]['fax']),
-                                markdown=True
-                            )
-                            pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
-                        elif block['bullet_level'] == 2:
-                            pdf.set_x(20)
-                            pdf.multi_cell(w=5, h=5, txt="\x95", new_x="END", new_y="LAST")
-                            pdf.multi_cell(
-                                w=0,
-                                h=5,
-                                new_x="LMARGIN",
-                                new_y="NEXT",
-                                txt=block['text']
-                                    .replace("###school_name###", school_info[school]['long_name'])
-                                    .replace('###school_phone###', school_info[school]['phone'])
-                                    .replace('###attendace_email###', school_info[school]['attendance_email'])
-                                    .replace('###fax_number###', school_info[school]['fax']),
-                                markdown=True
-                            )
-                            pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
-                    else:
-                        pdf.multi_cell(
-                            w=0,
-                            h=5,
-                            new_x="LMARGIN",
-                            new_y="NEXT",
-                            txt=block['text']
-                                    .replace("###school_name###", school_info[school]['long_name'])
-                                    .replace('###school_phone###', school_info[school]['phone'])
-                                    .replace('###attendace_email###', school_info[school]['attendance_email'])
-                                    .replace('###fax_number###', school_info[school]['fax']),
-                            markdown=True
-                        )
-                        pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
+                generate_page_content(pdf, school, oa_attendance_letter_blocks)
             else:
-                for block in attendance_letter5_blocks_page2:
-                    if 'bullet_level' in block:
-                        if block['bullet_level'] == 1:
-                            pdf.set_x(10)
-                            pdf.multi_cell(w=5, h=5, txt="\x95", new_x="END", new_y="LAST")
-                            pdf.multi_cell(
-                                w=0,
-                                h=5,
-                                new_x="LMARGIN",
-                                new_y="NEXT",
-                                txt=block['text']
-                                    .replace("###school_name###", school_info[school]['long_name'])
-                                    .replace('###school_phone###', school_info[school]['phone'])
-                                    .replace('###attendace_email###', school_info[school]['attendance_email'])
-                                    .replace('###fax_number###', school_info[school]['fax']),
-                                markdown=True
-                            )
-                            pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
-                        elif block['bullet_level'] == 2:
-                            pdf.set_x(20)
-                            pdf.multi_cell(w=5, h=5, txt="\x95", new_x="END", new_y="LAST")
-                            pdf.multi_cell(
-                                w=0,
-                                h=5,
-                                new_x="LMARGIN",
-                                new_y="NEXT",
-                                txt=block['text']
-                                    .replace("###school_name###", school_info[school]['long_name'])
-                                    .replace('###school_phone###', school_info[school]['phone'])
-                                    .replace('###attendace_email###', school_info[school]['attendance_email'])
-                                    .replace('###fax_number###', school_info[school]['fax']),
-                                markdown=True
-                            )
-                            pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
-                    else:
-                        pdf.multi_cell(
-                            w=0,
-                            h=5,
-                            new_x="LMARGIN",
-                            new_y="NEXT",
-                            txt=block['text']
-                                    .replace("###school_name###", school_info[school]['long_name'])
-                                    .replace('###school_phone###', school_info[school]['phone'])
-                                    .replace('###attendace_email###', school_info[school]['attendance_email'])
-                                    .replace('###fax_number###', school_info[school]['fax']),
-                            markdown=True
-                        )
-                        pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
+                generate_page_content(pdf, school, attendance_letter5_blocks_page2)
+                
             pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='Sincerely,')
             pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt=school_info[school]['principal'])
+            
             if school == 'OA':
                 pdf.add_page()
+
             pdf.text(15, 255, f"Parents/Guardians of {database[student]['first_name']} {database[student]['last_name']}")
             pdf.text(15, 260, database[student]['street'])
             pdf.text(15, 265, f"{database[student]['city']}, {database[student]['state']} {database[student]['zip']}")
