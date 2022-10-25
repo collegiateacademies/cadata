@@ -98,6 +98,9 @@ def generate_attendance_letters(school: str, start_date: str, repeated_letters: 
                 markdown=True
             )
             pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
+            if school == 'OA':
+                pass
+            else:
             for block in attendance_letter_blocks_page1:
                 if 'bullet_level' in block:
                     if block['bullet_level'] == 1:
