@@ -267,6 +267,25 @@ attendance_letter5_blocks_page2 = [
     }
 ]
 
+oa_attendance_letter_blocks = [
+    {
+        'name': 'oa_paragraph1',
+        'text': 'You are receiving this letter because your student has exceeded 3 Unexcused Absences from school this year.  This is cause for concern at Opportunities Academy, as when students are absent from school, they are unlikely to receive required service minutes outlined in his or her IEP and see stymied progress toward their IEP goals.',
+    },
+    {
+        'name': 'oa_paragraph1',
+        'text': 'If there are barriers your family faces in getting your student to school, we can discuss those and connect you with any resources available to support your family in getting your student to school or online each day.',
+    },
+    {
+        'name': 'oa_paragraph1',
+        'text': 'Attendance helps to foster an attitude of responsibility and cultivates a sense of belonging in our community, and is essential to the instructional program at Opportunities Academy.  Attendance is the first step in ensuring that students consistently have the chance to practice the essential skills they are working on to become a more independent and fulfilled adult.',
+    },
+    {
+        'name': 'oa_paragraph1',
+        'text': 'You can contact Opportunities Academy at 504-503-1421. We look forward to having your student in school each day and thank you for your partnership.',
+    },
+]
+
 with open('../creds.json') as file:
     credentials = json.load(file)
 
