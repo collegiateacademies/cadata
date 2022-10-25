@@ -609,7 +609,7 @@ def individualized_attendance_reports(school: str) -> None:
             contact_person = 'Student + parent cc\'d',
             comments = f"Weekly Attendance Report (contents below) {newline}{BeautifulSoup(html_email, 'html.parser').body.get_text(separator=newline)}",
             school_id = school_info[school]['sr_id'],
-            sandbox=True
+            sandbox=False
         )
     
         time.sleep(5)
