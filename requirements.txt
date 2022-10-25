@@ -2,3 +2,4 @@ reportlab # attempting to phase this out in lieu of using fpdf (since fpdf has b
 fpdf2
 gspread
 oauth2client
+bs4
