@@ -548,3 +548,53 @@ def return_monday(timestamp: str) -> str:
     date_to_convert = convert_yyyy_mm_dd_date(timestamp)
     monday = (date_to_convert - timedelta(days = date_to_convert.weekday())).strftime('%Y-%m-%d')
     return monday
+
+def generate_page_content(pdf_instance: FPDF, school: str, block_list: list) -> None:
+    for block in block_list:
+        if 'bullet_level' in block:
+            if block['bullet_level'] == 1:
+                pdf_instance.set_x(10)
+                pdf_instance.multi_cell(w=5, h=5, txt="\x95", new_x="END", new_y="LAST")
+                pdf_instance.multi_cell(
+                    w=0,
+                    h=5,
+                    new_x="LMARGIN",
+                    new_y="NEXT",
+                    txt=block['text']
+                        .replace("###school_name###", school_info[school]['long_name'])
+                        .replace('###school_phone###', school_info[school]['phone'])
+                        .replace('###attendace_email###', school_info[school]['attendance_email'])
+                        .replace('###fax_number###', school_info[school]['fax']),
+                    markdown=True
+                )
+                pdf_instance.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
+            elif block['bullet_level'] == 2:
+                pdf_instance.set_x(20)
+                pdf_instance.multi_cell(w=5, h=5, txt="\x95", new_x="END", new_y="LAST")
+                pdf_instance.multi_cell(
+                    w=0,
+                    h=5,
+                    new_x="LMARGIN",
+                    new_y="NEXT",
+                    txt=block['text']
+                        .replace("###school_name###", school_info[school]['long_name'])
+                        .replace('###school_phone###', school_info[school]['phone'])
+                        .replace('###attendace_email###', school_info[school]['attendance_email'])
+                        .replace('###fax_number###', school_info[school]['fax']),
+                    markdown=True
+                )
+                pdf_instance.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
+        else:
+            pdf_instance.multi_cell(
+                w=0,
+                h=5,
+                new_x="LMARGIN",
+                new_y="NEXT",
+                txt=block['text']
+                        .replace("###school_name###", school_info[school]['long_name'])
+                        .replace('###school_phone###', school_info[school]['phone'])
+                        .replace('###attendace_email###', school_info[school]['attendance_email'])
+                        .replace('###fax_number###', school_info[school]['fax']),
+                markdown=True
+            )
+            pdf_instance.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
