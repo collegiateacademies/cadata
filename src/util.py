@@ -691,10 +691,10 @@ def generate_page_content(pdf_instance: FPDF, school: str, block_list: list) -> 
         if 'bullet_level' in block:
             if block['bullet_level'] == 1:
                 pdf_instance.set_x(10)
-                pdf_instance.multi_cell(w=5, h=5, txt="\x95", new_x="END", new_y="LAST")
+                pdf_instance.multi_cell(w=5, h=4, txt="\x95", new_x="END", new_y="LAST")
                 pdf_instance.multi_cell(
                     w=0,
-                    h=5,
+                    h=4,
                     new_x="LMARGIN",
                     new_y="NEXT",
                     txt=block['text']
@@ -704,13 +704,13 @@ def generate_page_content(pdf_instance: FPDF, school: str, block_list: list) -> 
                         .replace('###fax_number###', school_info[school]['fax']),
                     markdown=True
                 )
-                pdf_instance.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
+                pdf_instance.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", txt='')
             elif block['bullet_level'] == 2:
                 pdf_instance.set_x(20)
-                pdf_instance.multi_cell(w=5, h=5, txt="\x95", new_x="END", new_y="LAST")
+                pdf_instance.multi_cell(w=5, h=4, txt="\x95", new_x="END", new_y="LAST")
                 pdf_instance.multi_cell(
                     w=0,
-                    h=5,
+                    h=4,
                     new_x="LMARGIN",
                     new_y="NEXT",
                     txt=block['text']
@@ -720,11 +720,11 @@ def generate_page_content(pdf_instance: FPDF, school: str, block_list: list) -> 
                         .replace('###fax_number###', school_info[school]['fax']),
                     markdown=True
                 )
-                pdf_instance.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
+                pdf_instance.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", txt='')
         else:
             pdf_instance.multi_cell(
                 w=0,
-                h=5,
+                h=4,
                 new_x="LMARGIN",
                 new_y="NEXT",
                 txt=block['text']
@@ -734,4 +734,4 @@ def generate_page_content(pdf_instance: FPDF, school: str, block_list: list) -> 
                         .replace('###fax_number###', school_info[school]['fax']),
                 markdown=True
             )
-            pdf_instance.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
+            pdf_instance.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", txt='')
