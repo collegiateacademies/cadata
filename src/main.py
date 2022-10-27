@@ -16,7 +16,7 @@ def generate_attendance_letters(school: str, start_date: str, repeated_letters: 
         parameters={
             "active": "1",
             "school_ids": school_info[school]['sr_id'],
-            'expand': 'grade_level, student_details' # student_attrs.student_attr_type
+            'expand': 'grade_level, student_details, student_attrs.student_attr_type',
         }
     )
 
