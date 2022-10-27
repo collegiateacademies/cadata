@@ -27,6 +27,12 @@ school_info = {
         'attendance_email': 'hello@livingstoncollegiate.org',
         'attendance_letter_recipient': 'cpuliafico@collegiateacademies.org',
         'individualized_report_reply': 'cpuliafico@collegiateacademies.org',
+        'seat_time': {
+            'calendar': False,
+            'contact': True,
+            'link': '',
+            'contact': 'cpuliafico@collegiateacademies.org'
+        }
     },
     'ASA': {
         'short_name': 'ASA',
@@ -42,6 +48,12 @@ school_info = {
         'attendance_email': 'frontdesk@sciacademy.org',
         'attendance_letter_recipient': 'kthomas1@collegiateacademies.org',
         # 'individualized_report_reply': 'cpuliafico@collegiateacademies.org',
+        # 'seat_time': {
+        #     'calendar': False,
+        #     'contact': True,
+        #     'link': '',
+        #     'contact': 'cpuliafico@collegiateacademies.org'
+        # }
     },
     'CBR': {
         'short_name': 'CBR',
@@ -57,6 +69,12 @@ school_info = {
         'attendance_email': 'info@collegiatebr.org',
         'attendance_letter_recipient': 'amiles@collegiateacademies.org',
         # 'individualized_report_reply': 'cpuliafico@collegiateacademies.org',
+        # 'seat_time': {
+        #     'calendar': False,
+        #     'contact': True,
+        #     'link': '',
+        #     'contact': 'cpuliafico@collegiateacademies.org'
+        # }
     },
     'GWC': {
         'short_name': 'GWC',
@@ -72,6 +90,12 @@ school_info = {
         'attendance_email': 'info@carvercollegiate.org',
         'attendance_letter_recipient': 'amueller@collegiateacademies.org',
         'individualized_report_reply': 'amueller@collegiateacademies.org',
+        'seat_time': {
+            'calendar': True,
+            'contact': False,
+            'link': 'https://docs.google.com/document/d/1IFKwD7p12haD3GbHtzFSvtAn_fdooUMleppx4pn-5_o/edit?usp=sharing',
+            'contact': ''
+        }
     },
     'RCA': {
         'short_name': 'RCA',
@@ -87,6 +111,12 @@ school_info = {
         'attendance_email': 'info@rosenwaldcollegiate.org',
         'attendance_letter_recipient': 'sbrooks@collegiateacademies.org',
         # 'individualized_report_reply': 'cpuliafico@collegiateacademies.org',
+        # 'seat_time': {
+        #     'calendar': False,
+        #     'contact': True,
+        #     'link': '',
+        #     'contact': 'cpuliafico@collegiateacademies.org'
+        # }
     },
     'OA': {
         'short_name': 'OA',
@@ -102,6 +132,12 @@ school_info = {
         'attendance_email': 'hello@opportunitiesacademy.org',
         'attendance_letter_recipient': 'hello@opportunitiesacademy.org',
         # 'individualized_report_reply': 'cpuliafico@collegiateacademies.org',
+        # 'seat_time': {
+        #     'calendar': False,
+        #     'contact': True,
+        #     'link': '',
+        #     'contact': 'cpuliafico@collegiateacademies.org'
+        # }
     },
 }
 
