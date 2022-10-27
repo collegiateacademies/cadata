@@ -381,6 +381,29 @@ attendance_letter5_blocks_page2 = [
     }
 ]
 
+attendance_letter5_blocks_spanish_page2 = [
+    {
+        'name': 'page2_header',
+        'text': 'Re: Advertencia sobre asistencia escolar',
+    },
+    {
+        'name': 'page2_paragraph1',
+        'text': '**Usted está recibiendo esta carta porque su hijo(a) ha excedido el número máximo de faltas y/o retardos injustificados permitidas por la ley y ahora se lo considera ausente.** En el estado de Louisiana se requiere que los estudiantes asistan a la escuela por una cierta cantidad de días para ser promovidos al siguiente grado y obtener crédito por un curso. Según la ley, los estudiantes deben asistir a la escuela con regularidad y deben asistir a una cantidad mínima de días de escuela para obtener crédito y ser elegibles para la promoción al siguiente grado. Su hijo está en peligro de no ser promovido al siguiente grado porque ha estado ausente más tiempo del asignado por el estado.',
+    },
+    {
+        'name': 'page2_paragraph2',
+        'text': 'Un representante de la escuela se comunicará con usted por teléfono para programar una audiencia de asistencia obligatoria. En esta audiencia, se revisará el registro de asistencia de su hijo(a) y se establecerá un plan que debe seguir para ser elegible para la promoción o la graduación.',
+    },
+    {
+        'name': 'page2_paragraph3',
+        'text': '**Si su hijo(a) no cumple con los requisitos de asistencia de la escuela, es posible que no obtenga crédito por sus cursos y que tenga que completar el mismo grado el próximo año. El incumplimiento de los requisitos del plan de asistencia de su estudiante también resultará en una remisión al Tribunal Municipal.**',
+    },
+    {
+        'name': 'page2_paragraph4',
+        'text': 'Por favor reviste el reglamento de asistencia escolar adjunta a esta carta. Si desea discutir los detalles sobre la situación de su hijo(a), puede comunicarse con ###school_name### al teléfono ###school_phone### para saber cuáles son los siguientes pasos. Esperamos que su estudiante asista a la escuela todos los días para que podamos continuar su camino hacia el éxito universitario.',
+    }
+]
+
 oa_attendance_letter_blocks = [
     {
         'name': 'oa_paragraph1',
