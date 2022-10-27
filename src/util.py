@@ -335,6 +335,29 @@ attendance_letter3_blocks_page2 = [
     }
 ]
 
+attendance_letter3_blocks_spanish_page2 = [
+    {
+        'name': 'page2_header',
+        'text': 'Re: Advertencia de asistencia',
+    },
+    {
+        'name': 'page2_paragraph1',
+        'text': '**Está recibiendo esta carta porque su hijo/a tiene 3 o más ausencias y/o tardanzas injustificadas.** Según la ley, los estudiantes deben asistir a la escuela con regularidad y deben asistir a una cantidad mínima de días de escuela para obtener crédito y ser elegibles para la promoción al siguiente grado. Su hijo/a está en peligro de no pasar al siguiente grado.',
+    },
+    {
+        'name': 'page2_paragraph2',
+        'text': 'Un representante de la escuela se comunicará con usted por teléfono para programar una conferencia de asistencia obligatoria. En esta conferencia, se revisará el registro de asistencia de su hijo/a y se establecerá un plan que debe seguir para ser elegible para la promoción o la graduación.',
+    },
+    {
+        'name': 'page2_paragraph3',
+        'text': '**Si su hijo/a no cumple con los requisitos de asistencia de la escuela, es posible que no obtenga crédito por sus cursos y que tenga que completar el mismo grado el próximo año. El incumplimiento de los requisitos del plan de asistencia de su estudiante también resultará en una remisión al Tribunal Municipal.**',
+    },
+    {
+        'name': 'page2_paragraph4',
+        'text': 'Por favor revise nuestra política de asistencia en el reverso de esta carta. Puede comunicarse con ###school_name### al ###school_phone### para hablar sobre la asistencia de su hijo/a y sus próximos pasos. Esperamos que su estudiante asista a la escuela todos los días para que podamos continuar su camino hacia el éxito universitario.',
+    }
+]
+
 attendance_letter5_blocks_page2 = [
     {
         'name': 'page2_header',
