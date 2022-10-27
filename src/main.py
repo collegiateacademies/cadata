@@ -55,6 +55,7 @@ def generate_attendance_letters(school: str, start_date: str, repeated_letters: 
                 'city': extract_sr_student_detail(student['student_details'], 'mailing_city'),
                 'state': extract_sr_student_detail(student['student_details'], 'mailing_state'),
                 'zip': extract_sr_student_detail(student['student_details'], 'mailing_zip'),
+                'home_language': extract_sr_student_attribute(student['student_attrs'], 'S_LA_STU_Language_X.LanguageCode'),
                 'sis_id': student['sis_id'],
                 'sr_id': student['student_id'],
                 'au': 0,
