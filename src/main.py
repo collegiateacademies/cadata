@@ -145,7 +145,7 @@ def generate_attendance_letters(school: str, start_date: str, repeated_letters: 
             
             log_communication(
                 student_id = database[student]['sr_id'],
-                communication_method_id = '17',
+                communication_method_id = '15' if database[student]['home_language'] == '113' else '17',
                 communication_type_id = '2',
                 staff_member_id = '11690',
                 school_id = school_info[school]['sr_id'],
@@ -210,7 +210,7 @@ def generate_attendance_letters(school: str, start_date: str, repeated_letters: 
 
             log_communication(
                 student_id = database[student]['sr_id'],
-                communication_method_id = '17',
+                communication_method_id = '15' if database[student]['home_language'] == '113' else '17',
                 communication_type_id = '2',
                 staff_member_id = '11690',
                 school_id = school_info[school]['sr_id'],
