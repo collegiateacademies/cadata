@@ -92,13 +92,13 @@ def generate_attendance_letters(school: str, start_date: str, repeated_letters: 
             pdf.image(f"../assets/{school.lower()}_letterhead.png", x=125, y=5, h=8)
             pdf.multi_cell(
                 w=0,
-                h=5,
+                h=4,
                 new_x="LMARGIN",
                 new_y="NEXT",
                 txt=f"{database[student]['first_name']} {database[student]['last_name']} - {datetime.datetime.today().strftime('%A, %B %-d, %Y')} (3 Absence Letter)",
                 markdown=True
             )
-            pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
+            pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", txt='')
             
             if school == 'OA':
                 pass
@@ -119,7 +119,7 @@ def generate_attendance_letters(school: str, start_date: str, repeated_letters: 
                     pdf.multi_cell(col_width, line_height, datum, border=1, new_x="RIGHT", new_y="TOP", max_line_height=pdf.font_size)
                 pdf.ln(line_height)
 
-            pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
+            pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", txt='')
 
             if school == 'OA':
                 generate_page_content(pdf, school, oa_attendance_letter_blocks)
@@ -127,8 +127,8 @@ def generate_attendance_letters(school: str, start_date: str, repeated_letters: 
             else:
                 generate_page_content(pdf, school, attendance_letter3_blocks_page2)
                 
-            pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='Sincerely,')
-            pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt=school_info[school]['principal'])
+            pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", txt='Sincerely,')
+            pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", txt=school_info[school]['principal'])
 
             if school == 'OA':
                 pdf.add_page()
@@ -136,7 +136,7 @@ def generate_attendance_letters(school: str, start_date: str, repeated_letters: 
             pdf.text(15, 255, f"Parents/Guardians of {database[student]['first_name']} {database[student]['last_name']}")
             pdf.text(15, 260, database[student]['street'])
             pdf.text(15, 265, f"{database[student]['city']}, {database[student]['state']} {database[student]['zip']}")
-
+            
             log_communication(
                 student_id = database[student]['sr_id'],
                 communication_method_id = '17',
@@ -153,13 +153,13 @@ def generate_attendance_letters(school: str, start_date: str, repeated_letters: 
             pdf.image(f"../assets/{school.lower()}_letterhead.png", x=125, y=5, h=8)
             pdf.multi_cell(
                 w=0,
-                h=5,
+                h=4,
                 new_x="LMARGIN",
                 new_y="NEXT",
                 txt=f"{database[student]['first_name']} {database[student]['last_name']} - {datetime.datetime.today().strftime('%A, %B %-d, %Y')} (5 Absence Letter)",
                 markdown=True
             )
-            pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
+            pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", txt='')
             
             if school == 'OA':
                 pass
@@ -179,15 +179,15 @@ def generate_attendance_letters(school: str, start_date: str, repeated_letters: 
                     pdf.multi_cell(col_width, line_height, datum, border=1, new_x="RIGHT", new_y="TOP", max_line_height=pdf.font_size)
                 pdf.ln(line_height)
 
-            pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='')
+            pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", txt='')
             
             if school == 'OA':
                 generate_page_content(pdf, school, oa_attendance_letter_blocks)
             else:
                 generate_page_content(pdf, school, attendance_letter5_blocks_page2)
                 
-            pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt='Sincerely,')
-            pdf.multi_cell(w=0, h=5, new_x="LMARGIN", new_y="NEXT", txt=school_info[school]['principal'])
+            pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", txt='Sincerely,')
+            pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", txt=school_info[school]['principal'])
             
             if school == 'OA':
                 pdf.add_page()
