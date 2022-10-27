@@ -103,7 +103,10 @@ def generate_attendance_letters(school: str, start_date: str, repeated_letters: 
             if school == 'OA':
                 pass
             else:
-                generate_page_content(pdf, school, attendance_letter_blocks_page1)
+                if database[student]['home_language'] == '113':
+                    generate_page_content(pdf, school, attendance_letter_blocks_spanish_page1)
+                else:
+                    generate_page_content(pdf, school, attendance_letter_blocks_page1)
                 pdf.add_page()
 
             data = (
@@ -125,7 +128,10 @@ def generate_attendance_letters(school: str, start_date: str, repeated_letters: 
                 generate_page_content(pdf, school, oa_attendance_letter_blocks)
                 
             else:
-                generate_page_content(pdf, school, attendance_letter3_blocks_page2)
+                if database[student]['home_language'] == '113':
+                    generate_page_content(pdf, school, attendance_letter3_blocks_spanish_page2)
+                else:
+                    generate_page_content(pdf, school, attendance_letter3_blocks_page2)
                 
             pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", txt='Sincerely,')
             pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", txt=school_info[school]['principal'])
@@ -164,7 +170,10 @@ def generate_attendance_letters(school: str, start_date: str, repeated_letters: 
             if school == 'OA':
                 pass
             else:
-                generate_page_content(pdf, school, attendance_letter_blocks_page1)
+                if database[student]['home_language'] == '113':
+                    generate_page_content(pdf, school, attendance_letter_blocks_spanish_page1)
+                else:
+                    generate_page_content(pdf, school, attendance_letter_blocks_page1)
                 pdf.add_page()
 
             data = (
@@ -184,7 +193,10 @@ def generate_attendance_letters(school: str, start_date: str, repeated_letters: 
             if school == 'OA':
                 generate_page_content(pdf, school, oa_attendance_letter_blocks)
             else:
-                generate_page_content(pdf, school, attendance_letter5_blocks_page2)
+                if database[student]['home_language'] == '113':
+                    generate_page_content(pdf, school, attendance_letter5_blocks_spanish_page2)
+                else:
+                    generate_page_content(pdf, school, attendance_letter5_blocks_page2)
                 
             pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", txt='Sincerely,')
             pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", txt=school_info[school]['principal'])
