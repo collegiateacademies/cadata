@@ -224,90 +224,90 @@ attendance_letter_blocks_page1 = [
 attendance_letter_blocks_spanish_page1 = [
     {
         'name': 'attendance_policy_header',
-        'text': "**###school_name### Attendance Policy**",
+        'text': "**Política de asistencia de ###school_name###**",
     },
     {
         'name': 'attendance_policy_explainer',
-        'text': "Students can only be successful if they are present and prepared in school every day. Our curriculum is an ambitious one; every day is essential for students to keep pace.  At ###school_name###, excessive absences will not be tolerated.",
+        'text': "Los estudiantes solo pueden tener éxito si están presentes y preparados en la escuela todos los días. Nuestro plan de estudios es ambicioso; cada día es esencial para que los estudiantes mantengan el ritmo. En ###school_name###, no se tolerarán ausencias excesivas.",
     },
     {
         'name': 'attendance_policy_warning',
-        'text': "**If a student is absent without excuse for more than 9 days of the semester, the student will not receive credit for any courses they are taking during that semester.**",
+        'text': "**Si un estudiante se ausenta sin excusa por más de 9 días del semestre, el estudiante no recibirá crédito por ningún curso que esté tomando durante ese semestre.**",
     },
     {
         'name': 'attendance_requirements_header',
-        'text': '**Attendance Requirements**',
+        'text': '**Requisitos de asistencia**',
     },
     {
         'name': 'attendance_requirement1',
-        'text': 'Students must be present for \"60,120 minutes (equivalent to 167 six-hour school days)\" per year and 30,060 per semester',
+        'text': 'Los estudiantes deben estar presentes durante \"60,120 minutos (equivalente a 167 días escolares de seis horas)\" por año y 30,060 por semestre.',
         'bullet_level': 1,
     },
     {
         'name': 'attendance_requirement2',
-        'text': 'Because our classes are semester based, students must meet attendance requirements per semester',
+        'text': 'Debido a que nuestras clases son semestrales, los estudiantes deben cumplir con los requisitos de asistencia por semestre.',
         'bullet_level': 1,
     },
     {
         'name': 'attendance_requirement3',
-        'text': '**Based on our schedule, a student must miss no more than 9 days per semester to earn credit for their courses**',
+        'text': '**Según nuestro horario, un estudiante no debe perder más de 9 días por semestre para obtener crédito por sus cursos.**',
         'bullet_level': 1,
     },
     {
         'name': 'excuse_policy_header',
-        'text': 'Absences will be recorded as excused or unexcused, in accordance with our policies:',
+        'text': 'Las ausencias se registrarán como justificadas o injustificadas, de acuerdo con nuestras políticas:',
     },
     {
         'name': 'excuse_policy1',
-        'text': 'Absences will be considered **excused** if they fall into one of the following categories and documentation is submitted to the school: illness, hospital stay, medical appointments, observation of holidays of the student\'s own faith, visitation with a parent who is a member of the armed forces, death in the immediate family.',
+        'text': 'Las ausencias se considerarán **justificadas** si caen en una de las siguientes categorías y se presenta documentación a la escuela: enfermedad, estadía en el hospital, citas médicas, observación de días festivos de la fe del estudiante, visitas con un padre que es miembro de las fuerzas armadas fuerzas, muerte en la familia inmediata.',
         'bullet_level': 1,
     },
     {
         'name': 'excuse_policy2',
-        'text': 'You can submit documentation by:',
+        'text': 'Puede enviar la documentación por:',
         'bullet_level': 1,
     },
     {
         'name': 'excuse_policy2a',
-        'text': 'Emailing it to ###attendace_email###',
+        'text': 'Enviándolo por correo electrónico a ###attendace_email###',
         'bullet_level': 2,
     },
     {
         'name': 'excuse_policy2b',
-        'text': 'Faxing it to ###fax_number###',
+        'text': 'Enviándolo por fax a ###fax_number###',
         'bullet_level': 2,
     },
     {
         'name': 'excuse_policy2c',
-        'text': 'Bringing it to the front office',
+        'text': 'Llevándolo a la oficina principal',
         'bullet_level': 2,
     },
     {
         'name': 'excuse_policy3',
-        'text': 'Absences will be considered **unexcused** if they do not fall into a category outlined above or if documentation is not provided.',
+        'text': 'Las ausencias se considerarán **injustificadas** si no entran en una de las categorías descritas anteriormente o si no se proporciona documentación.',
         'bullet_level': 1,
     },
     {
         'name': 'comms_and_ints_header',
-        'text': '**Attendance Communication and Interventions**',
+        'text': '**Asistencia Comunicación e Intervenciones**',
     },
     {
         'name': 'comms_and_ints_explainer',
-        'text': 'We believe that it is important for our school staff, families, and students to have open communication around attendance. Our school will take the following steps upon each absence:',
+        'text': 'Creemos que es importante que el personal de nuestra escuela, las familias y los estudiantes tengan una comunicación abierta sobre la asistencia. Nuestra escuela tomará los siguientes pasos en cada ausencia:',
     },
     {
         'name': 'comms_and_ints1',
-        'text': '3-4 absences: The school will send a letter to the parent/guardian notifying the parent of the student\'s status and recommending a conference to develop an attendance plan in accordance with LRS 17:233.  The student\'s parent/guardian will be contacted by school staff to schedule a mandatory Attendance Conference to develop an attendance plan for the student.  All notes from the meeting and the details of the attendance plan will be documented.',
+        'text': '3-4 ausencias: La escuela enviará una carta al padre/tutor notificando al padre sobre el estado del estudiante y recomendando una reunión para desarrollar un plan de asistencia de acuerdo con LRS 17:233. El personal de la escuela se comunicará con el padre/tutor del estudiante para programar una conferencia de asistencia obligatoria para desarrollar un plan de asistencia para el estudiante. Se documentarán todas las notas de la reunión y los detalles del plan de asistencia.',
         'bullet_level': 1,
     },
     {
         'name': 'comms_and_ints2',
-        'text': '5 absences: The student is considered as truant as pursuant to LRS 17:233.  A letter will be sent to the home of the student informing the parent/guardian of violation of compulsory attendance law. Supervisor of Child Welfare and Attendance may file report(s) to Municipal Court for Truancy and/or the NOLA Public Schools Office of Student Support and Attendance.',
+        'text': '5 ausencias: El estudiante se considera ausente sin permiso conforme a LRS 17:233. Se enviará una carta a la casa del estudiante informando al padre/tutor de la violación de la ley de asistencia obligatoria. El Supervisor de Asistencia y Bienestar Infantil puede presentar informes ante el Tribunal Municipal de Absentismo Escolar y/o la Oficina de Asistencia y Apoyo Estudiantil de las Escuelas Públicas de NOLA.',
         'bullet_level': 1,
     },
     {
         'name': 'comms_and_ints3',
-        'text': '6+ absences: A school official or representative may conduct a home visit, review the attendance plan, enforce compulsory attendance law, and make recommendations to improve attendance.',
+        'text': 'Más de 6 ausencias: un funcionario o representante de la escuela puede realizar una visita al hogar, revisar el plan de asistencia, hacer cumplir la ley de asistencia obligatoria y hacer recomendaciones para mejorar la asistencia.',
         'bullet_level': 1,
     },
 ]
