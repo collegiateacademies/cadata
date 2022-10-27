@@ -221,6 +221,97 @@ attendance_letter_blocks_page1 = [
     },
 ]
 
+attendance_letter_blocks_spanish_page1 = [
+    {
+        'name': 'attendance_policy_header',
+        'text': "**###school_name### Attendance Policy**",
+    },
+    {
+        'name': 'attendance_policy_explainer',
+        'text': "Students can only be successful if they are present and prepared in school every day. Our curriculum is an ambitious one; every day is essential for students to keep pace.  At ###school_name###, excessive absences will not be tolerated.",
+    },
+    {
+        'name': 'attendance_policy_warning',
+        'text': "**If a student is absent without excuse for more than 9 days of the semester, the student will not receive credit for any courses they are taking during that semester.**",
+    },
+    {
+        'name': 'attendance_requirements_header',
+        'text': '**Attendance Requirements**',
+    },
+    {
+        'name': 'attendance_requirement1',
+        'text': 'Students must be present for \"60,120 minutes (equivalent to 167 six-hour school days)\" per year and 30,060 per semester',
+        'bullet_level': 1,
+    },
+    {
+        'name': 'attendance_requirement2',
+        'text': 'Because our classes are semester based, students must meet attendance requirements per semester',
+        'bullet_level': 1,
+    },
+    {
+        'name': 'attendance_requirement3',
+        'text': '**Based on our schedule, a student must miss no more than 9 days per semester to earn credit for their courses**',
+        'bullet_level': 1,
+    },
+    {
+        'name': 'excuse_policy_header',
+        'text': 'Absences will be recorded as excused or unexcused, in accordance with our policies:',
+    },
+    {
+        'name': 'excuse_policy1',
+        'text': 'Absences will be considered **excused** if they fall into one of the following categories and documentation is submitted to the school: illness, hospital stay, medical appointments, observation of holidays of the student\'s own faith, visitation with a parent who is a member of the armed forces, death in the immediate family.',
+        'bullet_level': 1,
+    },
+    {
+        'name': 'excuse_policy2',
+        'text': 'You can submit documentation by:',
+        'bullet_level': 1,
+    },
+    {
+        'name': 'excuse_policy2a',
+        'text': 'Emailing it to ###attendace_email###',
+        'bullet_level': 2,
+    },
+    {
+        'name': 'excuse_policy2b',
+        'text': 'Faxing it to ###fax_number###',
+        'bullet_level': 2,
+    },
+    {
+        'name': 'excuse_policy2c',
+        'text': 'Bringing it to the front office',
+        'bullet_level': 2,
+    },
+    {
+        'name': 'excuse_policy3',
+        'text': 'Absences will be considered **unexcused** if they do not fall into a category outlined above or if documentation is not provided.',
+        'bullet_level': 1,
+    },
+    {
+        'name': 'comms_and_ints_header',
+        'text': '**Attendance Communication and Interventions**',
+    },
+    {
+        'name': 'comms_and_ints_explainer',
+        'text': 'We believe that it is important for our school staff, families, and students to have open communication around attendance. Our school will take the following steps upon each absence:',
+    },
+    {
+        'name': 'comms_and_ints1',
+        'text': '3-4 absences: The school will send a letter to the parent/guardian notifying the parent of the student\'s status and recommending a conference to develop an attendance plan in accordance with LRS 17:233.  The student\'s parent/guardian will be contacted by school staff to schedule a mandatory Attendance Conference to develop an attendance plan for the student.  All notes from the meeting and the details of the attendance plan will be documented.',
+        'bullet_level': 1,
+    },
+    {
+        'name': 'comms_and_ints2',
+        'text': '5 absences: The student is considered as truant as pursuant to LRS 17:233.  A letter will be sent to the home of the student informing the parent/guardian of violation of compulsory attendance law. Supervisor of Child Welfare and Attendance may file report(s) to Municipal Court for Truancy and/or the NOLA Public Schools Office of Student Support and Attendance.',
+        'bullet_level': 1,
+    },
+    {
+        'name': 'comms_and_ints3',
+        'text': '6+ absences: A school official or representative may conduct a home visit, review the attendance plan, enforce compulsory attendance law, and make recommendations to improve attendance.',
+        'bullet_level': 1,
+    },
+]
+
 attendance_letter3_blocks_page2 = [
     {
         'name': 'page2_header',
