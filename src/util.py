@@ -31,7 +31,8 @@ school_info = {
             'calendar': False,
             'contact': True,
             'link': '',
-            'contact': 'cpuliafico@collegiateacademies.org'
+            'contact_name': 'Caitlin Puliafico',
+            'contact_email': 'cpuliafico@collegiateacademies.org'
         }
     },
     'ASA': {
@@ -52,7 +53,8 @@ school_info = {
         #     'calendar': False,
         #     'contact': True,
         #     'link': '',
-        #     'contact': 'cpuliafico@collegiateacademies.org'
+        #    'contact_name': 'Caitlin Puliafico',
+        #    'contact_email': 'cpuliafico@collegiateacademies.org'
         # }
     },
     'CBR': {
@@ -73,7 +75,8 @@ school_info = {
         #     'calendar': False,
         #     'contact': True,
         #     'link': '',
-        #     'contact': 'cpuliafico@collegiateacademies.org'
+        #     'contact_name': 'Caitlin Puliafico',
+        #     'contact_email': 'cpuliafico@collegiateacademies.org'
         # }
     },
     'GWC': {
@@ -94,7 +97,8 @@ school_info = {
             'calendar': True,
             'contact': False,
             'link': 'https://docs.google.com/document/d/1IFKwD7p12haD3GbHtzFSvtAn_fdooUMleppx4pn-5_o/edit?usp=sharing',
-            'contact': ''
+            'contact_name': '',
+            'contact_email': ''
         }
     },
     'RCA': {
@@ -115,7 +119,8 @@ school_info = {
         #     'calendar': False,
         #     'contact': True,
         #     'link': '',
-        #     'contact': 'cpuliafico@collegiateacademies.org'
+        #     'contact_name': 'Caitlin Puliafico',
+        #     'contact_email': 'cpuliafico@collegiateacademies.org'
         # }
     },
     'OA': {
@@ -136,7 +141,8 @@ school_info = {
         #     'calendar': False,
         #     'contact': True,
         #     'link': '',
-        #     'contact': 'cpuliafico@collegiateacademies.org'
+        #     'contact_name': 'Caitlin Puliafico',
+        #     'contact_email': 'cpuliafico@collegiateacademies.org'
         # }
     },
 }
