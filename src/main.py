@@ -308,7 +308,9 @@ def individualized_attendance_reports(school: str) -> None:
             'active': '1',
             'school_ids': school_info[school]['sr_id'],
             'expand': 'grade_level, student_detail, student_attrs.student_attr_type',
+            # 'limit': '1'
         },
+        # page_limit=1
     )
 
     absence_list = sr_api_pull(
