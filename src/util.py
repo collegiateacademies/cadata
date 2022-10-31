@@ -595,7 +595,8 @@ def send_email(
         bcc: str = '',
         cc: str = '',
         reply_to: str = '',
-        attachment: str = '') -> None:
+        attachment: str = '',
+        sender_string: str = '') -> None:
     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
         try:
             smtp.login(credentials['cadata_email_addr'], credentials['python_gmail_app_password'])
@@ -605,7 +606,7 @@ def send_email(
 
         msg = EmailMessage()
         msg['Subject'] = subject_line
-        msg['From'] = credentials['cadata_email_addr']
+        msg['From'] = credentials['cadata_email_addr'] if sender_string == '' else sender_string
         msg['To'] = recipient
         if cc != '':
             msg['Cc'] = cc
