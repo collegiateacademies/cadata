@@ -229,101 +229,6 @@ def generate_attendance_letters(school: str, start_date: str, repeated_letters: 
         cc="shogarty@collegiateacademies.org"
     )
 
-def daily_attendance_email(school: str) -> None:
-    
-    if today_is_a_school_day(school, school_info[school]['sr_id']):
-        pass
-    else:
-        return
-        
-    database = {
-        '9': {
-            'total_students': 0,
-            'total_out_of_school': 0,
-            'names_list': ''
-        },
-        '10': {
-            'total_students': 0,
-            'total_out_of_school': 0,
-            'names_list': ''
-        },
-        '11': {
-            'total_students': 0,
-            'total_out_of_school': 0,
-            'names_list': ''
-        },
-        '12': {
-            'total_students': 0,
-            'total_out_of_school': 0,
-            'names_list': ''
-        },
-        'totals': {
-            'students': 0,
-            'absences': 0
-        }
-    }
-
-    student_list = sr_api_pull(
-        search_key='students',
-        parameters={
-            'active': '1',
-            'school_ids': school_info[school]['sr_id'],
-            'expand': 'grade_level'
-        }
-    )
-
-    for student in student_list:
-        if student['grade_level']['order_key'] in database:
-            database[student['grade_level']['order_key']]['total_students'] += 1
-            database['totals']['students'] += 1
-
-    absence_list = sr_api_pull(
-        search_key='absences',
-        parameters={
-            'min_date': today_yyyy_mm_dd,
-            'max_date': today_yyyy_mm_dd,
-            'active': '1',
-            'school_ids': school_info[school]['sr_id'],
-            'out_of_school_only': '1',
-            'expand': 'absence_type, student.grade_level, student.student_attrs.student_attr_type'
-        }
-    )
-
-    for absence in absence_list:
-        if absence['student']['grade_level']['order_key'] in database:
-            database[absence['student']['grade_level']['order_key']]['total_out_of_school'] += 1
-            database[absence['student']['grade_level']['order_key']]['names_list'] += f"{absence['student']['display_name']} - ({absence['absence_type']['code']})<br>" #  - {extract_sr_student_attribute(absence['student']['student_attrs'], 'Advisor')} SAVE THIS FOR WHEN ADVISORIES MAKE SENSE
-            database['totals']['absences'] += 1
-
-    with open('../logs/json/testingtesting.json', 'w') as file:
-        json.dump(database, file, indent=4)
-
-    with open('../html/daily_attendance.html', 'r') as file:
-        html_email = file.read()
-    
-    current_hour = datetime.datetime.now().hour
-    match current_hour:
-        case _ if current_hour <= 11:
-            time_of_day = "Morning"
-        case _ if current_hour > 11 and current_hour <= 2:
-            time_of_day = "Mid-Day"
-        case _ if current_hour > 2:
-            time_of_day = "EOD"
-
-    send_email(
-        recipient=school_info[school]['attendance_letter_recipient'],
-        subject_line=f"{today_yyyy_mm_dd} {time_of_day} Attendance Email",
-        html_body=html_email
-            .replace('###9th_list###', database['9']['names_list'])
-            .replace('###10th_list###', database['10']['names_list'])
-            .replace('###11th_list###', database['11']['names_list'])
-            .replace('###12th_list###', database['12']['names_list'])
-            .replace( '###total###',      str( round((int(database['totals']['students'])   - int(database['totals']['absences']))        / int(database['totals']['students'])   * 100 , 2)))
-            .replace( '###9th_total###',  str( round((int(database['9']['total_students'])  - int(database['9']['total_out_of_school']))  / int(database['9']['total_students'])  * 100 , 2)))
-            .replace( '###10th_total###', str( round((int(database['10']['total_students']) - int(database['10']['total_out_of_school'])) / int(database['10']['total_students']) * 100 , 2)))
-            .replace( '###11th_total###', str( round((int(database['11']['total_students']) - int(database['11']['total_out_of_school'])) / int(database['11']['total_students']) * 100 , 2)))
-            .replace( '###12th_total###', str( round((int(database['12']['total_students']) - int(database['12']['total_out_of_school'])) / int(database['12']['total_students']) * 100 , 2)))
-    )
 
 def assessments_export():
     assessments = sr_api_pull(
@@ -461,3 +366,93 @@ def individualized_attendance_reports(school: str) -> None:
         )
     
         time.sleep(5)
+
+
+def daily_attendance_email(school: str) -> None:
+    
+    if today_is_a_school_day(school, school_info[school]['sr_id']):
+        pass
+    else:
+        return
+
+    database = {
+
+        'grades': {},
+        'totals': {
+            'students': 0,
+            'absences': 0
+        }
+    }
+
+    student_list = sr_api_pull(
+        search_key='students',
+        parameters={
+            'active': '1',
+            'school_ids': school_info[school]['sr_id'],
+            'expand': 'grade_level'
+        }
+    )
+
+    for student in student_list:
+        if student['grade_level']['order_key'] not in database['grades']:
+            database['grades'][student['grade_level']['order_key']] = {
+                'int': int(student['grade_level']['order_key']),
+                'total_students': 0,
+                'total_out_of_school': 0,
+                'names_list': ''
+            }
+            database['grades'][student['grade_level']['order_key']]['total_students'] += 1
+            database['totals']['students'] += 1
+        else:
+            database['grades'][student['grade_level']['order_key']]['total_students'] += 1
+            database['totals']['students'] += 1
+
+    absence_list = sr_api_pull(
+        search_key='absences',
+        parameters={
+            'min_date': today_yyyy_mm_dd,
+            'max_date': today_yyyy_mm_dd,
+            'active': '1',
+            'school_ids': school_info[school]['sr_id'],
+            'out_of_school_only': '1',
+            'expand': 'absence_type, student.grade_level, student.student_attrs.student_attr_type'
+        }
+    )
+
+    for absence in absence_list:
+        if absence['student']['grade_level']['order_key'] in database['grades']:
+            database['grades'][absence['student']['grade_level']['order_key']]['total_out_of_school'] += 1
+            database['grades'][absence['student']['grade_level']['order_key']]['names_list'] += f"{absence['student']['display_name']} - ({absence['absence_type']['code']})<br>" #  - {extract_sr_student_attribute(absence['student']['student_attrs'], 'Advisor')} SAVE THIS FOR WHEN ADVISORIES MAKE SENSE
+            database['totals']['absences'] += 1
+
+    header_html = '<tr>'
+    student_list_html = '<tr>'
+    for grade in database['grades']:
+        if school != 'OA' and grade == '13':
+            continue
+        else:
+            header_html += f"<td>{grade}th: {str( round((int(database['grades'][grade]['total_students'])  - int(database['grades'][grade]['total_out_of_school']))  / int(database['grades'][grade]['total_students'])  * 100 , 2))}%</td>"
+            student_list_html += f"<td>{database['grades'][grade]['names_list']}</td>"
+    header_html += '</tr>'
+    student_list_html += '</tr>'
+
+    current_hour = datetime.datetime.now().hour
+    match current_hour:
+        case _ if current_hour <= 11:
+            time_of_day = "Morning"
+        case _ if current_hour > 11 and current_hour <= 2:
+            time_of_day = "Mid-Day"
+        case _ if current_hour > 2:
+            time_of_day = "EOD"
+
+    with open('../html/daily_attendance.html', 'r') as file:
+        html_email = file.read()
+
+    send_email(
+        recipient=school_info[school]['attendance_letter_recipient'],
+        subject_line=f"{today_yyyy_mm_dd} {time_of_day} Attendance Email",
+        html_body=html_email
+            .replace('###grade_headers###', header_html)
+            .replace('###name_lists###', student_list_html)
+            .replace( '###total###',      str( round((int(database['totals']['students'])   - int(database['totals']['absences']))        / int(database['totals']['students'])   * 100 , 2)))
+    )
