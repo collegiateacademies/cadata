@@ -347,7 +347,7 @@ def individualized_attendance_reports(school: str) -> None:
         
         send_email(
             recipient=email,
-            subject_line=f"{today_yyyy_mm_dd} Attendance Update to:{email} cc:{p1_email}", 
+            subject_line=f"{today_yyyy_mm_dd} Attendance Update", 
             html_body=html_email,
             cc=p1_email,
             reply_to=school_info[school]['attendance_email']
