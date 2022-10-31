@@ -368,7 +368,7 @@ def individualized_attendance_reports(school: str) -> None:
             sandbox=False
         )
     
-        time.sleep(5)
+        time.sleep(3)
 
 
 def daily_attendance_email(school: str) -> None:
