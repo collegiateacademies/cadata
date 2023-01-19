@@ -464,7 +464,6 @@ def log_cleaner():
     directory = "../logs/json"
     for file in os.listdir(directory):
         file_size = os.stat(f'{directory}/{file}')
-        print(f"File size:\n\t{directory}/{file}\n\t{file_size.st_size} bytes")
         if file_size.st_size >= 1_000_000:
             logging.info(f"removing {directory}/{file} because it is over 1 MB at {file_size.st_size} bytes")
             os.remove(f'{directory}/{file}')
