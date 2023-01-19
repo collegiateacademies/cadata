@@ -459,3 +459,6 @@ def daily_attendance_email(school: str) -> None:
             .replace('###name_lists###', student_list_html)
             .replace( '###total###',      str( round((int(database['totals']['students'])   - int(database['totals']['absences']))        / int(database['totals']['students'])   * 100 , 2)))
     )
+
+def log_cleaner():
+    pass
