@@ -53,8 +53,8 @@ school_info = {
             'calendar': False,
             'contact': True,
             'link': '',
-           'contact_name': 'Jamillah Corley',
-           'contact_email': 'jcorley@collegiateacademies.org'
+           'contact_name': 'Ms. Myers and Ms. Corley',
+           'contact_email': 'jcorley@collegiateacademies.org,smyers@collegiateacademies.org'
         }
     },
     'CBR': {
