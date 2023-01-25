@@ -48,14 +48,14 @@ school_info = {
         'phone': '504-373-6264',
         'attendance_email': 'frontdesk@sciacademy.org',
         'attendance_letter_recipient': 'kthomas1@collegiateacademies.org,smyers@collegiateacademies.org,jcorley@collegiateacademies.org',
-        # 'individualized_report_reply': 'cpuliafico@collegiateacademies.org',
-        # 'seat_time': {
-        #     'calendar': False,
-        #     'contact': True,
-        #     'link': '',
-        #    'contact_name': 'Caitlin Puliafico',
-        #    'contact_email': 'cpuliafico@collegiateacademies.org'
-        # }
+        'individualized_report_reply': 'jcorley@collegiateacademies.org',
+        'seat_time': {
+            'calendar': False,
+            'contact': True,
+            'link': '',
+           'contact_name': 'Jamillah Corley',
+           'contact_email': 'jcorley@collegiateacademies.org'
+        }
     },
     'CBR': {
         'short_name': 'CBR',
