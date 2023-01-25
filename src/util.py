@@ -48,7 +48,7 @@ school_info = {
         'phone': '504-373-6264',
         'attendance_email': 'frontdesk@sciacademy.org',
         'attendance_letter_recipient': 'kthomas1@collegiateacademies.org,smyers@collegiateacademies.org,jcorley@collegiateacademies.org',
-        'individualized_report_reply': 'jcorley@collegiateacademies.org',
+        'individualized_report_reply': 'frontdesk@sciacademy.org',
         'seat_time': {
             'calendar': False,
             'contact': True,
