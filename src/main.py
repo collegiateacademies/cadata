@@ -273,7 +273,7 @@ def assessments_export():
                 term_bin_output = term_bin['short_name']
 
         output.append([
-            assessment['school']['short_name'],
+            assessment['school_id'],
             ','.join(course_list),
             ','.join(section_list),
             assessment['staff_member']['sis_id'],
