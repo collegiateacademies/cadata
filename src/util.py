@@ -136,14 +136,14 @@ school_info = {
         'phone': '504-503-1421',
         'attendance_email': 'hello@opportunitiesacademy.org',
         'attendance_letter_recipient': 'hello@opportunitiesacademy.org',
-        # 'individualized_report_reply': 'cpuliafico@collegiateacademies.org',
-        # 'seat_time': {
-        #     'calendar': False,
-        #     'contact': True,
-        #     'link': '',
-        #     'contact_name': 'Caitlin Puliafico',
-        #     'contact_email': 'cpuliafico@collegiateacademies.org'
-        # }
+        'individualized_report_reply': 'hello@opportunitiesacademy.org',
+        'seat_time': {
+            'calendar': False,
+            'contact': True,
+            'link': '',
+            'contact_name': 'the Front Desk',
+            'contact_email': 'hello@opportunitiesacademy.org'
+        }
     },
 }
 
