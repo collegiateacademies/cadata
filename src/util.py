@@ -499,6 +499,7 @@ def sr_api_pull(search_key: str, parameters: dict = {}, page_limit: int = None) 
         logging.info(f"🎉 Done pulling {' '.join(search_key.split('-'))}! 🎉\n")
     
     with open(f"../logs/json/{datetime.datetime.now().strftime('%Y-%m-%d_%H:%M:%S')}_{search_key}.json", "w") as file:
+        logging.info('dumping json info to logs folder')
         json.dump(items, file, indent=4)
 
     return items
