@@ -236,7 +236,7 @@ def assessments_export():
         parameters={
             'min_date': '2022-07-01',
             'active': '1',
-            'expand': 'staff_member, assessment_type, assessment_courses, assessment_section_period_links.section_period.section'
+            'expand': 'school, staff_member, assessment_type, assessment_courses, assessment_section_period_links.section_period.section'
         }
     )
 
@@ -273,7 +273,7 @@ def assessments_export():
                 term_bin_output = term_bin['short_name']
 
         output.append([
-            assessment['school_id'],
+            assessment['school']['short_name'],
             ','.join(course_list),
             ','.join(section_list),
             assessment['staff_member']['sis_id'],
