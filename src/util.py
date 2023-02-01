@@ -70,14 +70,14 @@ school_info = {
         'phone': '225-892-6962',
         'attendance_email': 'info@collegiatebr.org',
         'attendance_letter_recipient': 'amiles@collegiateacademies.org',
-        # 'individualized_report_reply': 'cpuliafico@collegiateacademies.org',
-        # 'seat_time': {
-        #     'calendar': False,
-        #     'contact': True,
-        #     'link': '',
-        #     'contact_name': 'Caitlin Puliafico',
-        #     'contact_email': 'cpuliafico@collegiateacademies.org'
-        # }
+        'individualized_report_reply': 'amiles@collegiateacademies.org',
+        'seat_time': {
+            'calendar': False,
+            'contact': True,
+            'link': '',
+            'contact_name': 'Ava Miles',
+            'contact_email': 'amiles@collegiateacademies.org'
+        }
     },
     'GWC': {
         'short_name': 'GWC',
