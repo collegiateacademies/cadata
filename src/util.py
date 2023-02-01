@@ -476,6 +476,7 @@ with open('../creds.json') as file:
 
 
 def sr_api_pull(search_key: str, parameters: dict = {}, page_limit: int = None) -> list:
+    counter = 0
     """A blank function for returning an endpoint for Schoolrunner. Logs its progress in the logs folder and logs its outputs as a json file."""
     items = []
     headers = {'Authorization': 'Basic ' + base64.b64encode(bytes(f"{credentials['sr_email']}:{credentials['sr_pass']}", "UTF-8")).decode("ascii")}
@@ -489,6 +490,7 @@ def sr_api_pull(search_key: str, parameters: dict = {}, page_limit: int = None) 
             this_response = requests.get(f"https://ca.schoolrunner.org/api/v1/{search_key}?page={page + 1}", params=parameters, headers=headers).json()
             for item in this_response['results'][search_key.replace('-', '_')]:
                 items.append(item)
+                counter += 1
         logging.info(f"🎉 Done pulling {' '.join(search_key.split('-'))}! 🎉")
     else:
         for page in range(page_limit):
@@ -496,11 +498,15 @@ def sr_api_pull(search_key: str, parameters: dict = {}, page_limit: int = None) 
             this_response = requests.get(f"https://ca.schoolrunner.org/api/v1/{search_key}?page={page + 1}",params=parameters, headers=headers).json()
             for item in this_response['results'][search_key.replace('-', '_')]:
                 items.append(item)
+                counter += 1
         logging.info(f"🎉 Done pulling {' '.join(search_key.split('-'))}! 🎉\n")
     
-    with open(f"../logs/json/{datetime.datetime.now().strftime('%Y-%m-%d_%H:%M:%S')}_{search_key}.json", "w") as file:
-        logging.info('dumping json info to logs folder')
-        json.dump(items, file, indent=4)
+    if counter >= 5000:
+        logging.info(f"../logs/json/{datetime.datetime.now().strftime('%Y-%m-%d_%H:%M:%S')}_{search_key}.json would be {counter} lines long. Skipping dumping the file.")
+    else:
+        with open(f"../logs/json/{datetime.datetime.now().strftime('%Y-%m-%d_%H:%M:%S')}_{search_key}.json", "w") as file:
+            logging.info('dumping json info to logs folder')
+            json.dump(items, file, indent=4)
 
     return items
 
