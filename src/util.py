@@ -1,9 +1,12 @@
-import base64, requests, datetime, pprint, json, logging, sys, smtplib, gspread, math, time, os
+import base64, requests, datetime, pprint, json, logging, sys, smtplib, gspread, math, time, os, google.auth
 from pathlib import Path
 from fpdf import FPDF, HTMLMixin
 from email.message import EmailMessage
 from datetime import timedelta
 from bs4 import BeautifulSoup
+from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
+from simplegmail import Gmail
 import __main__
 
 pp = pprint.PrettyPrinter(indent=2)

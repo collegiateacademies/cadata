@@ -467,3 +467,17 @@ def log_cleaner():
         if file_size.st_size >= 1_000_000:
             logging.info(f"removing {directory}/{file} because it is over 1 MB at {file_size.st_size} bytes")
             os.remove(f'{directory}/{file}')
+
+def mail_monitor():
+    gmail = Gmail()
+    labels = gmail.list_labels()
+    messages = gmail.get_unread_inbox()
+
+    for message in messages:
+        print("To: " + message.recipient)
+        print("From: " + message.sender)
+        print("Subject: " + message.subject)
+        print("Date: " + message.date)
+        print("Preview: " + message.snippet)
+        
+        print("Message Body: " + message.plain)  # or message.html
