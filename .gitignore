@@ -134,3 +134,4 @@ pdf/*.pdf
 .DS_Store
 *test*
 /.idea
+quickstart.py
