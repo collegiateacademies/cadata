@@ -295,7 +295,7 @@ def assessments_export():
     # return_googlesheet_by_key(spreadsheet_key='1gaMzfvMbG1O7Nh1-sWc_UupVzKl5xFyyFZAHSodLMps', sheet_name='assessments').sort((6, 'asc'), (0, 'asc'), (4, 'asc'), range = f'A2:{return_numeric_column(len(output[0]))}{len(output)}')
 
 
-def individualized_attendance_reports(school: str) -> None:
+def individualized_attendance_reports(school: str, start_date: str) -> None:
     
     if today_is_a_school_day(school, school_info[school]['sr_id']):
         pass
@@ -318,7 +318,7 @@ def individualized_attendance_reports(school: str) -> None:
         parameters={
             'active': '1',
             'school_ids': school_info[school]['sr_id'],
-            'min_date': return_term_start_date('semester', school),
+            'min_date': start_date,
             'max_date': today_yyyy_mm_dd,
             'expand': 'absence_type'
         }
