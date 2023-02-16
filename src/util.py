@@ -144,7 +144,7 @@ school_info = {
             'calendar': False,
             'contact': True,
             'link': '',
-            'contact_name': 'the Front Desk',
+            'contact_name': 'hello@opportunitiesacademy.org',
             'contact_email': 'hello@opportunitiesacademy.org'
         }
     },
