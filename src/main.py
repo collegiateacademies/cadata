@@ -347,6 +347,7 @@ def individualized_attendance_reports(school: str, start_date: str) -> None:
                 elif school_info[school]['seat_time']['contact']:
                     html_email = file.read().replace('###table_data###', table_data).replace('###au###', str(au)).replace('###attendance_email###', school_info[school]['individualized_report_reply']).replace('###seat_time###', f'Students may recover up unexcused absences by attending seat time. Reach out to <a href="mailto:{school_info[school]["seat_time"]["contact_email"]}?subject=Seat%20time%20dates%20and%20times&body=Hi%20there%2C%0A%0AWhat%20are%20the%20dates%20and%20times%20for%20seat%20time%20recovery%3F%0A%0AThank%20you%2C%0A{student["first_name"]}%20{student["last_name"]}">{school_info[school]["seat_time"]["contact_name"]}</a> for dates and times.')
         
+        if (school == 'OA' and au > 0) or (school != 'OA'):
         send_email(
             recipient=email,
             subject_line=f"{today_yyyy_mm_dd} Attendance Update", 
