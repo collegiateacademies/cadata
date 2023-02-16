@@ -142,7 +142,7 @@ school_info = {
         'individualized_report_reply': 'hello@opportunitiesacademy.org',
         'seat_time': {
             'calendar': False,
-            'contact': True,
+            'contact': 'OA',
             'link': '',
             'contact_name': 'hello@opportunitiesacademy.org',
             'contact_email': 'hello@opportunitiesacademy.org'
