@@ -464,6 +464,7 @@ def daily_attendance_email(school: str) -> None:
             .replace( '###total###',      str( round((int(database['totals']['students'])   - int(database['totals']['absences']))        / int(database['totals']['students'])   * 100 , 2)))
     )
 
+
 def log_cleaner():
     directory = "../logs/json"
     for file in os.listdir(directory):
@@ -471,6 +472,7 @@ def log_cleaner():
         if file_size.st_size >= 1_000_000:
             logging.info(f"removing {directory}/{file} because it is over 1 MB at {file_size.st_size} bytes")
             os.remove(f'{directory}/{file}')
+
 
 def mail_monitor():
     gmail = Gmail()
