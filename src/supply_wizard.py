@@ -122,5 +122,5 @@ def new_supply_request_from_form(request) -> None:
     send_email(
         recipient='supplies@livingstoncollegiate.org',
         subject_line=f'New Supply Request from {return_typeform_response(answers, "tUEthDKlsDxn")}',
-        html_body=f"<p>Check the <a href='https://todoist.com/app/project/2289889190'>Supply Wizard Todoist project</a> for details</p>"
+        html_body=f"<p>Check the <a href='https://todoist.com/app/project/2289889190'>Supply Wizard Todoist project</a> for details</p><br><br>Requestor: {return_typeform_response(answers, 'tUEthDKlsDxn')}<br>Request: {return_typeform_response(answers, 'gM0putEL4y0Y')} {return_typeform_response(answers, 'T9Pt0RUiGm24')}<br>Link: {return_typeform_response(answers, '60QX6EQK1bEI')}<br>Total Cost: {return_typeform_response(answers, 'PeDsVa6JqjZn')}<br>Needed by: {return_typeform_response(answers, 'S2Xvyf7wsitr')}<br>Notes: {return_typeform_response(answers, 'yyTUgLDswCHr')}"
     )
