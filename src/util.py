@@ -7,6 +7,8 @@ from bs4 import BeautifulSoup
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from simplegmail import Gmail
+from pprint import pformat
+from todoist_api_python.api import TodoistAPI
 import __main__
 
 pp = pprint.PrettyPrinter(indent=2)
@@ -168,6 +170,16 @@ reset = "\u001b[0m"
 # Text Decorations
 bold = "\u001b[1m"
 underline = "\u001b[4m"
+
+
+# LCA Todoist Operations Team
+collaborators = {
+    'Diamond Davis': '39208790',
+    'Caitlin Puliafico': '39208786',
+    'Topher McKee': '39208760',
+    'Thaise Ashford': '39208781',
+    'R. J. Wilkins': '39208793'
+}
 
 
 sys.path.append("..")
@@ -794,3 +806,19 @@ def generate_page_content(pdf_instance: FPDF, school: str, block_list: list) -> 
                 markdown=True
             )
             pdf_instance.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", txt='')
+
+def return_typeform_response(responses, field_id):
+    for response in responses:
+        if response['field']['id'] == field_id:
+            if response['type'] == 'choice':
+                return response['choice']['label']
+            elif response['type'] == 'choices':
+                return ', '.join(response['choices']['labels'])
+            elif response['type'] == 'text':
+                return response['text']
+            elif response['type'] == 'number':
+                return response['number']
+            elif response['type'] == 'date':
+                return response['date']
+            elif response['type'] == 'url':
+                return response['url']
