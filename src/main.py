@@ -487,3 +487,51 @@ def mail_monitor():
         print("Preview: " + message.snippet)
         
         print("Message Body: " + message.plain)  # or message.html
+
+def new_supply_request(staff_name, department, contact_method, item_name, item_quantity, link_to_item, total_cost, due_date, notes, section_override=''):
+    api = TodoistAPI(credentials['todoist_access_token'])
+    supply_wizard_project_id = '2289889190'
+
+    if section_override != '':
+        section_id = section_override
+    else:
+        section_id = '86767515'
+
+    try:
+        task = api.add_task(
+            content=f"* {item_quantity} [{item_name.title()}]({link_to_item}) (${total_cost})",
+            description=f'{staff_name} - {due_date}',
+            section_id=section_id,
+            project_id=supply_wizard_project_id,
+            priority=4,
+            assignee=collaborators['Diamond Davis'],
+
+        )
+        logging.info(f"Task logged successfully: {pformat(task)}")
+        if len(notes) > 0:
+            comment_response = api.add_comment(
+                content=f"**Comment from {staff_name}:** {notes}",
+                task_id=task.id
+            )
+            logging.info(f"Added comment as well {comment_response}")
+    except Exception as error:
+        logging.error(error, exc_info=True)
+
+def new_supply_request_from_form(request) -> None:
+    answers = request.json['form_response']['answers']
+    new_supply_request(
+        staff_name=return_typeform_response(answers, 'tUEthDKlsDxn'),
+        department=return_typeform_response(answers, 'AgCxx7YGr278'),
+        contact_method=return_typeform_response(answers, 'R01zv68xOZs7'),
+        item_name=return_typeform_response(answers, 'T9Pt0RUiGm24'),
+        item_quantity=return_typeform_response(answers, 'gM0putEL4y0Y'),
+        link_to_item=return_typeform_response(answers, '60QX6EQK1bEI'),
+        total_cost=return_typeform_response(answers, 'PeDsVa6JqjZn'),
+        due_date=return_typeform_response(answers, 'S2Xvyf7wsitr'),
+        notes=return_typeform_response(answers, 'yyTUgLDswCHr')
+    )
+    send_email(
+        to_addr='supplies@livingstoncollegiate.org',
+        msg_subject=f'New Supply Request from {return_typeform_response(answers, "tUEthDKlsDxn")}',
+        html_msg=f"<p>Check the <a href='https://todoist.com/app/project/2289889190'>Supply Wizard Todoist project</a> for details</p>"
+    )
