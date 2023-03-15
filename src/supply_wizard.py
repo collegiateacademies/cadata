@@ -120,7 +120,7 @@ def new_supply_request_from_form(request) -> None:
         notes=return_typeform_response(answers, 'yyTUgLDswCHr')
     )
     send_email(
-        to_addr='supplies@livingstoncollegiate.org',
-        msg_subject=f'New Supply Request from {return_typeform_response(answers, "tUEthDKlsDxn")}',
-        html_msg=f"<p>Check the <a href='https://todoist.com/app/project/2289889190'>Supply Wizard Todoist project</a> for details</p>"
+        recipient='supplies@livingstoncollegiate.org',
+        subject_line=f'New Supply Request from {return_typeform_response(answers, "tUEthDKlsDxn")}',
+        html_body=f"<p>Check the <a href='https://todoist.com/app/project/2289889190'>Supply Wizard Todoist project</a> for details</p>"
     )
