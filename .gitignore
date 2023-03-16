@@ -135,3 +135,5 @@ pdf/*.pdf
 *test*
 /.idea
 quickstart.py
+triggers/AssessmentResults.csv
+triggers/StudentsBySchool.csv
