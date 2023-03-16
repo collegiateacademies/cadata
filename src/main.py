@@ -487,3 +487,13 @@ def mail_monitor():
         print("Preview: " + message.snippet)
         
         print("Message Body: " + message.plain)  # or message.html
+
+def upload_map_file():
+    os.system("7z x ~/services_kit/report/bin/map_output/342339.zip")
+    output = []
+    with open('AssessmentResults.csv') as file:
+        csv_reader = csv.reader(file)
+        row = []
+        for row in csv_reader:
+            output.append(row)
+    update_googlesheet_by_key(spreadsheet_key='17HNmMqS4Rwy3tZPcct69ZIz7yhuZIHv_mi4d9enJzD8', sheet_name='Sheet1', data = output, starting_cell="A1")
