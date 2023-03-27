@@ -236,7 +236,7 @@ def assessments_export():
         parameters={
             'min_date': '2022-07-01',
             'active': '1',
-            'expand': 'school, staff_member, assessment_type, assessment_courses, assessment_section_period_links.section_period.section'
+            'expand': 'school, staff_member, assessment_type, assessment_courses, assessment_section_period_links.section_period.section.course_definition'
         }
     )
 
