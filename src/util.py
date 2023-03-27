@@ -493,6 +493,7 @@ def sr_api_pull(search_key: str, parameters: dict = {}, page_limit: int = None) 
         for page in range(response['meta']['total_pages']):
             logging.info(f"Pulling page {page + 1} of {response['meta']['total_pages']} page(s)")
             this_response = requests.get(f"https://ca.schoolrunner.org/api/v1/{search_key}?page={page + 1}", params=parameters, headers=headers).json()
+            logging.info(f"🏗️ Processing page {page + 1} of {response['meta']['total_pages']} page(s) 🏗️")
             for item in this_response['results'][search_key.replace('-', '_')]:
                 items.append(item)
                 counter += 1
@@ -501,6 +502,7 @@ def sr_api_pull(search_key: str, parameters: dict = {}, page_limit: int = None) 
         for page in range(page_limit):
             logging.info(f"Pulling page {page + 1} of {page_limit} pages [limited]")
             this_response = requests.get(f"https://ca.schoolrunner.org/api/v1/{search_key}?page={page + 1}",params=parameters, headers=headers).json()
+            logging.info(f"🏗️ Processing page {page + 1} of {page_limit} pages [limited] 🏗️")
             for item in this_response['results'][search_key.replace('-', '_')]:
                 items.append(item)
                 counter += 1
