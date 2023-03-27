@@ -506,7 +506,7 @@ def sr_api_pull(search_key: str, parameters: dict = {}, page_limit: int = None) 
                 counter += 1
         logging.info(f"🎉 Done pulling {' '.join(search_key.split('-'))}! 🎉\n")
     
-    if counter >= 50000000000000000000000000:
+    if counter >= 5000:
         logging.info(f"../logs/json/{datetime.datetime.now().strftime('%Y-%m-%d_%H:%M:%S')}_{search_key}.json would be {counter} lines long. Skipping dumping the file.")
     else:
         with open(f"../logs/json/{datetime.datetime.now().strftime('%Y-%m-%d_%H:%M:%S')}_{search_key}.json", "w") as file:
