@@ -247,7 +247,7 @@ def assessments_export():
         }
     )
 
-    output = [['School', 'Course', 'Sections', 'Teacher ID', 'Teacher', 'Term Bin', 'Week of', 'Name', 'Assessment ID']]
+    output = [['School', 'PowerSchool Course', 'SR Course', 'Sections', 'Teacher ID', 'Teacher', 'Term Bin', 'Week of', 'Name', 'Assessment ID']]
 
     for assessment in assessments:
         
@@ -274,6 +274,7 @@ def assessments_export():
 
         output.append([
             assessment['school']['short_name'],
+            assessment['assessment_section_period_links'][0]['section_period']['section']['course_definition']['display_name'] if len(assessment['assessment_section_period_links']) > 0 else "No Course",
             ','.join(course_list),
             ','.join(section_list),
             assessment['staff_member']['sis_id'],
