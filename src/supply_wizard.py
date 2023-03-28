@@ -17,6 +17,21 @@ def get_collaborators(collaborator_name: str, project_id: str) -> str:
         if collaborator.name == collaborator_name:
             return collaborator.id
 
+
+def clean_out_tasks() -> None:
+    """Cleans out the tasks in the delivered or denied sections"""
+    api = TodoistAPI(credentials['todoist_access_token'])
+    
+    tasks_to_clear = api.get_tasks(filter="#🧙‍♂️ Supply Wizard & (/Delivered | /Denied)")
+
+    for task in tasks_to_clear:
+        try:
+            api.close_task(task.id)
+            logging.info(f"Successfully closed {task.content} -- {task.project_id} -- {task.section_id}")
+        except Exception as err:
+            logging.error(f"Error closing {task.content} -- {task.project_id} -- {task.section_id}", exc_info=True)
+
+
 def send_email(
         recipient: str = '',
         text_body: str = '',
