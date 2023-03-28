@@ -93,7 +93,7 @@ def new_supply_request(staff_name, department, contact_method, item_name, item_q
             section_id=section_id,
             project_id=supply_wizard_project_id,
             priority=4,
-            assignee=collaborators['Diamond Davis'],
+            assignee_id=get_collaborators('Diamond Davis', supply_wizard_project_id),
 
         )
         logging.info(f"Task logged successfully: {pformat(task)}")
