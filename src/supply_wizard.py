@@ -21,7 +21,7 @@ def get_collaborators(collaborator_name: str, project_id: str) -> str:
 def clean_out_tasks() -> None:
     """Cleans out the tasks in the delivered or denied sections"""
     api = TodoistAPI(credentials['todoist_access_token'])
-    
+
     tasks_to_clear = api.get_tasks(filter="#🧙‍♂️ Supply Wizard & (/Delivered | /Denied)")
 
     for task in tasks_to_clear:
