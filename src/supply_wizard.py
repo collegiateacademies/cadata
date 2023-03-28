@@ -8,14 +8,14 @@ sys.path.append("..")
 with open('../creds.json') as file:
     credentials = json.load(file)
 
-# LCA Todoist Operations Team
-collaborators = {
-    'Diamond Davis': '39208790',
-    'Caitlin Puliafico': '39208786',
-    'Topher McKee': '39208760',
-    'Thaise Ashford': '39208781',
-    'R. J. Wilkins': '39208793'
-}
+def get_collaborators(collaborator_name: str, project_id: str) -> str:
+    """Accesses the Todoist API to return collaborator IDs"""
+    api = TodoistAPI(credentials['todoist_access_token'])
+    collaborators = api.get_collaborators(project_id)
+
+    for collaborator in collaborators:
+        if collaborator.name == collaborator_name:
+            return collaborator.id
 
 def send_email(
         recipient: str = '',
