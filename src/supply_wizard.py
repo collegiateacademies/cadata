@@ -122,6 +122,12 @@ def new_supply_request(staff_name, department, contact_method, item_name, item_q
         logging.error(error, exc_info=True)
 
 def new_supply_request_from_form(request) -> None:
+
+    api = TodoistAPI(credentials['todoist_access_token'])
+    all_tasks = api.get_tasks(filter="#🧙‍♂️ Supply Wizard")
+    if len(all_tasks) >= 250:
+        clean_out_tasks()
+
     answers = request.json['form_response']['answers']
     new_supply_request(
         staff_name=return_typeform_response(answers, 'tUEthDKlsDxn'),
