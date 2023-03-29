@@ -261,6 +261,8 @@ def assessments_export():
         for section in assessment['assessment_section_period_links']:
             if section['section_period']['section_id'] not in section_list:
                 section_list.append(f"{section['section_period']['section_id']}")
+            if section['section_period']['section']['course_definition']['display_name'] not in ps_course_list:
+                ps_course_list.append(f"{section['section_period']['section']['course_definition']['display_name']}")
 
         term_bin_output = ''
         for term_bin in term_bins:
