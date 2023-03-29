@@ -251,11 +251,12 @@ def assessments_export():
 
     for assessment in assessments:
         
-        course_list = []
+        ps_course_list = []
+        sr_course_list = []
         section_list = []
 
-        for course in assessment['assessment_courses']:
-            course_list.append(course['display_name'])
+        for sr_course in assessment['assessment_courses']:
+            sr_course_list.append(sr_course['display_name'])
 
         for section in assessment['assessment_section_period_links']:
             if section['section_period']['section_id'] not in section_list:
@@ -275,7 +276,7 @@ def assessments_export():
         output.append([
             assessment['school']['short_name'],
             assessment['assessment_section_period_links'][0]['section_period']['section']['course_definition']['display_name'] if len(assessment['assessment_section_period_links']) > 0 else "No Course",
-            ','.join(course_list),
+            ','.join(sr_course_list),
             ','.join(section_list),
             assessment['staff_member']['sis_id'],
             assessment['staff_member']['display_name'],
