@@ -275,18 +275,33 @@ def assessments_export():
             if term_start_date <= assessment_date and term_end_date >= assessment_date and assessment['school_id'] == term_bin['school_id'] and 'quarter' in term_bin['long_name'].lower():
                 term_bin_output = term_bin['short_name']
 
-        output.append([
-            assessment['school']['short_name'],
-            assessment['assessment_section_period_links'][0]['section_period']['section']['course_definition']['display_name'] if len(assessment['assessment_section_period_links']) > 0 else "No Course",
-            ','.join(sr_course_list),
-            ','.join(section_list),
-            assessment['staff_member']['sis_id'],
-            assessment['staff_member']['display_name'],
-            term_bin_output,
-            return_monday(assessment['date']),
-            assessment['display_name'],
-            assessment['assessment_id']
-        ])
+        if len(ps_course_list) == 0:
+            output.append([
+                assessment['school']['short_name'],
+                assessment['assessment_section_period_links'][0]['section_period']['section']['course_definition']['display_name'] if len(assessment['assessment_section_period_links']) > 0 else "No Course",
+                ','.join(sr_course_list),
+                ','.join(section_list),
+                assessment['staff_member']['sis_id'],
+                assessment['staff_member']['display_name'],
+                term_bin_output,
+                return_monday(assessment['date']),
+                assessment['display_name'],
+                assessment['assessment_id']
+            ])
+        
+        for x in range(len(ps_course_list)):
+            output.append([
+                assessment['school']['short_name'],
+                ps_course_list[x],
+                ','.join(sr_course_list),
+                ','.join(section_list),
+                assessment['staff_member']['sis_id'],
+                assessment['staff_member']['display_name'],
+                term_bin_output,
+                return_monday(assessment['date']),
+                assessment['display_name'],
+                assessment['assessment_id']
+            ])
 
     update_googlesheet_by_key(
         spreadsheet_key='1gaMzfvMbG1O7Nh1-sWc_UupVzKl5xFyyFZAHSodLMps',
