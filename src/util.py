@@ -874,7 +874,7 @@ def create(file_name, mime_type, folder_id=None):
     return file_id
 
 
-def upload_basic(drive_name, local_path, mimetype):
+def upload_basic(drive_name, local_path, mimetype, folder_id):
     """Insert new file.
     Returns : Id's of the file uploaded
     """
@@ -885,7 +885,10 @@ def upload_basic(drive_name, local_path, mimetype):
         # create drive api client
         service = build('drive', 'v3', credentials=drive_creds)
 
-        file_metadata = {'name': drive_name}
+        file_metadata = {
+            'name': drive_name,
+            'parents': [folder_id]
+        }
         media = MediaFileUpload(local_path,
                                 mimetype=mimetype)
         # pylint: disable=maybe-no-member
