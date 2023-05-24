@@ -1,11 +1,15 @@
-import base64, requests, datetime, pprint, json, logging, sys, smtplib, gspread, math, time, os, google.auth, pydrive, csv
+import base64, requests, datetime, pprint, json, logging, sys, smtplib, gspread, math, time, os, google.auth, pydrive, csv, os.path
 from pathlib import Path
 from fpdf import FPDF, HTMLMixin
 from email.message import EmailMessage
 from datetime import timedelta
 from bs4 import BeautifulSoup
+from google.auth.transport.requests import Request
+from google.oauth2.credentials import Credentials
+from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
+from googleapiclient.http import MediaFileUpload
 from simplegmail import Gmail
 from pprint import pformat
 from todoist_api_python.api import TodoistAPI
@@ -479,6 +483,9 @@ oa_attendance_letter_blocks = [
 with open('../creds.json') as file:
     credentials = json.load(file)
 
+with open('../ca-data-administrator.json') as file:
+    service_account = json.load(file)
+
 
 def sr_api_pull(search_key: str, parameters: dict = {}, page_limit: int = None) -> list:
     counter = 0
@@ -798,3 +805,96 @@ def generate_page_content(pdf_instance: FPDF, school: str, block_list: list) -> 
                 markdown=True
             )
             pdf_instance.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", txt='')
+
+
+def google_auth_flow():
+    SCOPES = [
+        'https://www.googleapis.com/auth/drive.metadata.readonly',
+        'https://www.googleapis.com/auth/drive.file',
+        'https://www.googleapis.com/auth/drive',
+    ]
+
+    drive_creds = None
+    # The file token.json stores the user's access and refresh tokens, and is
+    # created automatically when the authorization flow completes for the first
+    # time.
+    if os.path.exists('../token.json'):
+        drive_creds = Credentials.from_authorized_user_file('../token.json', SCOPES)
+
+    # If there are no (valid) credentials available, let the user log in.
+    if not drive_creds or not drive_creds.valid:
+        if drive_creds and drive_creds.expired and drive_creds.refresh_token:
+            drive_creds.refresh(Request())
+        else:
+            flow = InstalledAppFlow.from_client_secrets_file(
+                '../ca-data-administrator.json', SCOPES)
+            drive_creds = flow.run_local_server(port=0)
+        # Save the credentials for the next run
+        with open('../token.json', 'w') as token:
+            token.write(drive_creds.to_json())
+
+    return drive_creds
+
+def create(file_name, mime_type, folder_id=None):
+    """
+    This function creates a new file on Google Drive.
+    Requires the following arguments:
+        1 - name to give the file
+        2 - the mime type of the file being created
+            (e.g., text/csv) reference -- https://developers.google.com/drive/api/guides/ref-export-formats
+        3 - optional value for the Google folder ID where the file will be saved
+   
+    See documentation:
+    https://developers.google.com/drive/api/v3/reference/files/create
+    """
+
+    drive_creds = google_auth_flow()
+
+    try:
+        service = build('drive', 'v3', credentials=drive_creds)
+    
+        logging.info(f'creating {file_name} on google drive in folder {folder_id}...')
+
+        file_metadata = {
+            'name': file_name,
+            'mimeType': mime_type
+        }
+        
+        if folder_id is not None:
+            file_metadata['parents'] = [folder_id]
+        
+        results = service.files().create(body=file_metadata).execute()
+        file_id = results['id']
+        
+        logging.info(f"file created with id: {file_id}\n")
+
+    except Exception as err:
+        logging.error(f"creating {file_name} on google drive in folder {folder_id} -- {err}", exc_info=True)
+   
+    return file_id
+
+
+def upload_basic(drive_name, local_path, mimetype):
+    """Insert new file.
+    Returns : Id's of the file uploaded
+    """
+    
+    drive_creds = google_auth_flow()
+
+    try:
+        # create drive api client
+        service = build('drive', 'v3', credentials=drive_creds)
+
+        file_metadata = {'name': drive_name}
+        media = MediaFileUpload(local_path,
+                                mimetype=mimetype)
+        # pylint: disable=maybe-no-member
+        file = service.files().create(body=file_metadata, media_body=media,
+                                      fields='id').execute()
+        logging.info(f'Successful upload -- file ID: {file.get("id")}')
+
+    except HttpError as error:
+        logging.error(F'An error occurred: {error}', exc_info=True)
+        file = None
+
+    return file.get('id')
