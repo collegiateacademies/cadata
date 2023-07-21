@@ -62,6 +62,7 @@ def generate_attendance_letters(school: str, start_date: str, repeated_letters: 
                 'tu': 0,
                 '3au_letters_logged': 0,
                 '5au_letters_logged': 0,
+                '10au_letters_logged': 0,
             }
     
     for absence in absence_list:
@@ -75,6 +76,8 @@ def generate_attendance_letters(school: str, start_date: str, repeated_letters: 
             database[communication['student_id']]['3au_letters_logged'] += 1
         elif communication['student_id'] in database and communication['student']['active'] == '1' and communication['communication_method']['name'] == "Letter" and communication['communication_type']['name'] == 'Attendance' and communication['comments'] == '5+ AU Letter':
             database[communication['student_id']]['5au_letters_logged'] += 1
+        elif communication['student_id'] in database and communication['student']['active'] == '1' and communication['communication_method']['name'] == "Letter" and communication['communication_type']['name'] == 'Attendance' and communication['comments'] == '10+ AU Letter':
+            database[communication['student_id']]['10au_letters_logged'] += 1
 
     ##########################################################################
     ########                PDF GENERATION STARTS HERE              ##########
