@@ -222,6 +222,71 @@ def generate_attendance_letters(school: str, start_date: str, repeated_letters: 
                 sandbox=False
             )
 
+        if database[student]['au'] >= 10 and database[student]['10au_letters_logged'] == 0:
+            pdf.add_page()
+            pdf.image(f"../assets/{school.lower()}_letterhead.png", x=125, y=5, h=8)
+            pdf.multi_cell(
+                w=0,
+                h=4,
+                new_x="LMARGIN",
+                new_y="NEXT",
+                txt=f"{database[student]['first_name']} {database[student]['last_name']} - {datetime.datetime.today().strftime('%A, %B %-d, %Y')} (10 Absence Letter)",
+                markdown=True
+            )
+            pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", txt='')
+            
+            if school == 'OA':
+                pass
+            else:
+                if database[student]['home_language'] == '113':
+                    generate_page_content(pdf, school, attendance_letter_blocks_spanish_page1)
+                else:
+                    generate_page_content(pdf, school, attendance_letter_blocks_page1)
+                pdf.add_page()
+
+            data = (
+                ("Scholar Attendance Summary", f"{database[student]['first_name']} {database[student]['last_name']}"),
+                ("Unexcused Absences", str(database[student]['au'])),
+                ("Unexcused Tardies", str(database[student]['tu'])),
+            )
+            line_height = pdf.font_size * 2.5
+            col_width = pdf.epw / 3  # distribute content evenly
+            for row in data:
+                for datum in row:
+                    pdf.multi_cell(col_width, line_height, datum, border=1, new_x="RIGHT", new_y="TOP", max_line_height=pdf.font_size)
+                pdf.ln(line_height)
+
+            pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", txt='')
+            
+            if school == 'OA':
+                generate_page_content(pdf, school, oa_attendance_letter_blocks)
+            else:
+                if database[student]['home_language'] == '113':
+                    generate_page_content(pdf, school, attendance_letter10_blocks_spanish_page2)
+                else:
+                    generate_page_content(pdf, school, attendance_letter10_blocks_page2)
+                
+            pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", txt='Sincerely,')
+            pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", txt=school_info[school]['principal'])
+            
+            if school == 'OA':
+                pdf.add_page()
+
+            pdf.text(15, 255, f"Parents/Guardians of {database[student]['first_name']} {database[student]['last_name']}")
+            pdf.text(15, 260, database[student]['street'])
+            pdf.text(15, 265, f"{database[student]['city']}, {database[student]['state']} {database[student]['zip']}")
+
+            log_communication(
+                student_id = database[student]['sr_id'],
+                communication_method_id = '15' if database[student]['home_language'] == '113' else '17',
+                communication_type_id = '2',
+                staff_member_id = '11690',
+                school_id = school_info[school]['sr_id'],
+                contact_person = 'Parent/Guardian letter',
+                comments = '10+ AU Letter',
+                sandbox=False
+            )
+
     pdf.output(f"../pdf/{school}_{today_yyyy_mm_dd}_attendance_letter.pdf")
     
     send_email(
