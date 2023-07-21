@@ -480,6 +480,25 @@ attendance_letter5_blocks_spanish_page2 = [
     }
 ]
 
+attendance_letter10_blocks_spanish_page2 = [
+    {
+        'name': 'page2_header',
+        'text': 'Re: Advertencia sobre asistencia escolar',
+    },
+    {
+        'name': 'page2_paragraph1',
+        'text': '**Esta recibiendo este comunicado porque su hijo(a) ha acumulado diez o más faltas injustificadas en lo que va del semestre.**',
+    },
+    {
+        'name': 'page2_paragraph2',
+        'text': '**Su hijo(a) no obtendrá créditos para sus cursos salvo si nos entregan justificantes para las faltas o bien si asisten a sesiones de recuperación de faltas para tener nueve faltas o menos.**',
+    },
+    {
+        'name': 'page2_paragraph3',
+        'text': 'Por favor reviste el reglamento de asistencia escolar adjunta a esta carta. Si desea discutir los detalles sobre la situación de su hijo(a), puede comunicarse con ###school_name### al teléfono ###school_phone### para saber cuáles son los siguientes pasos. Esperamos que su estudiante asista a la escuela todos los días para que podamos continuar su camino hacia el éxito universitario.',
+    }
+]
+
 oa_attendance_letter_blocks = [
     {
         'name': 'oa_paragraph1',
