@@ -438,6 +438,25 @@ attendance_letter5_blocks_page2 = [
     }
 ]
 
+attendance_letter10_blocks_page2 = [
+    {
+        'name': 'page2_header',
+        'text': 'Re: Attendance Warning',
+    },
+    {
+        'name': 'page2_paragraph1',
+        'text': '**You are receiving this letter because your child has 10 or more unexcused absences for the semester.**',
+    },
+    {
+        'name': 'page2_paragraph2',
+        'text': '**Your child will not be able to earn credit for their courses unless they submit excuse notes and/or attend attendance recovery to get to 9 or fewer absences.**',
+    },
+    {
+        'name': 'page2_paragraph3',
+        'text': 'Please review our attendance policy on the reverse of this letter.  You can contact ###school_name### at ###school_phone### to discuss your child\'s attendance and your next steps. We look forward to having your student attend school on a daily basis so we can continue their pathway to college success.',
+    }
+]
+
 attendance_letter5_blocks_spanish_page2 = [
     {
         'name': 'page2_header',
