@@ -110,14 +110,14 @@ school_info = {
             'contact_email': ''
         }
     },
-    'RCA': {
-        'short_name': 'RCA',
-        'long_name': 'Rosenwald Collegiate Academy',
+    'WLC': {
+        'short_name': 'WLC',
+        'long_name': 'Walter L. Cohen High School',
         'sr_id': '18',
-        'street': '1801 L B Landry Ave',
+        'street': '3575 Baronne St',
         'city': 'New Orleans',
         'state': 'LA',
-        'zip': '70114',
+        'zip': '70115',
         'principal': 'Rhonda Dale',
         'fax': '504-814-9296',
         'phone': '504-503-1400',
