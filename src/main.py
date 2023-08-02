@@ -584,3 +584,23 @@ def upload_map_file():
         for row in csv_reader:
             output.append(row)
     update_googlesheet_by_key(spreadsheet_key='17HNmMqS4Rwy3tZPcct69ZIz7yhuZIHv_mi4d9enJzD8', sheet_name='Sheet1', data = output, starting_cell="A1")
+
+def send_staff_absence_emails(school: str) -> None:
+    absence_data = return_googlesheet_by_key(spreadsheet_key = '1a6iLEJGX0v40BJ2DiqaCzB86owZTOsGsL8VS2zLTkI8', sheet_name = 'Summary').get_values('A3:T')
+    
+    counter = 1
+    for staff_member in absence_data:
+        first_name              = staff_member[2]
+        last_name               = staff_member[3]
+        email                   = staff_member[4]
+        pto_issued_tracker      = staff_member[9]
+        pto_taken_tracker       = staff_member[10]
+        pto_remaining_tracker   = staff_member[11]
+        pto_issued_paylocity    = staff_member[12]
+        pto_taken_paylocity     = staff_member[13]
+        pto_remaining_paylocity = staff_member[14]
+        unpaid_tracker          = staff_member[15]
+        unpaid_paylocity        = staff_member[16]
+        bereavement_tracker     = staff_member[17]
+        bereavement_paylocity   = staff_member[18]
+        tardies                 = staff_member[19]
