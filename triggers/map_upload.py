@@ -4,6 +4,13 @@ from src.main import *
 
 if __name__ == '__main__':
     # upload_map_file()
+    os.system("7z x ~/services_kit/report/bin/map_output/342339.zip")
+    output = []
+    with open('AssessmentResults.csv') as file:
+        csv_reader = csv.reader(file)
+        row = []
+        for row in csv_reader:
+            output.append(row)
     upload_basic(
         drive_name=f"AssessmentResults{datetime.datetime.now().strftime('%Y-%m-%d %I:%M')}.csv",
         local_path='AssessmentResults.csv',
