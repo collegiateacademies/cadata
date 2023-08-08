@@ -4,6 +4,8 @@ from src.main import *
 
 if __name__ == '__main__':
     # upload_map_file()
+    os.remove('AssessmentResults.csv')
+    time.sleep(3)
     os.system("7z x ~/services_kit/report/bin/map_output/342339.zip")
     output = []
     with open('AssessmentResults.csv') as file:
