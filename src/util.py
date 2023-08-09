@@ -961,5 +961,49 @@ def get_typeform(typeform_id):
     headers = {
         'Authorization': f'Bearer {typeform_token}',
     }
-    
+
     return requests.get(f'https://api.typeform.com/forms/{typeform_id}', headers=headers)
+
+def get_powerschool_token():
+    headers = {
+        'Authorization': 'Basic ' + base64.b64encode(bytes(f"{credentials['ps_client_id']}:{credentials['ps_client_secret']}", "UTF-8")).decode("ascii"),
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+    }
+
+    params = {
+        'grant_type': 'client_credentials'
+    }
+
+    response = requests.post(f"https://collegiateacademies.powerschool.com/oauth/access_token/", data=params, headers=headers).json()
+
+    return response['access_token']
+
+
+def powerschool_powerquery(query_name, payload):
+    ps_token = get_powerschool_token()
+    output = []
+
+    try:
+        url = f"https://collegiateacademies.powerschool.com/ws/schema/query/{query_name}"
+
+        params = {
+            'pagesize': 0  # this is used to stream records, might need to update requests to stream records
+        }
+
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {ps_token}"
+        }
+
+        payload = json.dumps(payload)
+        logging.info(f"🤞 Attempting to query {query_name} 🤞")
+        response = requests.post(url, data=payload, params=params, headers=headers)
+        logging.info(f"🎉 Query completed successfully! 🎉")
+
+        for record in response.json()['record']:
+            output.append(record)
+
+    except Exception as error:
+        logging.error(f"Error getting powerschool data -- {error}", exc_info=True)
+
+    return output
