@@ -631,3 +631,21 @@ def send_staff_absence_emails(school: str) -> None:
         counter += 1
         if counter >= 3:
             break
+
+def update_typeform_staff_names(spreadsheet_key, sheet_name, range, typeform_id, names_field_id):
+    staff_list = return_googlesheet_values_by_key(
+        spreadsheet_key=spreadsheet_key,
+        sheet_name=sheet_name,
+        range=range
+    )
+
+    current_form = get_typeform(typeform_id).json()
+
+    for item in current_form['fields']:
+        if item['id'] == names_field_id:
+            item['properties']['choices'] = []
+            for staffer in staff_list:
+                if len(staffer[0]) > 0:
+                    item['properties']['choices'].append({'label': staffer[0]})
+
+    return requests.put(f"https://api.typeform.com/forms/{typeform_id}", data=json.dumps(current_form), headers={'Authorization': f'Bearer {credentials["typeform_token"]}'})
