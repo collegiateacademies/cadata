@@ -954,3 +954,12 @@ def upload_basic(drive_name, local_path, mimetype, folder_id):
         file = None
 
     return file.get('id')
+
+def get_typeform(typeform_id):
+    typeform_token = credentials['typeform_token']
+    
+    headers = {
+        'Authorization': f'Bearer {typeform_token}',
+    }
+    
+    return requests.get(f'https://api.typeform.com/forms/{typeform_id}', headers=headers)
