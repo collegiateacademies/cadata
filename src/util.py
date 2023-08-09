@@ -788,6 +788,21 @@ def update_googlesheet_by_key(spreadsheet_key:str = '', sheet_name: str = '', da
     except Exception as error:
         logging.error(f"Error copying -- {error}", exc_info=True)
 
+def return_googlesheet_values_by_key(spreadsheet_key: str = '', sheet_name: str = '', range: str = ''):
+    from oauth2client.service_account import ServiceAccountCredentials
+    scope = [
+        "https://spreadsheets.google.com/feeds",
+        'https://www.googleapis.com/auth/spreadsheets',
+        "https://www.googleapis.com/auth/drive.file",
+        "https://www.googleapis.com/auth/drive"
+    ]
+    creds = ServiceAccountCredentials.from_json_keyfile_name('../ca-data-administrator.json', scope)
+    client = gspread.authorize(creds)
+    if range != '':
+        return client.open_by_key(spreadsheet_key).worksheet(sheet_name).get(range)
+    else:
+        return client.open_by_key(spreadsheet_key).worksheet(sheet_name).get_all_values()
+
 
 def return_monday(timestamp: str) -> str:
     date_to_convert = convert_yyyy_mm_dd_date(timestamp)
