@@ -604,3 +604,30 @@ def send_staff_absence_emails(school: str) -> None:
         bereavement_tracker     = staff_member[17]
         bereavement_paylocity   = staff_member[18]
         tardies                 = staff_member[19]
+        
+        with open('../html/staff_absences.html', 'r') as file:
+            html_email = file.read()
+            send_email(
+                recipient='afelter@collegiateacademies.org',#email,
+                subject_line='Staff Attendance Update',
+                #bcc='afelter@collegiateacademies.org'#'tophermckee@gmail.com'
+                # reply_to=''                                                   🚩🚩🚩 needs to reply to the DFO
+                html_body=html_email
+                    .replace('###staff_name###', f"{first_name} {last_name}")
+                    .replace('###pto_issued_tracker###',        pto_issued_tracker)
+                    .replace('###pto_taken_tracker###',         pto_taken_tracker)
+                    .replace('###pto_remaining_tracker###',     pto_remaining_tracker)
+                    .replace('###pto_issued_paylocity###',      pto_issued_paylocity)
+                    .replace('###pto_taken_paylocity###',       pto_taken_paylocity)
+                    .replace('###pto_remaining_paylocity###',   pto_remaining_paylocity)
+                    .replace('###unpaid_tracker###',            unpaid_tracker)
+                    .replace('###unpaid_paylocity###',          unpaid_paylocity)
+                    .replace('###bereavement_tracker###',       bereavement_tracker)
+                    .replace('###bereavement_paylocity###',     bereavement_paylocity)
+                    .replace('###tardies###',                   tardies)
+            )
+
+        #############
+        counter += 1
+        if counter >= 3:
+            break
