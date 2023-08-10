@@ -632,20 +632,28 @@ def send_staff_absence_emails(school: str) -> None:
         if counter >= 3:
             break
 
-def update_typeform_staff_names(spreadsheet_key, sheet_name, range, typeform_id, names_field_id):
-    staff_list = return_googlesheet_values_by_key(
-        spreadsheet_key=spreadsheet_key,
-        sheet_name=sheet_name,
-        range=range
+def update_typeform_staff_names(typeform_id: str = '', names_field_id: str = ''):
+    staff_list = powerschool_powerquery(
+        query_name='com.collegiateacademies.tophermckee.tables.staff',
+        payload={
+            'schoolid': '4'
+        }
     )
 
-    current_form = get_typeform(typeform_id).json()
+    current_form = get_typeform(typeform_id)
 
     for item in current_form['fields']:
         if item['id'] == names_field_id:
             item['properties']['choices'] = []
-            for staffer in staff_list:
-                if len(staffer[0]) > 0:
-                    item['properties']['choices'].append({'label': staffer[0]})
+            for staff_member in staff_list:
+                if staff_member['tables']['schoolstaff']['status'] == '1':
+                    item['properties']['choices'].append({'label': f"{staff_member['tables']['users']['first_name']} {staff_member['tables']['users']['last_name']}"})
 
-    return requests.put(f"https://api.typeform.com/forms/{typeform_id}", data=json.dumps(current_form), headers={'Authorization': f'Bearer {credentials["typeform_token"]}'})
+    try:
+        logging.info(f"🤞🏼 Attempting to update LCA Supply Wizard with new staff names 🤞🏼")
+        typeform_name_update_request = requests.put(f"https://api.typeform.com/forms/{typeform_id}", data=json.dumps(current_form), headers={'Authorization': f'Bearer {credentials["typeform_token"]}'}).json()
+        logging.info(f"🥂 Successfully updated LCA Supply Wizard with new staff names 🥂")
+    except Exception as err:
+        logging.error(f"Error updating LCA Supply Wizard with new staff names: {err}", exc_info=True)
+
+    return typeform_name_update_request

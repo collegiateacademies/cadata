@@ -962,7 +962,14 @@ def get_typeform(typeform_id):
         'Authorization': f'Bearer {typeform_token}',
     }
 
-    return requests.get(f'https://api.typeform.com/forms/{typeform_id}', headers=headers)
+    try:
+        logging.info(f"🤞 Attempting to retrieve Typeform with ID {typeform_id} 🤞")
+        typeform_request = requests.get(f'https://api.typeform.com/forms/{typeform_id}', headers=headers).json()
+        logging.info(f"🎉 Successful retrieved Typeform with ID {typeform_id} 🎉")
+    except Exception as err:
+        logging.error(f"Error retrieving Typeform with ID {typeform_id}: {err}", exc_info=True)
+
+    return typeform_request
 
 def get_powerschool_token():
     headers = {
