@@ -1,0 +1,311 @@
+<queries>
+    <query name="tophermckee.students" coreTable="students" flattened="false">
+        <description>Pull students</description>
+        <args>
+            <arg name="schoolid" column="students.schoolid" type="primitive" required="true" />
+        </args>
+        <columns>
+            <column>STUDENTS.DCID</column>
+            <column>STUDENTS.SCHOOLID</column>
+            <column>STUDENTS.ENROLL_STATUS</column>
+            <column>STUDENTS.FIRST_NAME</column>
+            <column>STUDENTS.LAST_NAME</column>
+            <column>STUDENTS.GRADE_LEVEL</column>
+            <column>STUDENTS.STREET</column>
+            <column>STUDENTS.STATE</column>
+            <column>STUDENTS.ZIP</column>
+            <column>STUDENTS.STUDENT_NUMBER</column>
+            <column>STUDENTS.DOB</column>
+            <column>STUDENTS.GENDER</column>
+            <column>STUDENTS.STATE_STUDENTNUMBER</column>
+            <column>STUDENTS.ID</column>
+            <column>STUDENTS.CITY</column>
+            <column>U_STUDENTSUSERFIELDS.SCHOLAR_EMAIL</column>
+            <column>U_STUDENTSUSERFIELDS.ADVISOR</column>
+            <column>U_STUDENTSUSERFIELDS.ADVISORY</column>
+            <column>U_STUDENTSUSERFIELDS.PACKTIME_ROOM</column>
+            <column>U_STUDENTSUSERFIELDS.PRIMARY_1_CELL</column>
+            <column>U_STUDENTSUSERFIELDS.PRIMARY_1_EMAIL</column>
+            <column>U_STUDENTSUSERFIELDS.PRIMARY_1_NAME</column>
+            <column>U_STUDENTSUSERFIELDS.SCHOLAR_CELL</column>
+            <column>U_DEF_EXT_STUDENTS.ONEAPPID</column>
+            <column>S_LA_STU_DEMOGRAPHICS_X.DIPLOMAPATHWAY</column>
+ 		</columns>
+        <sql>
+			<![CDATA[
+			SELECT
+            students.dcid,
+            students.schoolid,
+            students.enroll_status,
+            students.first_name,
+            students.last_name,
+            students.grade_level,
+            students.street,
+            students.state,
+            students.zip,
+            students.student_number,
+            students.dob,
+            students.gender,
+            students.state_studentnumber,
+            students.id,
+            students.city,
+            u_studentsuserfields.scholar_email,
+            u_studentsuserfields.advisor,
+            u_studentsuserfields.advisory,
+            u_studentsuserfields.packtime_room,
+            u_studentsuserfields.primary_1_cell,
+            u_studentsuserfields.primary_1_email,
+            u_studentsuserfields.primary_1_name,
+            u_studentsuserfields.scholar_cell,
+            u_def_ext_students.oneappid,
+            s_la_stu_demographics_x.diplomapathway
+            
+            FROM students
+            INNER JOIN u_studentsuserfields ON students.dcid = u_studentsuserfields.studentsdcid
+            INNER JOIN u_def_ext_students ON students.dcid = u_def_ext_students.studentsdcid
+            INNER JOIN s_la_stu_demographics_x ON students.dcid = s_la_stu_demographics_x.studentsdcid
+            WHERE students.schoolid = :schoolid
+                AND students.enroll_status = 0
+                AND students.grade_level <> 13
+            ORDER BY students.grade_level, students.last_name, students.first_name
+			]]>
+        </sql>
+    </query>
+
+    <query name="com.collegiateacademies.tophermckee.tables.staff" coreTable="users" flattened="false">
+        <description>Pull users</description>
+        <args>
+            <arg name="schoolid" column="users.homeschoolid" type="primitive" required="true" />
+        </args>
+        <columns>
+            <column>USERS.EMAIL_ADDR</column>
+            <column>USERS.FIRST_NAME</column>
+            <column>USERS.LAST_NAME</column>
+            <column>USERS.PREFERREDNAME</column>
+            <column>USERS.HOMESCHOOLID</column>
+            <column>SCHOOLSTAFF.STATUS</column>
+ 		</columns>
+        <sql>
+			<![CDATA[
+			SELECT
+            users.email_addr,
+            users.first_name,
+            users.last_name,
+            users.preferredname,
+            users.homeschoolid,
+            schoolstaff.status
+            
+            FROM users
+
+            INNER JOIN schoolstaff on users.dcid = schoolstaff.users_dcid
+
+            WHERE users.email_addr IS NOT NULL
+                AND users.homeschoolid = :schoolid
+            ORDER BY users.first_name
+			]]>
+        </sql>
+    </query>
+    
+    <query name="com.collegiateacademies.tophermckee.tables.enrollments" coreTable="cc" flattened="false">
+        <description>Pull enrollments by term id</description>
+        <args>
+            <arg name="term_id" column="cc.termid" type="primitive" required="false" />
+            <arg name="school_id" column="cc.schoolid" type="primitive" required="false" />
+        </args>
+        <columns>
+            <column column="STUDENTS.STUDENT_NUMBER">STUDENTS.STUDENT_NUMBER</column>
+            <column column="STUDENTS.FIRST_NAME">STUDENTS.FIRST_NAME</column>
+            <column column="STUDENTS.LAST_NAME">STUDENTS.LAST_NAME</column>
+            <column column="STUDENTS.ENROLL_STATUS">STUDENTS.ENROLL_STATUS</column>
+            <column column="STUDENTS.ENTRYDATE">STUDENTS.ENTRYDATE</column>
+            <column column="STUDENTS.GRADE_LEVEL">STUDENTS.GRADE_LEVEL</column>
+            <column column="USERS.FIRST_NAME">USERS.FIRST_NAME</column>
+            <column column="USERS.LAST_NAME">USERS.LAST_NAME</column>
+            <column column="CC.COURSE_NUMBER">CC.COURSE_NUMBER</column>
+            <column column="COURSES.COURSE_NAME">COURSES.COURSE_NAME</column>
+            <column column="CC.SECTION_NUMBER">CC.SECTION_NUMBER</column>
+            <column column="CC.EXPRESSION">CC.EXPRESSION</column>
+            <column column="CC.DATEENROLLED">CC.DATEENROLLED</column>
+            <column column="CC.DATELEFT">CC.DATELEFT</column>
+ 		</columns>
+        <sql>
+			<![CDATA[
+			SELECT
+                students.student_number,
+                students.first_name AS student_table_first_name,
+                students.last_name AS student_table_last_name,
+                students.enroll_status,
+                students.entrydate,
+                students.grade_level,
+                users.first_name AS user_table_first_name,
+                users.last_name AS user_table_last_name,
+                cc.course_number,
+                courses.course_name,
+                cc.section_number,
+                cc.expression,
+                cc.dateenrolled,
+                cc.dateleft
+
+            FROM cc
+
+            INNER JOIN students ON cc.studentid = students.id
+            INNER JOIN courses ON cc.course_number = courses.course_number
+            INNER JOIN schoolstaff ON cc.teacherid = schoolstaff.id
+            INNER JOIN users on schoolstaff.users_dcid = users.dcid
+                
+            WHERE cc.schoolid = :school_id
+                AND cc.termid = :term_id
+                
+            ORDER BY students.grade_level, students.last_name, students.first_name, cc.expression
+			]]>
+        </sql>
+    </query>
+
+    <query name="com.collegiateacademies.tophermckee.tables.stored_grades" coreTable="students" flattened="false">
+        <description>Pull stored grades by student ID</description>
+        <args>
+            <arg name="student_id" column="students.student_number" type="primitive" required="false" />
+        </args>
+        <columns>
+            <column column="STUDENTS.FIRST_NAME">STUDENTS.FIRST_NAME</column>
+            <column column="STUDENTS.LAST_NAME">STUDENTS.LAST_NAME</column>
+            <column column="STUDENTS.STUDENT_NUMBER">STUDENTS.STUDENT_NUMBER</column>
+            <column column="STOREDGRADES.COURSE_NUMBER">STOREDGRADES.COURSE_NUMBER</column>
+            <column column="STOREDGRADES.COURSE_NAME">STOREDGRADES.COURSE_NAME</column>
+            <column column="STOREDGRADES.EARNEDCRHRS">STOREDGRADES.EARNEDCRHRS</column>
+            <column column="STOREDGRADES.POTENTIALCRHRS">STOREDGRADES.POTENTIALCRHRS</column>
+            <column column="STOREDGRADES.GRADE">STOREDGRADES.GRADE</column>
+            <column column="STOREDGRADES.GRADE_LEVEL">STOREDGRADES.GRADE_LEVEL</column>
+            <column column="STOREDGRADES.SCHOOLID">STOREDGRADES.SCHOOLID</column>
+            <column column="STOREDGRADES.SCHOOLNAME">STOREDGRADES.SCHOOLNAME</column>
+            <column column="STOREDGRADES.TERMID">STOREDGRADES.TERMID</column>
+ 		</columns>
+        <sql>
+			<![CDATA[
+			SELECT
+                students.first_name,
+                students.last_name,
+                students.student_number,
+                storedgrades.course_number,
+                storedgrades.course_name,
+                storedgrades.earnedcrhrs,
+                storedgrades.potentialcrhrs,
+                storedgrades.grade,
+                storedgrades.grade_level,
+                storedgrades.schoolid,
+                storedgrades.schoolname,
+                storedgrades.termid
+
+            FROM students
+
+            INNER JOIN storedgrades ON storedgrades.studentid = students.id
+
+            WHERE students.student_number = :student_id
+			]]>
+        </sql>
+    </query>
+
+    <query name="com.collegiateacademies.tophermckee.tables.current_enrollment_by_id" coreTable="cc" flattened="false">
+        <description>Pull current classes by student ID</description>
+        <args>
+            <arg name="student_id" column="students.student_number" type="primitive" required="false" />
+            <arg name="today" type="primitive" required="false" />
+        </args>
+        <columns>
+            <column column="CC.COURSE_NUMBER">CC.COURSE_NUMBER</column>
+            <column column="COURSES.COURSE_NAME">COURSES.COURSE_NAME</column>
+            <column column="COURSES.CREDIT_HOURS">COURSES.CREDIT_HOURS</column>
+            <column column="STUDENTS.GRADE_LEVEL">STUDENTS.GRADE_LEVEL</column>
+ 		</columns>
+        <sql>
+			<![CDATA[
+			SELECT
+                cc.course_number,
+                courses.course_name,
+                courses.credit_hours,
+                students.grade_level
+
+            FROM cc
+
+            INNER JOIN students ON students.id = cc.studentid
+            INNER JOIN courses ON courses.course_number = cc.course_number
+
+            WHERE cc.dateenrolled <= TO_DATE(:today, 'MM/DD/YYYY') AND cc.dateleft >= TO_DATE(:today, 'MM/DD/YYYY')
+               AND students.student_number = :student_id
+			]]>
+        </sql>
+    </query>
+
+    <query name="com.collegiateacademies.tophermckee.tables.ethnicity" coreTable="students" flattened="false">
+        <description>Pull roster with ethnicity for testing hub</description>
+        <args>
+            <arg name="school_id" column="students.schoolid" type="primitive" required="false" />
+        </args>
+        <columns>
+            <column column="STUDENTS.STUDENT_NUMBER">STUDENTS.STUDENT_NUMBER</column>
+            <column column="STUDENTS.STATE_STUDENTNUMBER">STUDENTS.STATE_STUDENTNUMBER</column>
+            <column column="STUDENTS.ETHNICITY">STUDENTS.ETHNICITY</column>
+            <column column="STUDENTS.FEDETHNICITY">STUDENTS.FEDETHNICITY</column>
+ 		</columns>
+        <sql>
+			<![CDATA[
+			SELECT
+                students.student_number,
+                students.state_studentnumber,
+                students.ethnicity,
+                students.fedethnicity
+
+            FROM students
+
+            WHERE students.schoolid = :school_id
+                AND students.enroll_status = 0
+                AND students.grade_level <> 13
+                
+            ORDER BY students.grade_level, students.last_name, students.first_name
+			]]>
+        </sql>
+    </query>
+
+    <query name="com.collegiateacademies.tophermckee.tables.test_scores" coreTable="testscore" flattened="false">
+        <description>Pull test scores</description>
+        <args>
+            <arg name="school_id" column="students.schoolid" type="primitive" required="false" />
+        </args>
+        <columns>
+            <column column="STUDENTS.STUDENT_NUMBER">STUDENTS.STUDENT_NUMBER</column>
+            <column column="STUDENTS.FIRST_NAME">STUDENTS.FIRST_NAME</column>
+            <column column="STUDENTS.LAST_NAME">STUDENTS.LAST_NAME</column>
+            <column column="TEST.NAME">TEST.NAME</column>
+            <column column="TESTSCORE.NAME">TESTSCORE.NAME</column>
+            <column column="STUDENTTEST.TEST_DATE">STUDENTTEST.TEST_DATE</column>
+            <column column="STUDENTTESTSCORE.ALPHASCORE">STUDENTTESTSCORE.ALPHASCORE</column>
+            <column column="STUDENTTESTSCORE.NUMSCORE">STUDENTTESTSCORE.NUMSCORE</column>
+            <column column="STUDENTTESTSCORE.PERCENTSCORE">STUDENTTESTSCORE.PERCENTSCORE</column>
+ 		</columns>
+        <sql>
+			<![CDATA[
+			SELECT
+                students.student_number,
+                students.first_name,
+                students.last_name,
+                test.name AS test_name,
+                testscore.name AS testscore_name,
+                studenttest.test_date,
+                studenttestscore.alphascore,
+                studenttestscore.numscore,
+                studenttestscore.percentscore
+
+            FROM testscore
+
+            INNER JOIN test ON test.id = testscore.testid
+            INNER JOIN studenttestscore ON studenttestscore.testscoreid = testscore.id
+            INNER JOIN studenttest ON studenttest.id = studenttestscore.id
+            INNER JOIN students ON students.id = studenttestscore.studentid
+
+            WHERE students.schoolid = :school_id
+
+            ORDER by students.last_name
+			]]>
+        </sql>
+    </query>
+</queries>

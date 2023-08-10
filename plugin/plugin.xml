@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://plugin.powerschool.pearson.com"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation='http://plugin.powerschool.pearson.com plugin.xsd'
+    name="rest-api"
+    version="1"
+    description="Topher's plugin">
+    
+    <oauth></oauth>
+
+    <access_request>
+
+        <!-- ################################################################################# -->
+        <field table="STUDENTS" field="DCID" access="ViewOnly"/>
+        <field table="STUDENTS" field="ID" access="ViewOnly"/>
+        <field table="STUDENTS" field="DISTRICTENTRYDATE" access="ViewOnly"/>
+        <field table="STUDENTS" field="DOB" access="ViewOnly"/>
+        <field table="STUDENTS" field="ENROLL_STATUS" access="ViewOnly"/>
+        <field table="STUDENTS" field="ENTRYCODE" access="ViewOnly"/>
+        <field table="STUDENTS" field="ENTRYDATE" access="ViewOnly"/>
+        <field table="STUDENTS" field="ETHNICITY" access="ViewOnly"/>
+        <field table="STUDENTS" field="FEDETHNICITY" access="ViewOnly"/>
+        <field table="STUDENTS" field="EXITCODE" access="ViewOnly"/>
+        <field table="STUDENTS" field="EXITCOMMENT" access="ViewOnly"/>
+        <field table="STUDENTS" field="EXITDATE" access="ViewOnly"/>
+        <field table="STUDENTS" field="FIRST_NAME" access="ViewOnly"/>
+        <field table="STUDENTS" field="GENDER" access="ViewOnly"/>
+        <field table="STUDENTS" field="GRADE_LEVEL" access="ViewOnly"/>
+        <field table="STUDENTS" field="ID" access="ViewOnly"/>
+        <field table="STUDENTS" field="LAST_NAME" access="ViewOnly"/>
+        <field table="STUDENTS" field="MIDDLE_NAME" access="ViewOnly"/>
+        <field table="STUDENTS" field="SCHOOLID" access="ViewOnly"/>
+        <field table="STUDENTS" field="SSN" access="ViewOnly"/>
+        <field table="STUDENTS" field="STATE_STUDENTNUMBER" access="ViewOnly"/>
+        <field table="STUDENTS" field="STUDENT_NUMBER" access="ViewOnly"/>
+        <field table="STUDENTS" field="TRANSFERCOMMENT" access="ViewOnly"/>
+        <field table="STUDENTS" field="STREET" access="ViewOnly"/>
+        <field table="STUDENTS" field="STATE" access="ViewOnly"/>
+        <field table="STUDENTS" field="ZIP" access="ViewOnly"/>
+        <field table="STUDENTS" field="CITY" access="ViewOnly"/>
+
+        <!-- ################################################################################# -->
+        <field table="U_DEF_EXT_STUDENTS" field="ONEAPPID" access="ViewOnly"/>
+        <field table="U_DEF_EXT_STUDENTS" field="STUDENTSDCID" access="ViewOnly"/>
+
+        <!-- ################################################################################# -->
+        <field table="S_LA_STU_DEMOGRAPHICS_X" field="DIPLOMAPATHWAY" access="ViewOnly"/>
+        <field table="S_LA_STU_DEMOGRAPHICS_X" field="STUDENTSDCID" access="ViewOnly"/>
+
+        <!-- ################################################################################# -->
+        <field table="U_STUDENTSUSERFIELDS" field="ADVISORY" access="ViewOnly"/>
+        <field table="U_STUDENTSUSERFIELDS" field="ADVISOR" access="ViewOnly"/>
+        <field table="U_STUDENTSUSERFIELDS" field="SCHOLAR_EMAIL" access="ViewOnly"/>
+        <field table="U_STUDENTSUSERFIELDS" field="PACKTIME_ROOM" access="ViewOnly"/>
+        <field table="U_STUDENTSUSERFIELDS" field="PRIMARY_1_CELL" access="ViewOnly"/>
+        <field table="U_STUDENTSUSERFIELDS" field="PRIMARY_1_EMAIL" access="ViewOnly"/>
+        <field table="U_STUDENTSUSERFIELDS" field="PRIMARY_1_NAME" access="ViewOnly"/>
+        <field table="U_STUDENTSUSERFIELDS" field="SCHOLAR_CELL" access="ViewOnly"/>
+        <field table="U_STUDENTSUSERFIELDS" field="STUDENTSDCID" access="ViewOnly"/>
+
+        <!-- ################################################################################# -->
+        <field table="S_LA_STU_504SPED_X" field="ANSWERSRECORDEDACCOMM" access="ViewOnly"/>
+        <field table="S_LA_STU_504SPED_X" field="BRAILLEACCOMM" access="ViewOnly"/>
+        <field table="S_LA_STU_504SPED_X" field="DATEOF504" access="ViewOnly"/>
+        <field table="S_LA_STU_504SPED_X" field="DISABILITY1" access="ViewOnly"/>
+        <field table="S_LA_STU_504SPED_X" field="DISABILITY2" access="ViewOnly"/>
+        <field table="S_LA_STU_504SPED_X" field="DISABILITY3" access="ViewOnly"/>
+        <field table="S_LA_STU_504SPED_X" field="DISABILITY4" access="ViewOnly"/>
+        <field table="S_LA_STU_504SPED_X" field="DISABILITY5" access="ViewOnly"/>
+        <field table="S_LA_STU_504SPED_X" field="DISABILITY6" access="ViewOnly"/>
+        <field table="S_LA_STU_504SPED_X" field="DISABILITY7" access="ViewOnly"/>
+        <field table="S_LA_STU_504SPED_X" field="EXITDATE" access="ViewOnly"/>
+        <field table="S_LA_STU_504SPED_X" field="EXITREASON" access="ViewOnly"/>
+        <field table="S_LA_STU_504SPED_X" field="EXTENDEDTIMEACCOMM" access="ViewOnly"/>
+        <field table="S_LA_STU_504SPED_X" field="IAPREVIEWDATE" access="ViewOnly"/>
+        <field table="S_LA_STU_504SPED_X" field="INDIVIDUALTESTINGACCOMM" access="ViewOnly"/>
+        <field table="S_LA_STU_504SPED_X" field="IS504_TF" access="ViewOnly"/>
+        <field table="S_LA_STU_504SPED_X" field="LARGEPRINTACCOMM" access="ViewOnly"/>
+        <field table="S_LA_STU_504SPED_X" field="READENGLISHLANGARTSACCOMM" access="ViewOnly"/>
+        <field table="S_LA_STU_504SPED_X" field="READMATHACCOMM" access="ViewOnly"/>
+        <field table="S_LA_STU_504SPED_X" field="READMATHSCISOCSTUDACCOMM" access="ViewOnly"/>
+        <field table="S_LA_STU_504SPED_X" field="READSCIENCEACCOMM" access="ViewOnly"/>
+        <field table="S_LA_STU_504SPED_X" field="READSOCSTUDACCOMM" access="ViewOnly"/>
+        <field table="S_LA_STU_504SPED_X" field="SER_STUROSTEREXCPTNLTY" access="ViewOnly"/>
+        <field table="S_LA_STU_504SPED_X" field="SMALLGROUPTESTINGACCOMM" access="ViewOnly"/>
+        <field table="S_LA_STU_504SPED_X" field="SPEDINDICATOR" access="ViewOnly"/>
+        <field table="S_LA_STU_504SPED_X" field="STUDENTSDCID" access="ViewOnly"/>
+        <field table="S_LA_STU_504SPED_X" field="TRANSFERREDANSWERSACCOMM" access="ViewOnly"/>
+
+        <!-- ################################################################################# -->
+        <field table="STOREDGRADES" field="AB_FINAL_MARK" access="ViewOnly"/>
+        <field table="STOREDGRADES" field="AB_LNG_CD" access="ViewOnly"/>
+        <field table="STOREDGRADES" field="COMMENT_VALUE" access="ViewOnly"/>
+        <field table="STOREDGRADES" field="COURSE_EQUIV" access="ViewOnly"/>
+        <field table="STOREDGRADES" field="COURSE_NAME" access="ViewOnly"/>
+        <field table="STOREDGRADES" field="COURSE_NUMBER" access="ViewOnly"/>
+        <field table="STOREDGRADES" field="CREDIT_TYPE" access="ViewOnly"/>
+        <field table="STOREDGRADES" field="DATESTORED" access="ViewOnly"/>
+        <field table="STOREDGRADES" field="DCID" access="ViewOnly"/>
+        <field table="STOREDGRADES" field="EARNEDCRHRS" access="ViewOnly"/>
+        <field table="STOREDGRADES" field="EXCLUDEFROMGPA" access="ViewOnly"/>
+        <field table="STOREDGRADES" field="GPA_ADDEDVALUE" access="ViewOnly"/>
+        <field table="STOREDGRADES" field="GPA_POINTS" access="ViewOnly"/>
+        <field table="STOREDGRADES" field="GRADE" access="ViewOnly"/>
+        <field table="STOREDGRADES" field="GRADE_LEVEL" access="ViewOnly"/>
+        <field table="STOREDGRADES" field="PERCENT" access="ViewOnly"/>
+        <field table="STOREDGRADES" field="POTENTIALCRHRS" access="ViewOnly"/>
+        <field table="STOREDGRADES" field="SCHOOLID" access="ViewOnly"/>
+        <field table="STOREDGRADES" field="SCHOOLNAME" access="ViewOnly"/>
+        <field table="STOREDGRADES" field="STORECODE" access="ViewOnly"/>
+        <field table="STOREDGRADES" field="STUDENTID" access="ViewOnly"/>
+        <field table="STOREDGRADES" field="TERMID" access="ViewOnly"/>
+
+        <!-- ################################################################################# -->
+        <field table="USERS" field="EMAIL_ADDR" access="ViewOnly"/>
+        <field table="USERS" field="FIRST_NAME" access="ViewOnly"/>
+        <field table="USERS" field="LAST_NAME" access="ViewOnly"/>
+        <field table="USERS" field="PREFERREDNAME" access="ViewOnly"/>
+        <field table="USERS" field="HOMESCHOOLID" access="ViewOnly"/>
+        <field table="USERS" field="DCID" access="ViewOnly"/>
+
+        <!-- ################################################################################# -->
+        <field table="TEACHERS" field="ID" access="ViewOnly"/>
+        <field table="TEACHERS" field="FIRST_NAME" access="ViewOnly"/>
+        <field table="TEACHERS" field="LAST_NAME" access="ViewOnly"/>
+
+        <!-- ################################################################################# -->
+        <field table="CC" field="SECTION_NUMBER" access="ViewOnly"/>
+        <field table="CC" field="EXPRESSION" access="ViewOnly"/>
+        <field table="CC" field="DATEENROLLED" access="ViewOnly"/>
+        <field table="CC" field="DATELEFT" access="ViewOnly"/>
+        <field table="CC" field="TERMID" access="ViewOnly"/>
+        <field table="CC" field="TEACHERID" access="ViewOnly"/>
+        <field table="CC" field="STUDENTID" access="ViewOnly"/>
+        <field table="CC" field="COURSE_NUMBER" access="ViewOnly"/>
+        <field table="CC" field="DCID" access="ViewOnly"/>
+        <field table="CC" field="SCHOOLID" access="ViewOnly"/>
+
+        <!-- ################################################################################# -->
+        <field table="COURSES" field="COURSE_NAME" access="ViewOnly"/>
+        <field table="COURSES" field="COURSE_NUMBER" access="ViewOnly"/>
+        <field table="COURSES" field="DCID" access="ViewOnly"/>
+        <field table="COURSES" field="CREDIT_HOURS" access="ViewOnly"/>
+
+        <!-- ################################################################################# -->
+        <field table="SCHOOLSTAFF" field="DCID" access="ViewOnly"/>
+        <field table="SCHOOLSTAFF" field="ID" access="ViewOnly"/>
+        <field table="SCHOOLSTAFF" field="USERS_DCID" access="ViewOnly"/>
+        <field table="SCHOOLSTAFF" field="STATUS" access="ViewOnly"/>
+
+        <!-- ################################################################################# -->
+        <field table="TEST" field="NAME" access="ViewOnly"/>
+        <field table="TEST" field="ID" access="ViewOnly"/>
+
+        <!-- ################################################################################# -->
+        <field table="TESTSCORE" field="NAME" access="ViewOnly"/>
+        <field table="TESTSCORE" field="ID" access="ViewOnly"/>
+        <field table="TESTSCORE" field="TESTID" access="ViewOnly"/>
+
+        <!-- ################################################################################# -->
+        <field table="STUDENTTEST" field="TEST_DATE" access="ViewOnly"/>
+        <field table="STUDENTTEST" field="ID" access="ViewOnly"/>
+
+        <!-- ################################################################################# -->
+        <field table="STUDENTTESTSCORE" field="ALPHASCORE" access="ViewOnly"/>
+        <field table="STUDENTTESTSCORE" field="TESTSCOREID" access="ViewOnly"/>
+        <field table="STUDENTTESTSCORE" field="ID" access="ViewOnly"/>
+        <field table="STUDENTTESTSCORE" field="NUMSCORE" access="ViewOnly"/>
+        <field table="STUDENTTESTSCORE" field="PERCENTSCORE" access="ViewOnly"/>
+        <field table="STUDENTTESTSCORE" field="STUDENTID" access="ViewOnly"/>
+
+    </access_request>
+
+    <publisher name="Topher McKee">
+        <contact email="tophermckee@gmail.com"/>
+    </publisher>
+
+</plugin>
