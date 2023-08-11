@@ -657,3 +657,30 @@ def update_typeform_staff_names(typeform_id: str = '', names_field_id: str = '')
         logging.error(f"Error updating LCA Supply Wizard with new staff names: {err}", exc_info=True)
 
     return typeform_name_update_request
+
+def network_staff_export():
+    staff_list = powerschool_powerquery(
+            query_name='com.collegiateacademies.tophermckee.tables.all_staff',
+            payload={
+                'schoolid': '4'
+            }
+        )
+    
+    output = []
+
+    for staff_member in staff_list:
+        output.append([
+            staff_member['tables']['users']['first_name'],
+            staff_member['tables']['users']['preferredname'],
+            staff_member['tables']['users']['last_name'],
+            staff_member['tables']['users']['email_addr'],
+            staff_member['tables']['users']['homeschoolid'],
+            staff_member['tables']['schoolstaff']['status'],
+        ])
+    
+    update_googlesheet_by_key(
+        spreadsheet_key='1PkiVhI9UzLQOSKxtmLFyhLWB4ZehR8v_1I0ury4goV4',
+        sheet_name='Sheet1',
+        data=output,
+        starting_cell='A1'
+    )
