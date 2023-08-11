@@ -308,4 +308,37 @@
 			]]>
         </sql>
     </query>
+
+    <query name="com.collegiateacademies.tophermckee.tables.all_staff" coreTable="users" flattened="false">
+        <description>Pull users</description>
+        <args>
+            <arg name="schoolid" column="users.homeschoolid" type="primitive" required="true" />
+        </args>
+        <columns>
+            <column>USERS.EMAIL_ADDR</column>
+            <column>USERS.FIRST_NAME</column>
+            <column>USERS.LAST_NAME</column>
+            <column>USERS.PREFERREDNAME</column>
+            <column>USERS.HOMESCHOOLID</column>
+            <column>SCHOOLSTAFF.STATUS</column>
+ 		</columns>
+        <sql>
+			<![CDATA[
+			SELECT
+            users.email_addr,
+            users.first_name,
+            users.last_name,
+            users.preferredname,
+            users.homeschoolid,
+            schoolstaff.status
+            
+            FROM users
+
+            INNER JOIN schoolstaff on users.dcid = schoolstaff.users_dcid
+
+            ORDER BY users.first_name
+			]]>
+        </sql>
+    </query>
+
 </queries>
