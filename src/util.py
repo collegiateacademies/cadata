@@ -34,14 +34,14 @@ school_info = {
         'phone': '504-503-0004',
         'fax': '504-342-0322',
         'attendance_email': 'hello@livingstoncollegiate.org',
-        'attendance_letter_recipient': 'cpuliafico@collegiateacademies.org',
-        'individualized_report_reply': 'cpuliafico@collegiateacademies.org',
+        'attendance_letter_recipient': 'rmurray@collegiateacademies.org',
+        'individualized_report_reply': 'rmurray@collegiateacademies.org',
         'seat_time': {
             'calendar': False,
             'contact': True,
             'link': '',
-            'contact_name': 'Caitlin Puliafico',
-            'contact_email': 'cpuliafico@collegiateacademies.org'
+            'contact_name': 'Robin Murray',
+            'contact_email': 'rmurray@collegiateacademies.org'
         }
     },
     'ASA': {
