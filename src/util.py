@@ -121,15 +121,15 @@ school_info = {
         'principal': 'Rhonda Dale',
         'fax': '504-814-9296',
         'phone': '504-503-1400',
-        'attendance_email': 'info@rosenwaldcollegiate.org',
-        'attendance_letter_recipient': 'sbrooks@collegiateacademies.org',
-        'individualized_report_reply': 'info@rosenwaldcollegiate.org',
+        'attendance_email': 'info@walterlcohen.org',
+        'attendance_letter_recipient': 'info@walterlcohen.org',
+        'individualized_report_reply': 'info@walterlcohen.org',
         'seat_time': {
             'calendar': False,
             'contact': True,
             'link': '',
             'contact_name': 'the Front Desk',
-            'contact_email': 'info@rosenwaldcollegiate.org'
+            'contact_email': 'info@walterlcohen.org'
         }
     },
     'OA': {
