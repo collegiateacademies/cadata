@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
 </head>
-<style>
 
-</style>
 <body>
     <p>
         Hi ###staff_name###,
@@ -13,13 +11,54 @@
     <p>
         This is an update on your PTO: <br>
         <br>
-        PTO Issued According to Tracker: ###pto_issued_tracker### <br>
+        <table style = "border: 1px solid black; border-collapse: collapse; text-align: center; padding: 10px;">
+            <tr>
+                <th style="border-top: 1px solid white; border-left: 1px solid white;"></th>
+                <th style = "border: 1px solid black; border-collapse: collapse; text-align: center; padding: 10px; min-width: 100px;">
+                    Issued
+                </th>
+                <th style = "border: 1px solid black; border-collapse: collapse; text-align: center; padding: 10px; min-width: 100px;">
+                    Taken
+                </th>
+                <th style = "border: 1px solid black; border-collapse: collapse; text-align: center; padding: 10px; min-width: 100px;">
+                    Remaining
+                </th>
+            </tr>
+
+            <tr>
+                <th style = "border: 1px solid black; border-collapse: collapse; text-align: center; padding: 10px;">
+                    PTO
+                </th>
+                <td style = "border: 1px solid black; border-collapse: collapse; text-align: center; padding: 10px;">
+                    ###pto_issued_tracker### hrs
+                </td>
+                <td style = "border: 1px solid black; border-collapse: collapse; text-align: center; padding: 10px;">
+                    ###pto_taken_tracker### hrs
+                </td>
+                <td style = "border: 1px solid black; border-collapse: collapse; text-align: center; padding: 10px;">
+                    ###pto_remaining_tracker### hrs
+                </td>
+            </tr>
+
+            <tr>
+                <th style = "border: 1px solid black; border-collapse: collapse; text-align: center; padding: 10px;">
+                    Unpaid
+                </th>
+                <td colspan="3">
+                    ###unpaid_tracker### unpaid hrs
+                </td>
+            </tr>
+        </table>
+        <!-- PTO Issued According to Tracker: ###pto_issued_tracker### <br>
         PTO Taken According to Tracker: ###pto_taken_tracker### <br>
         PTO Remaining According to Tracker: ###pto_remaining_tracker### <br>
         <br>
-        Unpaid Leave According to Tracker ###unpaid_tracker### <br>
+        Unpaid Leave According to Tracker ###unpaid_tracker### <br> -->
         <br>
         As an FYI, you have ###tardies### tardies.
+    </p>
+    <p>
+        - The Collegiate Academies Staff Attendance Robot 🤖
     </p>
 
 </body>

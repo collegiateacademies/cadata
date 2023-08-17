@@ -608,7 +608,7 @@ def send_staff_absence_emails(school: str) -> None:
         with open('../html/staff_absences.html', 'r') as file:
             html_email = file.read()
             send_email(
-                recipient='afelter@collegiateacademies.org',#email,
+                recipient='tophermckee@gmail.com',#email,
                 subject_line='Staff Attendance Update',
                 #bcc='afelter@collegiateacademies.org'#'tophermckee@gmail.com'
                 # reply_to=''                                                   🚩🚩🚩 needs to reply to the DFO
