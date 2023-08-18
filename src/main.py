@@ -684,3 +684,33 @@ def network_staff_export():
         data=output,
         starting_cell='A1'
     )
+def start_date_of_previous_month() -> datetime.date:
+    return datetime.date(datetime.date.today().year, datetime.date.today().month - 1, 1)
+
+def end_date_of_previous_month() -> datetime.date:
+    month_range = calendar.monthrange(datetime.date.today().year, datetime.date.today().month - 1)
+    return datetime.date(datetime.date.today().year, datetime.date.today().month - 1, month_range[1])
+
+def start_date_of_current_month() -> datetime.date:
+    return datetime.date(datetime.date.today().year, datetime.date.today().month, 1)
+
+def end_date_of_current_month() -> datetime.date:
+    month_range = calendar.monthrange(datetime.date.today().year, datetime.date.today().month)
+    return datetime.date(datetime.date.today().year, datetime.date.today().month, month_range[1])
+
+def attendance_report(start_date: str = start_date_of_previous_month(), end_date: str = end_date_of_previous_month(), school: str = '') -> None:
+    logging.info(f"\n{start_date_of_previous_month()=}\n{end_date_of_previous_month()=}\n{start_date_of_current_month()=}\n{end_date_of_current_month()=}")
+    if datetime.date.today() != start_date_of_current_month(): ### 🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩 flip this logic
+        # students = sr_api_pull(
+        #     search_key = 'students',
+        #     parameters = {
+        #         'school_ids': '1,2,15,17,18,19,20,21'
+        #     }
+        # )
+        for x in range(end_date.day):
+            print(datetime.date(datetime.date.today().year, datetime.date.today().month - 1, x + 1).strftime('%a %m/%d/%y'))
+        
+        
+
+    else:
+        logging.info(f"No need to send email to service providers today. Today\'s date is {datetime.date.today()} and the end of the month is {end_date_of_current_month()}")
