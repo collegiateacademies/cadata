@@ -701,14 +701,38 @@ def end_date_of_current_month() -> datetime.date:
 def attendance_report(start_date: str = start_date_of_previous_month(), end_date: str = end_date_of_previous_month(), school: str = '') -> None:
     logging.info(f"\n{start_date_of_previous_month()=}\n{end_date_of_previous_month()=}\n{start_date_of_current_month()=}\n{end_date_of_current_month()=}")
     if datetime.date.today() != start_date_of_current_month(): ### 🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩 flip this logic
-        # students = sr_api_pull(
-        #     search_key = 'students',
-        #     parameters = {
-        #         'school_ids': '1,2,15,17,18,19,20,21'
-        #     }
-        # )
+        students = sr_api_pull(
+            search_key = 'students',
+            parameters = {
+                'school_ids': school_info[school]['sr_id'],
+                'expand': 'student_detail'
+            }
+        )
         for x in range(end_date.day):
-            print(datetime.date(datetime.date.today().year, datetime.date.today().month - 1, x + 1).strftime('%a %m/%d/%y'))
+            students_enrolled = 0
+            # current_loop_date = datetime.date(datetime.date.today().year, datetime.date.today().month - 1, x + 1)
+            current_loop_date = datetime.date(datetime.date.today().year, datetime.date.today().month, x + 1)
+            for student in students:
+                student_start_year  = int(student['student_detail']['entry_date'][0:4])
+                student_start_month = int(student['student_detail']['entry_date'][5:7])
+                student_start_day   = int(student['student_detail']['entry_date'][8:10])
+                student_start_date  = datetime.date(student_start_year, student_start_month , student_start_day)
+
+                # if student['thru_date'] is not None:
+                student_end_year  = int(student['student_detail']['exit_date'][0:4])
+                student_end_month = int(student['student_detail']['exit_date'][5:7])
+                student_end_day   = int(student['student_detail']['exit_date'][8:10])
+                student_end_date  = datetime.date(student_end_year, student_end_month , student_end_day)
+                # else:
+                #     student_end_date = datetime.date.today()
+
+                # print(f"{student['from_date']=}\n{student_start_year=}\n{student_start_month=}\n{student_start_day=}")
+                if student_start_date <= current_loop_date and student_end_date <= current_loop_date:
+                    # pp.pprint(student)
+                    students_enrolled += 1
+           
+            print(students_enrolled)
+            print(current_loop_date.strftime('%Y-%m-%d'))
         
         
 
