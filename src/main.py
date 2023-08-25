@@ -783,7 +783,6 @@ def attendance_report(start_date: str = start_date_of_previous_month(), end_date
             subject_line = f'Attendance Report for {school}',
             html_body = html_email,
             sender_string = 'CA Service Provider Reports'
-
         )
 
     else:
