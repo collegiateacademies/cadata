@@ -699,8 +699,11 @@ def end_date_of_current_month() -> datetime.date:
     return datetime.date(datetime.date.today().year, datetime.date.today().month, month_range[1])
 
 def attendance_report(start_date: str = start_date_of_previous_month(), end_date: str = end_date_of_previous_month(), school: str = '') -> None:
+    
     logging.info(f"\n{start_date_of_previous_month()=}\n{end_date_of_previous_month()=}\n{start_date_of_current_month()=}\n{end_date_of_current_month()=}")
+    
     if datetime.date.today() != start_date_of_current_month(): ### 🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩 flip this logic
+        
         students = sr_api_pull(
             search_key = 'students',
             parameters = {
@@ -708,31 +711,64 @@ def attendance_report(start_date: str = start_date_of_previous_month(), end_date
                 'expand': 'student_detail'
             }
         )
-        for x in range(end_date.day):
+
+        absences_list = sr_api_pull(
+            search_key = 'absences',
+            parameters = {
+                'school_ids': school_info[school]['sr_id'],
+                'active': '1',
+                'out_of_school_only': '1',
+                'min_date': '2023-08-01', # start_date_of_previous_month().strftime('%Y-%m-%d'), 🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩
+                'max_date': '2023-08-31', # end_date_of_previous_month().strftime('%Y-%m-%d'),   🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩
+                # 'expand': 'absence_type,student'
+            }
+        )
+
+        calendar_days = sr_api_pull(
+            search_key = 'calendar-days',
+            parameters = {
+                'school_ids': school_info[school]['sr_id'],
+                'active': '1',
+                'min_date': '2023-08-01', # start_date_of_previous_month().strftime('%Y-%m-%d'), 🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩
+                'max_date': '2023-08-31', # end_date_of_previous_month().strftime('%Y-%m-%d'),   🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩
+            }
+        )
+
+        for day in range(1, end_date.day + 1): # the + 1 is used here because the range starts at 0
             students_enrolled = 0
-            # current_loop_date = datetime.date(datetime.date.today().year, datetime.date.today().month - 1, x + 1)
-            current_loop_date = datetime.date(datetime.date.today().year, datetime.date.today().month, x + 1)
+            absences = 0
+
+            current_loop_date = datetime.date(datetime.date.today().year, datetime.date.today().month, day) #  🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩 should have month - 1
+
+            for day in calendar_days:
+                if day['date'] == current_loop_date.strftime('%Y-%m-%d'):
+                    if day['in_session'] == '1':
+                        in_session = True
+                    else:
+                        in_session = False
+            
             for student in students:
-                student_start_year  = int(student['student_detail']['entry_date'][0:4])
-                student_start_month = int(student['student_detail']['entry_date'][5:7])
-                student_start_day   = int(student['student_detail']['entry_date'][8:10])
-                student_start_date  = datetime.date(student_start_year, student_start_month , student_start_day)
+                if student['student_detail'] is None:
+                    continue
+                student_entry_year  = int(student['student_detail']['entry_date'][0:4])
+                student_entry_month = int(student['student_detail']['entry_date'][5:7])
+                student_entry_day   = int(student['student_detail']['entry_date'][8:10])
+                student_entry_date  = datetime.date(student_entry_year, student_entry_month , student_entry_day)
 
-                # if student['thru_date'] is not None:
-                student_end_year  = int(student['student_detail']['exit_date'][0:4])
-                student_end_month = int(student['student_detail']['exit_date'][5:7])
-                student_end_day   = int(student['student_detail']['exit_date'][8:10])
-                student_end_date  = datetime.date(student_end_year, student_end_month , student_end_day)
-                # else:
-                #     student_end_date = datetime.date.today()
-
-                # print(f"{student['from_date']=}\n{student_start_year=}\n{student_start_month=}\n{student_start_day=}")
-                if student_start_date <= current_loop_date and student_end_date <= current_loop_date:
-                    # pp.pprint(student)
+                student_exit_year  = int(student['student_detail']['exit_date'][0:4])
+                student_exit_month = int(student['student_detail']['exit_date'][5:7])
+                student_exit_day   = int(student['student_detail']['exit_date'][8:10])
+                student_exit_date  = datetime.date(student_exit_year, student_exit_month , student_exit_day)
+                
+                if student_entry_date <= current_loop_date and student_exit_date >= current_loop_date:
                     students_enrolled += 1
-           
-            print(students_enrolled)
-            print(current_loop_date.strftime('%Y-%m-%d'))
+
+            for absence in absences_list:
+                if absence['date'] == current_loop_date.strftime('%Y-%m-%d'):
+                    absences += 1
+            
+            if in_session:
+                print(f"{students_enrolled} students enrolled on {current_loop_date.strftime('%a %Y-%m-%d')}\n\t{magenta}{absences} absences{reset}")
         
         
 
