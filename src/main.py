@@ -734,6 +734,8 @@ def attendance_report(start_date: str = start_date_of_previous_month(), end_date
             }
         )
 
+        table_data = ''
+
         for day in range(1, end_date.day + 1): # the + 1 is used here because the range starts at 0
             students_enrolled = 0
             absences = 0
@@ -766,11 +768,23 @@ def attendance_report(start_date: str = start_date_of_previous_month(), end_date
             for absence in absences_list:
                 if absence['date'] == current_loop_date.strftime('%Y-%m-%d'):
                     absences += 1
-            
+             
             if in_session:
-                print(f"{students_enrolled} students enrolled on {current_loop_date.strftime('%a %Y-%m-%d')}\n\t{magenta}{absences} absences{reset}")
+                table_data += f"<tr><td style='border: 1px solid black; border-collapse: collapse; padding: 10px; text-align: center;'>{current_loop_date.strftime('%a %b %d')}</td><td style='border: 1px solid black; border-collapse: collapse; padding: 10px; text-align: center;'>{students_enrolled}</td><td style='border: 1px solid black; border-collapse: collapse; padding: 10px; text-align: center;'>{absences}</td><td style='border: 1px solid black; border-collapse: collapse; padding: 10px; text-align: center;'>{students_enrolled-absences}</td></tr>"
+            else:
+                table_data += f"<tr><td style='border: 1px solid black; border-collapse: collapse; padding: 10px; text-align: center;'>{current_loop_date.strftime('%a %b %d')}</td><td style='border: 1px solid black; border-collapse: collapse; padding: 10px; text-align: center;' colspan='3'><span style='color: red'>SCHOOL NOT IN SESSION</span></td></tr>"
         
-        
+        with open('../html/lunch_service_provider.html', 'r') as file:
+            html_email = file.read().replace('###table_data###', table_data).replace('###school###', school)
+                                                     
+        send_email(
+            recipient = 'tophermckee@gmail.com',
+            cc='afelter@collegiateacademies.org',
+            subject_line = f'Attendance Report for {school}',
+            html_body = html_email,
+            sender_string = 'CA Service Provider Reports'
+
+        )
 
     else:
         logging.info(f"No need to send email to service providers today. Today\'s date is {datetime.date.today()} and the end of the month is {end_date_of_current_month()}")
