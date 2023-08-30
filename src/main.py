@@ -720,7 +720,6 @@ def attendance_report(start_date: str = start_date_of_previous_month(), end_date
                 'out_of_school_only': '1',
                 'min_date': '2023-08-01', # start_date_of_previous_month().strftime('%Y-%m-%d'), 🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩
                 'max_date': '2023-08-31', # end_date_of_previous_month().strftime('%Y-%m-%d'),   🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩
-                # 'expand': 'absence_type,student'
             }
         )
 
