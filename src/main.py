@@ -702,7 +702,7 @@ def attendance_report(start_date: str = start_date_of_previous_month(), end_date
     
     logging.info(f"\n{start_date_of_previous_month()=}\n{end_date_of_previous_month()=}\n{start_date_of_current_month()=}\n{end_date_of_current_month()=}")
     
-    if datetime.date.today() != start_date_of_current_month(): ### 🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩 flip this logic
+    if datetime.date.today() == start_date_of_current_month():
         
         students = sr_api_pull(
             search_key = 'students',
