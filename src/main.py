@@ -718,8 +718,8 @@ def attendance_report(start_date: str = start_date_of_previous_month(), end_date
                 'school_ids': school_info[school]['sr_id'],
                 'active': '1',
                 'out_of_school_only': '1',
-                'min_date': '2023-08-01', # start_date_of_previous_month().strftime('%Y-%m-%d'), 🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩
-                'max_date': '2023-08-31', # end_date_of_previous_month().strftime('%Y-%m-%d'),   🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩
+                'min_date':  start_date_of_previous_month().strftime('%Y-%m-%d'),
+                'max_date': end_date_of_previous_month().strftime('%Y-%m-%d'),
             }
         )
 
@@ -728,8 +728,8 @@ def attendance_report(start_date: str = start_date_of_previous_month(), end_date
             parameters = {
                 'school_ids': school_info[school]['sr_id'],
                 'active': '1',
-                'min_date': '2023-08-01', # start_date_of_previous_month().strftime('%Y-%m-%d'), 🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩
-                'max_date': '2023-08-31', # end_date_of_previous_month().strftime('%Y-%m-%d'),   🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩
+                'min_date':  start_date_of_previous_month().strftime('%Y-%m-%d'),
+                'max_date': end_date_of_previous_month().strftime('%Y-%m-%d'),
             }
         )
 
