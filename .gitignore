@@ -137,4 +137,4 @@ pdf/*.pdf
 quickstart.py
 triggers/AssessmentResults.csv
 triggers/StudentsBySchool.csv
-logs/csv/*attendance_report.csv
+logs/csv/*attendance_report*.csv
