@@ -742,7 +742,7 @@ def attendance_report(start_date: str = start_date_of_previous_month(), end_date
                 students_enrolled = 0
                 absences = 0
 
-                current_loop_date = datetime.date(datetime.date.today().year, datetime.date.today().month, day) #  🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩 should have month - 1
+                current_loop_date = datetime.date(datetime.date.today().year, datetime.date.today().month - 1, day)
 
                 for day in calendar_days:
                     if day['date'] == current_loop_date.strftime('%Y-%m-%d'):
