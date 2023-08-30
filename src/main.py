@@ -738,7 +738,7 @@ def attendance_report(start_date: str = start_date_of_previous_month(), end_date
         with open(f"../logs/csv/{school.lower()}_attendance_report_{datetime.date.today().strftime('%Y-%m-%d')}.csv", 'w', newline='') as file:
             writer = csv.writer(file)
             writer.writerow(["date", "in session", "enrolled", "absent", "present"])
-            for day in range(1, end_date.day + 1): # the + 1 is used here because the range starts at 0
+            for day in range(1, end_date.day + 1): # the + 1 is used here because the range starts at 1
                 students_enrolled = 0
                 absences = 0
 
