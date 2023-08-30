@@ -736,53 +736,59 @@ def attendance_report(start_date: str = start_date_of_previous_month(), end_date
 
         table_data = ''
 
-        for day in range(1, end_date.day + 1): # the + 1 is used here because the range starts at 0
-            students_enrolled = 0
-            absences = 0
+        with open(f"../logs/csv/{school.lower()}_attendance_report_{datetime.date.today().strftime('%Y-%m-%d')}.csv", 'w', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(["date", "in session", "enrolled", "absent", "present"])
+            for day in range(1, end_date.day + 1): # the + 1 is used here because the range starts at 0
+                students_enrolled = 0
+                absences = 0
 
-            current_loop_date = datetime.date(datetime.date.today().year, datetime.date.today().month, day) #  🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩 should have month - 1
+                current_loop_date = datetime.date(datetime.date.today().year, datetime.date.today().month, day) #  🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩 should have month - 1
 
-            for day in calendar_days:
-                if day['date'] == current_loop_date.strftime('%Y-%m-%d'):
-                    if day['in_session'] == '1':
-                        in_session = True
-                    else:
-                        in_session = False
-            
-            for student in students:
-                if student['student_detail'] is None:
-                    continue
-                student_entry_year  = int(student['student_detail']['entry_date'][0:4])
-                student_entry_month = int(student['student_detail']['entry_date'][5:7])
-                student_entry_day   = int(student['student_detail']['entry_date'][8:10])
-                student_entry_date  = datetime.date(student_entry_year, student_entry_month , student_entry_day)
-
-                student_exit_year  = int(student['student_detail']['exit_date'][0:4])
-                student_exit_month = int(student['student_detail']['exit_date'][5:7])
-                student_exit_day   = int(student['student_detail']['exit_date'][8:10])
-                student_exit_date  = datetime.date(student_exit_year, student_exit_month , student_exit_day)
+                for day in calendar_days:
+                    if day['date'] == current_loop_date.strftime('%Y-%m-%d'):
+                        if day['in_session'] == '1':
+                            in_session = True
+                        else:
+                            in_session = False
                 
-                if student_entry_date <= current_loop_date and student_exit_date >= current_loop_date:
-                    students_enrolled += 1
+                for student in students:
+                    if student['student_detail'] is None:
+                        continue
+                    student_entry_year  = int(student['student_detail']['entry_date'][0:4])
+                    student_entry_month = int(student['student_detail']['entry_date'][5:7])
+                    student_entry_day   = int(student['student_detail']['entry_date'][8:10])
+                    student_entry_date  = datetime.date(student_entry_year, student_entry_month , student_entry_day)
 
-            for absence in absences_list:
-                if absence['date'] == current_loop_date.strftime('%Y-%m-%d'):
-                    absences += 1
-             
-            if in_session:
-                table_data += f"<tr><td style='border: 1px solid black; border-collapse: collapse; padding: 10px; text-align: center;'>{current_loop_date.strftime('%a %b %d')}</td><td style='border: 1px solid black; border-collapse: collapse; padding: 10px; text-align: center;'>{students_enrolled}</td><td style='border: 1px solid black; border-collapse: collapse; padding: 10px; text-align: center;'>{absences}</td><td style='border: 1px solid black; border-collapse: collapse; padding: 10px; text-align: center;'>{students_enrolled-absences}</td></tr>"
-            else:
-                table_data += f"<tr><td style='border: 1px solid black; border-collapse: collapse; padding: 10px; text-align: center;'>{current_loop_date.strftime('%a %b %d')}</td><td style='border: 1px solid black; border-collapse: collapse; padding: 10px; text-align: center;' colspan='3'><span style='color: red'>SCHOOL NOT IN SESSION</span></td></tr>"
-        
+                    student_exit_year  = int(student['student_detail']['exit_date'][0:4])
+                    student_exit_month = int(student['student_detail']['exit_date'][5:7])
+                    student_exit_day   = int(student['student_detail']['exit_date'][8:10])
+                    student_exit_date  = datetime.date(student_exit_year, student_exit_month , student_exit_day)
+                    
+                    if student_entry_date <= current_loop_date and student_exit_date >= current_loop_date:
+                        students_enrolled += 1
+
+                for absence in absences_list:
+                    if absence['date'] == current_loop_date.strftime('%Y-%m-%d'):
+                        absences += 1
+                
+                if in_session:
+                    table_data += f"<tr><td style='border: 1px solid black; border-collapse: collapse; padding: 10px; text-align: center;'>{current_loop_date.strftime('%a %b %d')}</td><td style='border: 1px solid black; border-collapse: collapse; padding: 10px; text-align: center;'>{students_enrolled}</td><td style='border: 1px solid black; border-collapse: collapse; padding: 10px; text-align: center;'>{absences}</td><td style='border: 1px solid black; border-collapse: collapse; padding: 10px; text-align: center;'>{students_enrolled-absences}</td></tr>"
+                    writer.writerow([current_loop_date.strftime('%Y-%m-%d'), "true", students_enrolled, absences, students_enrolled-absences])
+                else:
+                    table_data += f"<tr><td style='border: 1px solid black; border-collapse: collapse; padding: 10px; text-align: center;'>{current_loop_date.strftime('%a %b %d')}</td><td style='border: 1px solid black; border-collapse: collapse; padding: 10px; text-align: center;' colspan='3'><span style='color: red'>SCHOOL NOT IN SESSION</span></td></tr>"
+                    writer.writerow([current_loop_date.strftime('%Y-%m-%d'), "false", 0, 0, 0])
+
         with open('../html/lunch_service_provider.html', 'r') as file:
             html_email = file.read().replace('###table_data###', table_data).replace('###school###', school)
-                                                     
+
         send_email(
             recipient = 'tophermckee@gmail.com',
-            cc='afelter@collegiateacademies.org',
+            #cc='afelter@collegiateacademies.org',
             subject_line = f'Attendance Report for {school}',
             html_body = html_email,
-            sender_string = 'CA Service Provider Reports'
+            sender_string = 'CA Service Provider Reports',
+            attachment = f"../logs/csv/{school.lower()}_attendance_report_{datetime.date.today().strftime('%Y-%m-%d')}.csv"
         )
 
     else:
