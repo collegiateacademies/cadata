@@ -62,7 +62,7 @@ school_info = {
             'calendar': False,
             'contact': True,
             'link': '',
-           'contact_name': 'Ms. Myers and Ms. Corley',
+           'contact_name': 'Ms. Myers',
            'contact_email': 'jcorley@collegiateacademies.org,smyers@collegiateacademies.org'
         }
     },
