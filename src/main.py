@@ -83,6 +83,10 @@ def generate_attendance_letters(school: str, start_date: str, repeated_letters: 
     ########                PDF GENERATION STARTS HERE              ##########
     ##########################################################################
 
+    with open(f"../logs/json/{datetime.datetime.now().strftime('%Y-%m-%d_%H:%M:%S')}_{school}_attendance_database.json", "w") as file:
+            logging.info('dumping attendance database info to logs folder')
+            json.dump(database, file, indent=4)
+
     class MyFPDF(FPDF, HTMLMixin):
         pass
     pdf = MyFPDF(orientation='P', unit='mm', format='Letter')
