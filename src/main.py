@@ -94,6 +94,8 @@ def generate_attendance_letters(school: str, start_date: str, repeated_letters: 
     pdf.set_font('helvetica', size=10)
 
     for student in database:
+        if database[student]['street'] == None or database[student]['city'] == None or database[student]['state'] == None or database[student]['zip'] == None:
+            continue
         if database[student]['au'] >= 3 and database[student]['3au_letters_logged'] == 0:
             pdf.add_page()
             pdf.image(f"../assets/{school.lower()}_letterhead.png", x=125, y=5, h=8)
