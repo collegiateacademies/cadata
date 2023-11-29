@@ -341,4 +341,43 @@
         </sql>
     </query>
 
+    <query name="com.collegiateacademies.tophermckee.tables.attendance_letter_data_checker" coreTable="students" flattened="false">
+        <description>Pull students fields required to print attendance letters</description>
+        <args>
+            <arg name="school_id" column="students.schoolid" type="primitive" required="false" />
+        </args>
+        <columns>
+            <column column="STUDENTS.STUDENT_NUMBER">STUDENTS.STUDENT_NUMBER</column>
+            <column column="STUDENTS.FIRST_NAME">STUDENTS.FIRST_NAME</column>
+            <column column="STUDENTS.LAST_NAME">STUDENTS.LAST_NAME</column>
+            <column column="STUDENTS.GRADE_LEVEL">STUDENTS.GRADE_LEVEL</column>
+            <column column="STUDENTS.STREET">STUDENTS.STREET</column>
+            <column column="STUDENTS.STATE">STUDENTS.STATE</column>
+            <column column="STUDENTS.ZIP">STUDENTS.ZIP</column>
+            <column column="STUDENTS.SCHOOLID">STUDENTS.SCHOOLID</column>
+            <column column="STUDENTS.ENROLL_STATUS">STUDENTS.ENROLL_STATUS</column>
+ 		</columns>
+        <sql>
+			<![CDATA[
+			SELECT
+            students.first_name,
+            students.last_name,
+            students.student_number,
+            students.grade_level,
+            students.street,
+            students.state,
+            students.zip,
+            students.schoolid,
+            students.enroll_status
+            
+            FROM students
+
+            WHERE students.schoolid = :school_id
+                AND students.enroll_status = 0
+
+            ORDER BY students.grade_level, students.last_name, students.first_name
+			]]>
+        </sql>
+    </query>
+
 </queries>
