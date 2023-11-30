@@ -594,7 +594,6 @@ def upload_map_file():
 def send_staff_absence_emails(school: str, all_staff: int, spreadsheet_key: str) -> None:
     absence_data = return_googlesheet_by_key(spreadsheet_key = spreadsheet_key, sheet_name = 'Summary').get_values('A3:U')
     
-    counter = 1
     for staff_member in absence_data:
         email_send              = staff_member[2]
         first_name              = staff_member[3]
