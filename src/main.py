@@ -622,11 +622,14 @@ def send_staff_absence_emails(school: str, all_staff: int, spreadsheet_key: str)
             
             if all_staff == 1:
                 pass
-            elif staff_member[1] == 'Active': # terminated column
-                pass
             elif all_staff == 0 and email_send == 'FALSE':
                 continue
-
+            
+            if staff_member[1] == 'Active':                         # terminated column
+                pass
+            else:
+                continue
+            
             send_email(
                 recipient = 'tophermckee@gmail.com',#email,
                 subject_line = 'Staff Attendance Update',
