@@ -530,10 +530,20 @@ oa_attendance_letter_blocks = [
     },
 ]
 
-with open('../creds.json') as file:
+if sys.platform == 'darwin':
+    credentials_path = '/Users/tophermckee/cadata/creds.json'
+elif sys.platform == 'linux':
+    credentials_path = '/home/data_admin/cadata/creds.json'
+
+if sys.platform == 'darwin':
+    service_account_credentials_path = '/Users/tophermckee/cadata/ca-data-administrator.json'
+elif sys.platform == 'linux':
+    service_account_credentials_path = '/home/data_admin/cadata/ca-data-administrator.json'
+
+with open(credentials_path) as file:
     credentials = json.load(file)
 
-with open('../ca-data-administrator.json') as file:
+with open(service_account_credentials_path) as file:
     service_account = json.load(file)
 
 
