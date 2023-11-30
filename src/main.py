@@ -797,3 +797,41 @@ def attendance_report(start_date: str = start_date_of_previous_month(), end_date
 
     else:
         logging.info(f"No need to send email to service providers today. Today\'s date is {datetime.date.today()} and the end of the month is {end_date_of_current_month()}")
+
+
+def attendance_field_checker(school: str = '') -> None:
+    student_list = powerschool_powerquery(
+        query_name='com.collegiateacademies.tophermckee.tables.attendance_letter_data_checker',
+        payload={
+            'school_id': school_info[school]['ps_id']
+        }
+    )
+
+    total_missing_fields = 0
+    list_items = ''
+
+    for student in student_list:
+        
+        missing_fields = []
+        for key in student['tables']['students'].keys():
+            if student['tables']['students'][key] == None:
+                missing_fields.append(key)
+                total_missing_fields += 1
+        if len(missing_fields) > 0:
+            list_items += f"<li>{student['tables']['students']['first_name']} {student['tables']['students']['last_name']} ({student['tables']['students']['student_number']}) is missing the following fields: <code>{', '.join(missing_fields)}</code></li>"
+        
+    if total_missing_fields > 0:
+
+        with open('../html/attendance_letter_checker.html', 'r') as file:
+            html_email = file.read().replace('###missing_data###', list_items)
+        
+        send_email(
+            recipient = school_info[school]['data_manager'],
+            subject_line = '[data request] Attendance Letter Data Update',
+            html_body = html_email,
+            reply_to = 'tophermckee@gmail.com,afelter@collegiateacademies.org',
+            sender_string = 'CA Data Robot'
+        )
+    
+    else:
+        print('No students are missing any fields')
