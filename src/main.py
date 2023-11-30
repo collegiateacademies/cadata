@@ -800,7 +800,7 @@ def attendance_report(start_date: str = start_date_of_previous_month(), end_date
 
 
 def attendance_field_checker(school: str = '') -> None:
-    
+
     if today_is_a_school_day(school, school_info[school]['sr_id']):
         pass
     else:
@@ -840,4 +840,4 @@ def attendance_field_checker(school: str = '') -> None:
         )
     
     else:
-        print('No students are missing any fields')
+        logging.info('No students are missing any fields')
