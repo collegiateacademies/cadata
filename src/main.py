@@ -650,11 +650,6 @@ def send_staff_absence_emails(school: str, all_staff: int, spreadsheet_key: str)
                     .replace('###tardies###',                   tardies)
             )
 
-        #############
-        counter += 1
-        if counter >= 10:
-            break
-
 def update_typeform_staff_names(typeform_id: str = '', names_field_id: str = ''):
     staff_list = powerschool_powerquery(
         query_name='com.collegiateacademies.tophermckee.tables.staff',
