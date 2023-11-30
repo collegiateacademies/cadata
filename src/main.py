@@ -591,25 +591,26 @@ def upload_map_file():
             output.append(row)
     update_googlesheet_by_key(spreadsheet_key='17HNmMqS4Rwy3tZPcct69ZIz7yhuZIHv_mi4d9enJzD8', sheet_name='Sheet1', data = output, starting_cell="A1")
 
-def send_staff_absence_emails(school: str) -> None:
-    absence_data = return_googlesheet_by_key(spreadsheet_key = '1a6iLEJGX0v40BJ2DiqaCzB86owZTOsGsL8VS2zLTkI8', sheet_name = 'Summary').get_values('A3:T')
+def send_staff_absence_emails(school: str, all_staff: int, spreadsheet_key: str) -> None:
+    absence_data = return_googlesheet_by_key(spreadsheet_key = '1a6iLEJGX0v40BJ2DiqaCzB86owZTOsGsL8VS2zLTkI8', sheet_name = 'Summary').get_values('A3:U')
     
     counter = 1
     for staff_member in absence_data:
-        first_name              = staff_member[2]
-        last_name               = staff_member[3]
-        email                   = staff_member[4]
-        pto_issued_tracker      = staff_member[9]
-        pto_taken_tracker       = staff_member[10]
-        pto_remaining_tracker   = staff_member[11]
-        pto_issued_paylocity    = staff_member[12]
-        pto_taken_paylocity     = staff_member[13]
-        pto_remaining_paylocity = staff_member[14]
-        unpaid_tracker          = staff_member[15]
-        unpaid_paylocity        = staff_member[16]
-        bereavement_tracker     = staff_member[17]
-        bereavement_paylocity   = staff_member[18]
-        tardies                 = staff_member[19]
+        email_send              = staff_member[2]
+        first_name              = staff_member[3]
+        last_name               = staff_member[4]
+        email                   = staff_member[5]
+        pto_issued_tracker      = staff_member[10]
+        pto_taken_tracker       = staff_member[11]
+        pto_remaining_tracker   = staff_member[12]
+        pto_issued_paylocity    = staff_member[13]
+        pto_taken_paylocity     = staff_member[14]
+        pto_remaining_paylocity = staff_member[15]
+        unpaid_tracker          = staff_member[16]
+        unpaid_paylocity        = staff_member[17]
+        bereavement_tracker     = staff_member[18]
+        bereavement_paylocity   = staff_member[19]
+        tardies                 = staff_member[20]
         
         with open('../html/staff_absences.html', 'r') as file:
             html_email = file.read()
