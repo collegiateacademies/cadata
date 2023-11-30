@@ -620,11 +620,12 @@ def send_staff_absence_emails(school: str, all_staff: int, spreadsheet_key: str)
         with open(html_path, 'r') as file:
             html_email = file.read()
             send_email(
-                recipient='tophermckee@gmail.com',#email,
-                subject_line='Staff Attendance Update',
+                recipient = 'tophermckee@gmail.com',#email,
+                subject_line = 'Staff Attendance Update',
                 #bcc='afelter@collegiateacademies.org'#'tophermckee@gmail.com'
                 # reply_to=''                                                   🚩🚩🚩 needs to reply to the DFO
-                html_body=html_email
+                sender_string = 'CA Staff Updates',
+                html_body = html_email
                     .replace('###staff_name###', f"{first_name} {last_name}")
                     .replace('###pto_issued_tracker###',        pto_issued_tracker)
                     .replace('###pto_taken_tracker###',         pto_taken_tracker)
