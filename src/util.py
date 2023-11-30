@@ -785,7 +785,7 @@ def return_googlesheet_by_key(spreadsheet_key: str, sheet_name: str) -> gspread.
         "https://www.googleapis.com/auth/drive.file",
         "https://www.googleapis.com/auth/drive"
     ]
-    creds = ServiceAccountCredentials.from_json_keyfile_name('../ca-data-administrator.json', scope)
+    creds = ServiceAccountCredentials.from_json_keyfile_name('../ca-data-administrator-f52c3e758490.json', scope)
     client = gspread.authorize(creds)
     return client.open_by_key(spreadsheet_key).worksheet(sheet_name)
 
@@ -808,7 +808,7 @@ def return_googlesheet_values_by_key(spreadsheet_key: str = '', sheet_name: str 
         "https://www.googleapis.com/auth/drive.file",
         "https://www.googleapis.com/auth/drive"
     ]
-    creds = ServiceAccountCredentials.from_json_keyfile_name('../ca-data-administrator.json', scope)
+    creds = ServiceAccountCredentials.from_json_keyfile_name('../ca-data-administrator-f52c3e758490.json', scope)
     client = gspread.authorize(creds)
     if range != '':
         return client.open_by_key(spreadsheet_key).worksheet(sheet_name).get(range)
