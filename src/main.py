@@ -592,7 +592,7 @@ def upload_map_file():
     update_googlesheet_by_key(spreadsheet_key='17HNmMqS4Rwy3tZPcct69ZIz7yhuZIHv_mi4d9enJzD8', sheet_name='Sheet1', data = output, starting_cell="A1")
 
 def send_staff_absence_emails(school: str, all_staff: int, spreadsheet_key: str) -> None:
-    absence_data = return_googlesheet_by_key(spreadsheet_key = '1a6iLEJGX0v40BJ2DiqaCzB86owZTOsGsL8VS2zLTkI8', sheet_name = 'Summary').get_values('A3:U')
+    absence_data = return_googlesheet_by_key(spreadsheet_key = spreadsheet_key, sheet_name = 'Summary').get_values('A3:U')
     
     counter = 1
     for staff_member in absence_data:
@@ -612,7 +612,12 @@ def send_staff_absence_emails(school: str, all_staff: int, spreadsheet_key: str)
         bereavement_paylocity   = staff_member[19]
         tardies                 = staff_member[20]
         
-        with open('../html/staff_absences.html', 'r') as file:
+        if sys.platform == 'darwin':
+            html_path = '/Users/tophermckee/cadata/html/staff_absences.html'
+        elif sys.platform == 'linux':
+            html_path = '/home/data_admin/cadata/html/staff_absences.html'
+
+        with open(html_path, 'r') as file:
             html_email = file.read()
             send_email(
                 recipient='tophermckee@gmail.com',#email,
