@@ -38,6 +38,7 @@ school_info = {
         'attendance_letter_recipient': 'rmurray@collegiateacademies.org',
         'individualized_report_reply': 'rmurray@collegiateacademies.org',
         'data_manager': 'sadams1@collegiateacademies.org',
+        'staff_pto_replyto': 'tashford@collegiateacademies.org',
         'seat_time': {
             'calendar': False,
             'contact': True,
@@ -62,6 +63,7 @@ school_info = {
         'attendance_letter_recipient': 'kthomas1@collegiateacademies.org,smyers@collegiateacademies.org',
         'individualized_report_reply': 'frontdesk@sciacademy.org',
         'data_manager': 'ncowlin@collegiateacademies.org',
+        'staff_pto_replyto': 'ncowlin@collegiateacademies.org',
         'seat_time': {
             'calendar': False,
             'contact': True,
@@ -86,6 +88,7 @@ school_info = {
         'attendance_letter_recipient': 'amiles@collegiateacademies.org',
         'individualized_report_reply': 'amiles@collegiateacademies.org',
         'data_manager': 'fsall@collegiateacademies.org',
+        'staff_pto_replyto': 'nfranklin@collegiateacademies.org',
         'seat_time': {
             'calendar': False,
             'contact': True,
@@ -110,6 +113,7 @@ school_info = {
         'attendance_letter_recipient': 'amueller@collegiateacademies.org',
         'individualized_report_reply': 'amueller@collegiateacademies.org',
         'data_manager': 'tdemuns@collegiateacademies.org',
+        'staff_pto_replyto': 'nfranklin@collegiateacademies.org',
         'seat_time': {
             'calendar': True,
             'contact': False,
@@ -134,6 +138,7 @@ school_info = {
         'attendance_letter_recipient': 'info@walterlcohen.org',
         'individualized_report_reply': 'info@walterlcohen.org',
         'data_manager': 'jeasley@collegiateacademies.org',
+        'staff_pto_replyto': 'btaylor@collegiateacademies.org',
         'seat_time': {
             'calendar': False,
             'contact': True,
@@ -158,6 +163,7 @@ school_info = {
         'attendance_letter_recipient': 'hello@opportunitiesacademy.org',
         'individualized_report_reply': 'hello@opportunitiesacademy.org',
         'data_manager': 'kimani@collegiateacademies.org',
+        'staff_pto_replyto': 'kimani@collegiateacademies.org',
         'seat_time': {
             'calendar': False,
             'contact': 'OA',

@@ -629,12 +629,11 @@ def send_staff_absence_emails(school: str, all_staff: int, spreadsheet_key: str)
                 pass
             else:
                 continue
-            
+
             send_email(
                 recipient = 'tophermckee@gmail.com',#email,
                 subject_line = 'Staff Attendance Update',
-                #bcc='afelter@collegiateacademies.org'#'tophermckee@gmail.com'
-                # reply_to=''                                                   🚩🚩🚩 needs to reply to the DFO
+                reply_to = school_info[school]['staff_pto_replyto'],
                 sender_string = 'CA Staff Updates',
                 html_body = html_email
                     .replace('###staff_name###', f"{first_name} {last_name}")
