@@ -800,6 +800,12 @@ def attendance_report(start_date: str = start_date_of_previous_month(), end_date
 
 
 def attendance_field_checker(school: str = '') -> None:
+    
+    if today_is_a_school_day(school, school_info[school]['sr_id']):
+        pass
+    else:
+        return
+    
     student_list = powerschool_powerquery(
         query_name='com.collegiateacademies.tophermckee.tables.attendance_letter_data_checker',
         payload={
