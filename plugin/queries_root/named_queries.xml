@@ -347,9 +347,9 @@
             <arg name="school_id" column="students.schoolid" type="primitive" required="false" />
         </args>
         <columns>
-            <column column="STUDENTS.STUDENT_NUMBER">STUDENTS.STUDENT_NUMBER</column>
             <column column="STUDENTS.FIRST_NAME">STUDENTS.FIRST_NAME</column>
             <column column="STUDENTS.LAST_NAME">STUDENTS.LAST_NAME</column>
+            <column column="STUDENTS.STUDENT_NUMBER">STUDENTS.STUDENT_NUMBER</column>
             <column column="STUDENTS.GRADE_LEVEL">STUDENTS.GRADE_LEVEL</column>
             <column column="STUDENTS.STREET">STUDENTS.STREET</column>
             <column column="STUDENTS.STATE">STUDENTS.STATE</column>
