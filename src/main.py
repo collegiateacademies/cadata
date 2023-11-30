@@ -619,6 +619,12 @@ def send_staff_absence_emails(school: str, all_staff: int, spreadsheet_key: str)
 
         with open(html_path, 'r') as file:
             html_email = file.read()
+            
+            if all_staff == 1:
+                pass
+            elif all_staff == 0 and email_send == 'FALSE':
+                continue
+
             send_email(
                 recipient = 'tophermckee@gmail.com',#email,
                 subject_line = 'Staff Attendance Update',
@@ -642,7 +648,7 @@ def send_staff_absence_emails(school: str, all_staff: int, spreadsheet_key: str)
 
         #############
         counter += 1
-        if counter >= 3:
+        if counter >= 10:
             break
 
 def update_typeform_staff_names(typeform_id: str = '', names_field_id: str = ''):
