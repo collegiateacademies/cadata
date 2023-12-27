@@ -664,7 +664,7 @@ def send_staff_absence_emails(school: str, all_staff: int, spreadsheet_key: str)
         html_email_dfo = dfo_file.read()
 
         if len(failed_sends) == 0:
-            failed_sends = '<li>No failures!</li>'
+            failed_sends = '<li style="color: green;">No failures!</li>'
 
         send_email(
             recipient = 'tophermckee@gmail.com',#email,
