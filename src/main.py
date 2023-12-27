@@ -702,20 +702,24 @@ def network_staff_export():
         starting_cell='A1'
     )
 
-    
+
 def start_date_of_previous_month() -> datetime.date:
     return datetime.date(datetime.date.today().year, datetime.date.today().month - 1, 1)
+
 
 def end_date_of_previous_month() -> datetime.date:
     month_range = calendar.monthrange(datetime.date.today().year, datetime.date.today().month - 1)
     return datetime.date(datetime.date.today().year, datetime.date.today().month - 1, month_range[1])
 
+
 def start_date_of_current_month() -> datetime.date:
     return datetime.date(datetime.date.today().year, datetime.date.today().month, 1)
+
 
 def end_date_of_current_month() -> datetime.date:
     month_range = calendar.monthrange(datetime.date.today().year, datetime.date.today().month)
     return datetime.date(datetime.date.today().year, datetime.date.today().month, month_range[1])
+
 
 def attendance_report(start_date: str = start_date_of_previous_month(), end_date: str = end_date_of_previous_month(), school: str = '') -> None:
     
