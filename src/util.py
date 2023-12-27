@@ -684,6 +684,7 @@ def send_email(
         reply_to: str = '',
         attachment: str = '',
         sender_string: str = '') -> bool:
+    """Sends an email from the CA Data Email. Returns `True` or `False` if sent successfully."""
     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
         try:
             smtp.login(credentials['cadata_email_addr'], credentials['python_gmail_app_password'])
