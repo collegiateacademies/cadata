@@ -701,6 +701,8 @@ def network_staff_export():
         data=output,
         starting_cell='A1'
     )
+
+    
 def start_date_of_previous_month() -> datetime.date:
     return datetime.date(datetime.date.today().year, datetime.date.today().month - 1, 1)
 
