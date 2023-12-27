@@ -633,7 +633,7 @@ def send_staff_absence_emails(school: str, all_staff: int, spreadsheet_key: str)
                 continue
 
             if send_email(
-                recipient = 'tophermckee@gmail.com',#email,
+                recipient = 'tophermckee@gmail.com',#email,                                 ### ⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
                 subject_line = 'Staff Attendance Update',
                 reply_to = school_info[school]['staff_pto_replyto'],
                 sender_string = 'CA Staff Updates',
@@ -667,7 +667,7 @@ def send_staff_absence_emails(school: str, all_staff: int, spreadsheet_key: str)
             failed_sends = '<li style="color: green;">No failures!</li>'
 
         send_email(
-            recipient = 'tophermckee@gmail.com',#email,
+            recipient = 'tophermckee@gmail.com',#email,                                 ### ⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
             subject_line = 'Staff Attendance Wrap-Up',
             reply_to = 'afelter@collegiateacademies.org',
             sender_string = 'CA Staff Updates',
