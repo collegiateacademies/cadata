@@ -651,9 +651,9 @@ def send_staff_absence_emails(school: str, all_staff: int, spreadsheet_key: str)
                     .replace('###bereavement_paylocity###',     bereavement_paylocity)
                     .replace('###tardies###',                   tardies)
             ):
-                successful_sends += f"<li><code>[{datetime.datetime.now().strftime('at %I:%M %p on %m/%d/%y')}]</code> Sent to {first_name} {last_name}</li>"
+                successful_sends += f"<li><code>[{datetime.datetime.now().strftime('%m/%d/%y %I:%M %p')}]</code> Sent to {first_name} {last_name}</li>"
             else:
-                failed_sends += f"<li><code>[{datetime.datetime.now().strftime('at %I:%M %p on %m/%d/%y')}]</code> Failed send to {first_name} {last_name}</li>"
+                failed_sends += f"<li><code>[{datetime.datetime.now().strftime('%m/%d/%y %I:%M %p')}]</code> Failed send to {first_name} {last_name}</li>"
 
     if sys.platform == 'darwin':
         html_path_dfo = '/Users/tophermckee/cadata/html/staff_absences_dfo.html'
