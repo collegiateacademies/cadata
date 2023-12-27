@@ -714,9 +714,11 @@ def send_email(
             smtp.send_message(msg)
             logging.info(f"🍾 Email sent for to:{recipient} 🍾")
             smtp.quit()
+            return True
         except Exception as error_inside:
             logging.error(f"Error at send for to:{recipient} -- error: {error_inside}", exc_info=True)
             smtp.quit()
+            return False
 
 
 def extract_sr_student_attribute(attr_list: list, attr_key: str):
