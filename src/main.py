@@ -594,6 +594,9 @@ def upload_map_file():
 def send_staff_absence_emails(school: str, all_staff: int, spreadsheet_key: str) -> None:
     absence_data = return_googlesheet_by_key(spreadsheet_key = spreadsheet_key, sheet_name = 'Summary').get_values('A3:U')
     
+    successful_sends = ''
+    failed_sends     = ''
+
     for staff_member in absence_data:
         email_send              = staff_member[2]
         first_name              = staff_member[3]
@@ -629,10 +632,10 @@ def send_staff_absence_emails(school: str, all_staff: int, spreadsheet_key: str)
             else:
                 continue
 
-            send_email(
+            if send_email(
                 recipient = 'tophermckee@gmail.com',#email,
                 subject_line = 'Staff Attendance Update',
-                reply_to = school_info[school]['staff_pto_replyto'],
+                reply_to = 'tophermckee@gmail.com',#school_info[school]['staff_pto_replyto'],
                 sender_string = 'CA Staff Updates',
                 html_body = html_email
                     .replace('###staff_name###', f"{first_name} {last_name}")
@@ -647,7 +650,33 @@ def send_staff_absence_emails(school: str, all_staff: int, spreadsheet_key: str)
                     .replace('###bereavement_tracker###',       bereavement_tracker)
                     .replace('###bereavement_paylocity###',     bereavement_paylocity)
                     .replace('###tardies###',                   tardies)
-            )
+            ):
+                successful_sends.append(f"<li>Sent to {first_name} {last_name} {datetime.datetime.now().strftime('at %I:%M %p on %m/%d/%y')}</li>")
+            else:
+                failed_sends.append(f"<li>Failed send to {first_name} {last_name} {datetime.datetime.now().strftime('at %I:%M %p on %m/%d/%y')}</li>")
+
+    if sys.platform == 'darwin':
+        html_path_dfo = '/Users/tophermckee/cadata/html/staff_absences_dfo.html'
+    elif sys.platform == 'linux':
+        html_path_dfo = '/home/data_admin/cadata/html/staff_absences_dfo.html'
+
+    with open(html_path_dfo, 'r') as dfo_file:
+        html_email_dfo = dfo_file.read()
+
+        if len(failed_sends) == 0:
+            failed_sends = '<li>No failures!</li>'
+
+        send_email(
+            recipient = 'tophermckee@gmail.com',#email,
+            subject_line = 'Staff Attendance Wrap-Up',
+            reply_to = 'afelter@collegiateacademies.org',
+            sender_string = 'CA Staff Updates',
+            html_body = html_email_dfo
+                    .replace('###dfo_name###',                  f"dfo name goes here")
+                    .replace('###successful_sends###',          successful_sends)
+                    .replace('###failed_sends###',              failed_sends)
+        )
+        
 
 def update_typeform_staff_names(typeform_id: str = '', names_field_id: str = ''):
     staff_list = powerschool_powerquery(
