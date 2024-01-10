@@ -773,7 +773,7 @@ def return_current_sr_term(term_type: str, school: str) -> str:
         try:
             start_date = convert_yyyy_mm_dd_date(term['start_date'])
             end_date = convert_yyyy_mm_dd_date(term['end_date'])
-            if term_type.lower() in term['long_name'].lower() and start_date <= datetime.datetime.now() <= end_date:
+            if term_type.lower() in term['long_name'].lower() and start_date <= datetime.datetime.today() and datetime.datetime.today() <= end_date:
                 logging.info(f"Found term {term['long_name']} - {term['term_bin_id']}")
                 return term['term_bin_id']
         except AttributeError as attr_error:
