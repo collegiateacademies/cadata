@@ -603,6 +603,8 @@ def convert_yyyy_mm_dd_date(date_string: str) -> datetime.date:
 
 def return_term_dates(term_bin_id: str) -> tuple:
     """Returns the start and end dates of a given term in Schoolrunner."""
+    if term_bin_id == None:
+        raise Exception("Did not find a matching term bin for this date -- erroring out.")
     term_bins = sr_api_pull(
         search_key='term-bins',
         parameters={
