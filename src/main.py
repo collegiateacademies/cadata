@@ -758,7 +758,14 @@ def end_date_of_current_month() -> datetime.date:
 
 
 def attendance_report(start_date: str = start_date_of_previous_month(), end_date: str = end_date_of_previous_month(), school: str = '') -> None:
-    
+   
+    if sys.platform == 'darwin':
+        csv_path = f"/Users/tophermckee/cadata/logs/csv/{school.lower()}_attendance_report_{datetime.date.today().strftime('%Y-%m-%d')}.csv"
+        html_path = "/Users/tophermckee/cadata/html/lunch_service_provider.html"
+    elif sys.platform == 'linux':
+        csv_path = f"/home/data_admin/cadata/logs/csv/{school.lower()}_attendance_report_{datetime.date.today().strftime('%Y-%m-%d')}.csv"
+        html_path = "/home/data_admin/cadata/html/lunch_service_provider.html"
+
     logging.info(f"\n{start_date_of_previous_month()=}\n{end_date_of_previous_month()=}\n{start_date_of_current_month()=}\n{end_date_of_current_month()=}")
     
     if datetime.date.today() == start_date_of_current_month():
@@ -794,7 +801,7 @@ def attendance_report(start_date: str = start_date_of_previous_month(), end_date
 
         table_data = ''
 
-        with open(f"../logs/csv/{school.lower()}_attendance_report_{datetime.date.today().strftime('%Y-%m-%d')}.csv", 'w', newline='') as file:
+        with open(csv_path, 'w', newline='') as file:
             writer = csv.writer(file)
             writer.writerow(["date", "in session", "enrolled", "absent", "present"])
             for day in range(1, end_date.day + 1): # the + 1 is used here because the range starts at 1
@@ -837,7 +844,7 @@ def attendance_report(start_date: str = start_date_of_previous_month(), end_date
                     table_data += f"<tr><td style='border: 1px solid black; border-collapse: collapse; padding: 10px; text-align: center;'>{current_loop_date.strftime('%a %b %d')}</td><td style='border: 1px solid black; border-collapse: collapse; padding: 10px; text-align: center;' colspan='3'><span style='color: red'>SCHOOL NOT IN SESSION</span></td></tr>"
                     writer.writerow([current_loop_date.strftime('%Y-%m-%d'), "false", 0, 0, 0])
 
-        with open('../html/lunch_service_provider.html', 'r') as file:
+        with open(html_path, 'r') as file:
             html_email = file.read().replace('###table_data###', table_data).replace('###school###', school)
 
         send_email(
@@ -845,7 +852,7 @@ def attendance_report(start_date: str = start_date_of_previous_month(), end_date
             subject_line = f'Attendance Report for {school}',
             html_body = html_email,
             sender_string = 'CA Service Provider Reports',
-            attachment = f"../logs/csv/{school.lower()}_attendance_report_{datetime.date.today().strftime('%Y-%m-%d')}.csv"
+            attachment = csv_path
         )
 
     else:
