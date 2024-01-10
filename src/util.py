@@ -560,7 +560,9 @@ def sr_api_pull(search_key: str, parameters: dict = {}, page_limit: int = None) 
     headers = {'Authorization': 'Basic ' + base64.b64encode(bytes(f"{credentials['sr_email']}:{credentials['sr_pass']}", "UTF-8")).decode("ascii")}
     page_params = {key: value for (key, value) in parameters.items() if key != 'expand'}
     logging.info(f"🤞 Finding number of pages for {' '.join(search_key.split('-'))} 🤞")
-    response = requests.get(f"https://ca.schoolrunner.org/api/v1/{search_key}?", params=page_params,headers=headers).json()
+    request = requests.get(f"https://ca.schoolrunner.org/api/v1/{search_key}?", params=page_params,headers=headers)
+    response = request.json()
+    logging.info(f"This request's URL is {request.url}")
     logging.info(f"There are {response['meta']['total_pages']} page(s) of {' '.join(search_key.split('-'))}.")
     if page_limit == None:
         for page in range(response['meta']['total_pages']):
