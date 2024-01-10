@@ -733,12 +733,19 @@ def network_staff_export():
 
 
 def start_date_of_previous_month() -> datetime.date:
-    return datetime.date(datetime.date.today().year, datetime.date.today().month - 1, 1)
+    if datetime.date.today().month == 1:
+        return datetime.date(datetime.date.today().year - 1, 12, 1)
+    else:
+        return datetime.date(datetime.date.today().year, datetime.date.today().month - 1, 1)
 
 
 def end_date_of_previous_month() -> datetime.date:
-    month_range = calendar.monthrange(datetime.date.today().year, datetime.date.today().month - 1)
-    return datetime.date(datetime.date.today().year, datetime.date.today().month - 1, month_range[1])
+    if datetime.date.today().month == 1:
+        month_range = calendar.monthrange(datetime.date.today().year - 1, 12)
+        return datetime.date(datetime.date.today().year - 1, 12, month_range[1])
+    else:
+        month_range = calendar.monthrange(datetime.date.today().year, datetime.date.today().month - 1)
+        return datetime.date(datetime.date.today().year, datetime.date.today().month - 1, month_range[1])
 
 
 def start_date_of_current_month() -> datetime.date:
