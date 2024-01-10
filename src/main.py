@@ -851,7 +851,7 @@ def attendance_report(start_date: str = start_date_of_previous_month(), end_date
             html_email = file.read().replace('###table_data###', table_data).replace('###school###', school)
 
         send_email(
-            recipient = 'afelter@collegiateacademies.org,tess@schoolfoodsolutions.org,kaylee@schoolfoodsolutions.org,amissai@collegiateacademies.org',
+            recipient = 'afelter@collegiateacademies.org,tess@schoolfoodsolutions.org,kaylee@schoolfoodsolutions.org,JPickel@collegiateacademies.org',
             subject_line = f'Attendance Report for {school}',
             html_body = html_email,
             sender_string = 'CA Service Provider Reports',
