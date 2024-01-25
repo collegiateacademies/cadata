@@ -732,6 +732,15 @@ def network_staff_export():
     )
 
 
+def today_is_monday() -> datetime.date:
+    if datetime.date.today().weekday() == 0:
+        logging.info(f"{datetime.date.today()} a Monday, sorry everyone.")
+        return True
+    else:
+        logging.info(f"Today is not Monday, {datetime.date.today()} is a {datetime.date.today().strftime('%A')}")
+        return False
+
+
 def start_date_of_previous_month() -> datetime.date:
     if datetime.date.today().month == 1:
         return datetime.date(datetime.date.today().year - 1, 12, 1)
@@ -757,7 +766,7 @@ def end_date_of_current_month() -> datetime.date:
     return datetime.date(datetime.date.today().year, datetime.date.today().month, month_range[1])
 
 
-def attendance_report(start_date: str = start_date_of_previous_month(), end_date: str = end_date_of_previous_month(), school: str = '') -> None:
+def attendance_report(start_date: datetime.date = datetime.date.today() - datetime.timedelta(days=7), end_date: datetime.date = datetime.date.today() - datetime.timedelta(days=1), school: str = '') -> None:
    
     if sys.platform == 'darwin':
         csv_path = f"/Users/tophermckee/cadata/logs/csv/{school.lower()}_attendance_report_{datetime.date.today().strftime('%Y-%m-%d')}.csv"
@@ -765,10 +774,8 @@ def attendance_report(start_date: str = start_date_of_previous_month(), end_date
     elif sys.platform == 'linux':
         csv_path = f"/home/data_admin/cadata/logs/csv/{school.lower()}_attendance_report_{datetime.date.today().strftime('%Y-%m-%d')}.csv"
         html_path = "/home/data_admin/cadata/html/lunch_service_provider.html"
-
-    logging.info(f"\n{start_date_of_previous_month()=}\n{end_date_of_previous_month()=}\n{start_date_of_current_month()=}\n{end_date_of_current_month()=}")
     
-    if datetime.date.today() == start_date_of_current_month():
+    if today_is_monday():
         
         students = sr_api_pull(
             search_key = 'students',
@@ -784,8 +791,8 @@ def attendance_report(start_date: str = start_date_of_previous_month(), end_date
                 'school_ids': school_info[school]['sr_id'],
                 'active': '1',
                 'out_of_school_only': '1',
-                'min_date':  start_date_of_previous_month().strftime('%Y-%m-%d'),
-                'max_date': end_date_of_previous_month().strftime('%Y-%m-%d'),
+                'min_date':  start_date.strftime('%Y-%m-%d'),
+                'max_date': end_date.strftime('%Y-%m-%d'),
             }
         )
 
@@ -794,8 +801,8 @@ def attendance_report(start_date: str = start_date_of_previous_month(), end_date
             parameters = {
                 'school_ids': school_info[school]['sr_id'],
                 'active': '1',
-                'min_date':  start_date_of_previous_month().strftime('%Y-%m-%d'),
-                'max_date': end_date_of_previous_month().strftime('%Y-%m-%d'),
+                'min_date':  start_date.strftime('%Y-%m-%d'),
+                'max_date': end_date.strftime('%Y-%m-%d'),
             }
         )
 
@@ -804,14 +811,11 @@ def attendance_report(start_date: str = start_date_of_previous_month(), end_date
         with open(csv_path, 'w', newline='') as file:
             writer = csv.writer(file)
             writer.writerow(["date", "in session", "enrolled", "absent", "present"])
-            for day in range(1, end_date.day + 1): # the + 1 is used here because the range starts at 1
+            for day in range(7): # the + 1 is used here because the range starts at 1
                 students_enrolled = 0
                 absences = 0
                 
-                if datetime.date.today().month == 1:
-                    current_loop_date = datetime.date(datetime.date.today().year - 1, 12, day)
-                else:
-                    current_loop_date = datetime.date(datetime.date.today().year, datetime.date.today().month - 1, day)
+                current_loop_date = start_date + datetime.timedelta(days=day)
 
                 for day in calendar_days:
                     if day['date'] == current_loop_date.strftime('%Y-%m-%d'):
@@ -859,7 +863,7 @@ def attendance_report(start_date: str = start_date_of_previous_month(), end_date
         )
 
     else:
-        logging.info(f"No need to send email to service providers today. Today\'s date is {datetime.date.today()} and the end of the month is {end_date_of_current_month()}")
+        logging.info(f"No need to send email to service providers today. {datetime.date.today()} is not a Monday.")
 
 
 def attendance_field_checker(school: str = '') -> None:
