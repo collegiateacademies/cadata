@@ -106,7 +106,7 @@ school_info = {
         'city': 'New Orleans',
         'state': 'LA',
         'zip': '70126',
-        'principal': 'Jerel Bryant',
+        'principal': 'Victor Jones',
         'fax': '504-754-7980',
         'phone': '504-308-3660',
         'attendance_email': 'info@carvercollegiate.org',
