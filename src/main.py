@@ -672,7 +672,7 @@ def send_staff_absence_emails(school: str, all_staff: int, spreadsheet_key: str)
             reply_to = 'afelter@collegiateacademies.org',
             sender_string = 'CA Staff Updates',
             html_body = html_email_dfo
-                    .replace('###dfo_name###',                  "DFO")#f"{school_info[school]}")
+                    .replace('###dfo_name###',                  f"{school_info[school]['dfo_name']}")
                     .replace('###successful_sends###',          successful_sends)
                     .replace('###failed_sends###',              failed_sends)
         )
