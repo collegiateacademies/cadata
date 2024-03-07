@@ -39,6 +39,7 @@ school_info = {
         'individualized_report_reply': 'rmurray@collegiateacademies.org',
         'data_manager': 'sadams1@collegiateacademies.org',
         'staff_pto_replyto': 'tashford@collegiateacademies.org',
+        'dfo_name': 'Thaise',
         'seat_time': {
             'calendar': False,
             'contact': True,
@@ -64,6 +65,7 @@ school_info = {
         'individualized_report_reply': 'frontdesk@sciacademy.org',
         'data_manager': 'ncowlin@collegiateacademies.org',
         'staff_pto_replyto': 'ncowlin@collegiateacademies.org',
+        'dfo_name': 'Nora',
         'seat_time': {
             'calendar': False,
             'contact': True,
@@ -88,7 +90,8 @@ school_info = {
         'attendance_letter_recipient': 'tmunson@collegiateacademies.org,krichardson@collegiateacademies.org',
         'individualized_report_reply': 'tmunson@collegiateacademies.org,krichardson@collegiateacademies.org',
         'data_manager': 'fsall@collegiateacademies.org',
-        'staff_pto_replyto': 'nfranklin@collegiateacademies.org',
+        'staff_pto_replyto': 'tmunson@collegiateacademies.org',
+        'dfo_name': 'Tyler',
         'seat_time': {
             'calendar': False,
             'contact': True,
@@ -113,7 +116,8 @@ school_info = {
         'attendance_letter_recipient': 'amueller@collegiateacademies.org',
         'individualized_report_reply': 'amueller@collegiateacademies.org',
         'data_manager': 'tdemuns@collegiateacademies.org',
-        'staff_pto_replyto': 'nfranklin@collegiateacademies.org',
+        'staff_pto_replyto': 'bbienemy@collegiateacademies.org',
+        'dfo_name': 'Brandy',
         'seat_time': {
             'calendar': True,
             'contact': False,
@@ -139,6 +143,7 @@ school_info = {
         'individualized_report_reply': 'info@walterlcohen.org',
         'data_manager': 'jeasley@collegiateacademies.org',
         'staff_pto_replyto': 'btaylor@collegiateacademies.org',
+        'dfo_name': 'Blaire',
         'seat_time': {
             'calendar': False,
             'contact': True,
@@ -164,6 +169,7 @@ school_info = {
         'individualized_report_reply': 'hello@opportunitiesacademy.org',
         'data_manager': 'kimani@collegiateacademies.org',
         'staff_pto_replyto': 'kimani@collegiateacademies.org',
+        'dfo_name': 'King Victorr',
         'seat_time': {
             'calendar': False,
             'contact': 'OA',
