@@ -87,8 +87,8 @@ school_info = {
         'fax': '225-286-7808',
         'phone': '225-892-6962',
         'attendance_email': 'info@collegiatebr.org',
-        'attendance_letter_recipient': 'tmunson@collegiateacademies.org,krichardson@collegiateacademies.org',
-        'individualized_report_reply': 'tmunson@collegiateacademies.org,krichardson@collegiateacademies.org',
+        'attendance_letter_recipient': 'tmunson@collegiateacademies.org,krichardson@collegiateacademies.org,ahunter2@collegiateacademies.org',
+        'individualized_report_reply': 'tmunson@collegiateacademies.org,krichardson@collegiateacademies.org,ahunter2@collegiateacademies.org',
         'data_manager': 'fsall@collegiateacademies.org',
         'staff_pto_replyto': 'tmunson@collegiateacademies.org',
         'dfo_name': 'Tyler',
@@ -96,8 +96,8 @@ school_info = {
             'calendar': False,
             'contact': True,
             'link': '',
-            'contact_name': 'Tyler Munson and Kimberly Richardson',
-            'contact_email': 'tmunson@collegiateacademies.org,krichardson@collegiateacademies.org'
+            'contact_name': 'Tyler Munson, Kimberly Richardson, and Ms. Hunter',
+            'contact_email': 'tmunson@collegiateacademies.org,krichardson@collegiateacademies.org,ahunter2@collegiateacademies.org'
         }
     },
     'GWC': {
