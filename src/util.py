@@ -161,7 +161,7 @@ school_info = {
         'city': 'New Orleans',
         'state': 'LA',
         'zip': '70113',
-        'principal': 'Sophia Scott',
+        'principal': 'Francesca Antonucci',
         'fax': '504-814-1721',
         'phone': '504-503-1421',
         'attendance_email': 'hello@opportunitiesacademy.org',
