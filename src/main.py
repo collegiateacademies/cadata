@@ -48,8 +48,8 @@ def generate_attendance_letters(school: str, start_date: str, repeated_letters: 
             continue
         else:
             database[student['student_id']] = {
-                'first_name': student['first_name'],
-                'last_name': student['last_name'],
+                'first_name': student['first_name'].replace("’", "'"),
+                'last_name': student['last_name'].replace("’", "'"),
                 'grade_level': student['grade_level']['order_key'],
                 'street': extract_sr_student_detail(student['student_details'], 'mailing_street'),
                 'city': extract_sr_student_detail(student['student_details'], 'mailing_city'),
