@@ -530,16 +530,12 @@ oa_attendance_letter_blocks = [
     },
     {
         'name': 'oa_paragraph1',
-        'text': 'If there are barriers your family faces in getting your student to school, we can discuss those and connect you with any resources available to support your family in getting your student to school or online each day.',
+        'text': 'Attendance is the first step in ensuring that students consistently have the chance to practice the essential skills they are working on to become a more independent and fulfilled adult. Attending daily helps students to practice responsibility and develop the habits necessary for being able to maintain employment. In addition, daily attendance is essential for students to achieve their transition goals.',
     },
     {
         'name': 'oa_paragraph1',
-        'text': 'Attendance helps to foster an attitude of responsibility and cultivates a sense of belonging in our community, and is essential to the instructional program at Opportunities Academy.  Attendance is the first step in ensuring that students consistently have the chance to practice the essential skills they are working on to become a more independent and fulfilled adult.',
-    },
-    {
-        'name': 'oa_paragraph1',
-        'text': 'You can contact Opportunities Academy at 504-503-1421. We look forward to having your student in school each day and thank you for your partnership.',
-    },
+        'text': 'If there are barriers your family is facing in getting your student to school, we can discuss those and connect you with any resources available to support your family in getting your student to school each day. You can contact Opportunities Academy at 504-503-1421. We look forward to having your student in school each day and thank you for your partnership.',
+    }
 ]
 
 if sys.platform == 'darwin':
