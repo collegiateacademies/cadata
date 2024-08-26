@@ -526,7 +526,7 @@ attendance_letter10_blocks_spanish_page2 = [
 oa_attendance_letter_blocks = [
     {
         'name': 'oa_paragraph1',
-        'text': 'You are receiving this letter because your student has exceeded 3 Unexcused Absences from school this year.  This is cause for concern at Opportunities Academy, as when students are absent from school, they are unlikely to receive required service minutes outlined in his or her IEP and see stymied progress toward their IEP goals.',
+        'text': 'You are receiving this letter because your student has exceeded **3 Unexcused Absences** from school this year.  This is cause for concern at Opportunities Academy, as when students are absent from school, they are unlikely to receive required service minutes outlined in his or her IEP and see stymied progress toward their IEP goals.',
     },
     {
         'name': 'oa_paragraph1',
