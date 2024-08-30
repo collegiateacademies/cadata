@@ -135,7 +135,7 @@ school_info = {
         'city': 'New Orleans',
         'state': 'LA',
         'zip': '70115',
-        'principal': 'Rhonda Dale',
+        'principal': 'Samara Levy',
         'fax': '504-814-9296',
         'phone': '504-503-1400',
         'attendance_email': 'info@walterlcohen.org',
