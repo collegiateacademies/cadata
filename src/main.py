@@ -650,6 +650,7 @@ def send_staff_absence_emails(school: str, all_staff: int, spreadsheet_key: str)
                     .replace('###bereavement_tracker###',       bereavement_tracker)
                     .replace('###bereavement_paylocity###',     bereavement_paylocity)
                     .replace('###tardies###',                   tardies)
+                    .replace('###pto_types###',                 pto_types)
             ):
                 successful_sends += f"<li><code>[{datetime.datetime.now().strftime('%m/%d/%y %I:%M %p')}]</code> Sent to {first_name} {last_name}</li>"
             else:
