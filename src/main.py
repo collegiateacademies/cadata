@@ -593,6 +593,7 @@ def upload_map_file():
 
 def send_staff_absence_emails(school: str, all_staff: int, spreadsheet_key: str) -> None:
     absence_data = return_googlesheet_by_key(spreadsheet_key = spreadsheet_key, sheet_name = 'Summary').get_values('A3:U')
+    absence_types = return_googlesheet_by_key(spreadsheet_key = spreadsheet_key, sheet_name = 'Absences').get_values('A2:I')
     
     successful_sends = ''
     failed_sends     = ''
