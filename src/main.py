@@ -615,6 +615,10 @@ def send_staff_absence_emails(school: str, all_staff: int, spreadsheet_key: str)
         bereavement_tracker     = staff_member[18]
         bereavement_paylocity   = staff_member[19]
         tardies                 = staff_member[20]
+
+        for row in absence_types:
+            if row[3] == staff_member[6] and row[0] != '' and row[1] != 'Tardy':
+                pto_types += f"<li><code>{datetime.datetime.strptime(row[0], "%m/%d/%Y").strftime("%m-%d-%Y")}</code> - {row[1]} - {row[2]} hrs</li>"
         
         if sys.platform == 'darwin':
             html_path = '/Users/tophermckee/cadata/html/staff_absences.html'
