@@ -6,7 +6,7 @@ if __name__ == '__main__':
     try:
         generate_attendance_letters(
             school = 'OA', 
-            start_date = '2024-08-01',#return_term_start_date('year', 'OA'),
+            start_date = '2025-01-01',#return_term_start_date('year', 'OA'),
             repeated_letters = True
         )
     except Exception as error:
