@@ -568,10 +568,13 @@ def log_cleaner():
         for file in files:
             file_path = os.path.join(root, file)
             file_size = os.stat(file_path)
-            if file != '.gitkeep' and (file_size.st_size >= 1_000_000 or (datetime.datetime.now() - datetime.datetime.fromtimestamp(file_size.st_mtime)).days > 30):
-                # print(file_path)
-                logging.info(f"removing {file_path} because it is over 1 MB at {file_size.st_size} bytes")
-                os.remove(file_path)
+            if file != '.gitkeep':
+                if file_size.st_size >= 1_000_000:
+                    logging.info(f"removing {file_path} because it is over 1 MB at {file_size.st_size} bytes")
+                    os.remove(file_path)
+                elif (datetime.datetime.now() - datetime.datetime.fromtimestamp(file_size.st_mtime)).days > 30:
+                    logging.info(f"removing {file_path} because it is older than 30 days")
+                    os.remove(file_path)
 
 
 def mail_monitor():
