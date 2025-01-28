@@ -562,7 +562,7 @@ def log_cleaner():
     directory = "../logs/json"
     for file in os.listdir(directory):
         file_size = os.stat(f'{directory}/{file}')
-        if file_size.st_size >= 1_000_000 or (datetime.datetime.now() - datetime.datetime.fromtimestamp(file_size.st_mtime)).days > 30:
+        if file != '.gitkeep' and (file_size.st_size >= 1_000_000 or (datetime.datetime.now() - datetime.datetime.fromtimestamp(file_size.st_mtime)).days > 30):
             logging.info(f"removing {directory}/{file} because it is over 1 MB at {file_size.st_size} bytes")
             os.remove(f'{directory}/{file}')
 
