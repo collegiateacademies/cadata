@@ -136,7 +136,7 @@ school_info = {
         'state': 'LA',
         'zip': '70115',
         'principal': 'Samara Levy',
-        'fax': '504-814-9296',
+        'fax': '504-395-0031',
         'phone': '504-503-1400',
         'attendance_email': 'info@walterlcohen.org',
         'attendance_letter_recipient': 'info@walterlcohen.org',
