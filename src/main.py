@@ -624,6 +624,8 @@ def send_staff_absence_emails(school: str, all_staff: int, spreadsheet_key: str)
         bereavement_tracker     = staff_member[18]
         bereavement_paylocity   = staff_member[19]
         tardies                 = staff_member[20]
+        
+        pto_types = ''
 
         for row in absence_types:
             if row[3] == staff_member[6] and row[0] != '' and row[1] != 'Tardy':
