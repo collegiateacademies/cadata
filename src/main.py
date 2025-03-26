@@ -607,7 +607,6 @@ def send_staff_absence_emails(school: str, all_staff: int, spreadsheet_key: str)
     
     successful_sends = ''
     failed_sends     = ''
-    pto_types = ''
 
     for staff_member in absence_data:
         email_send              = staff_member[2]
