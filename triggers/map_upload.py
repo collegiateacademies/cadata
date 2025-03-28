@@ -8,6 +8,7 @@ if __name__ == '__main__':
     os.remove('StudentsBySchool.csv')
     time.sleep(3)
     os.system("7z x ~/services_kit/report/bin/map_output/342339.zip")
+    os.system("7z x ~/services_kit/report/bin/map_output/535239.zip")
     output = []
     with open('AssessmentResults.csv') as file:
         csv_reader = csv.reader(file)
