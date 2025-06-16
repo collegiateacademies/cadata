@@ -50,7 +50,9 @@ Daily attendance emails are scheduled to run automatically via cron jobs for eac
 
 ## Does This Process Run on Non-School Days?
 
-- **No.** The process checks if today is a school day for the specific school by querying the Schoolrunner calendar API for the current date and school. If the calendar indicates that the school is not in session, the script exits and does not send an email. There are no hard-coded dates or semester checks; the check is dynamic and school-specific.
+- **No.** The process checks if today is a school day for the specific school by querying the Schoolrunner calendar API for the current date and school. If the calendar indicates that the school is not in session, the script exits and does not send an email.
+- **How does it know?** There are no hard-coded dates or semester checks. The check is dynamic and school-specific, using the Schoolrunner calendar API (`/api/v1/calendar_days`) to determine if the school is in session for the current date.
+- **Date range:** The process only considers the current day for absences and attendance rates.
 
 ## From Where Does This Process Get Its Data?
 
@@ -59,12 +61,18 @@ Daily attendance emails are scheduled to run automatically via cron jobs for eac
     - Absences: `/api/v1/absences` endpoint, filtered by school, active status, and current date.
     - The process uses the Schoolrunner calendar API to determine if today is a school day.
 
+## Is There Any OA-Specific Logic?
+
+- **No.** The daily attendance email process is the same for all schools, including OA. There is no OA-specific logic in this process.
+
 ## Summary
 
 - **Emails sent from:** `data@collegiateacademies.org`
 - **Runs on non-school days?** No; checks Schoolrunner calendar dynamically per school.
+- **How does it know whether to run?** Uses Schoolrunner calendar API for the current date and school; not hard-coded.
 - **Data source:** Schoolrunner API (students, absences, calendar).
 - **Trigger:** Automated via cron jobs, twice daily per school.
+- **OA-specific logic:** None; OA is handled the same as other schools.
 
 ---
 

@@ -17,6 +17,13 @@ The attendance checker is scheduled to run automatically via cron jobs for each 
 
 **Note:** The attendance checker only runs on school days. If the scheduled cron job falls on a non-school day, the checker will not perform any checks or send any emails.
 
+### How Does the Checker Know If Today Is a School Day?
+
+- The checker uses the Schoolrunner API to determine if today is a school day for the specific school.
+- It does **not** use hard-coded dates, semester start/end dates, or static calendars.
+- The process queries the Schoolrunner calendar for the current date and school, checking the `in_session` flag for that day.
+- If today is not a school day (e.g., holiday, weekend, or other non-instructional day), the checker exits without running or sending emails.
+
 ### Schedule by School
 
 | School | Script | Cron Schedule (Central Time) | Data Manager Recipient |
@@ -47,12 +54,21 @@ The attendance checker is scheduled to run automatically via cron jobs for each 
 - **Script Execution:** Each script imports the main checker logic and calls `attendance_field_checker()` with the appropriate school code.
 - **Data Pull:** The checker uses a PowerQuery against PowerSchool to retrieve student data for the specified school.
 
+## From Where Does the Checker Get Its Data?
+
+- **Source:** All student data is pulled from PowerSchool using a custom PowerQuery named `attendance_letter_data_checker`.
+- The PowerQuery is parameterized by school and retrieves all relevant student fields for that school.
+
 ## Where Are the Results Sent?
 
 - If missing data is found, an email is sent to the school's data manager (as configured) with a list of students and missing fields.
 - If no missing data is found, no email is sent and a log entry is created.
 
 - **All emails are sent from `data@collegiateacademies.org`.**
+
+## Is There Any OA-Specific Logic?
+
+- **No.** The attendance letter data checker process does not contain any OA (Opportunities Academy) specific logic. It treats OA the same as other schools for the purposes of data field checking.
 
 ## Additional Notes
 
