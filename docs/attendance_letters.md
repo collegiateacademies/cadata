@@ -14,7 +14,7 @@ Attendance letters are automated notifications generated for students who have r
 
 ## From Which Email Address Are Emails Sent?
 
-All attendance letter emails are sent from **`data@collegiateacademies.org`**. This is configured in the system and used for all outgoing attendance letter communications.
+- **All attendance letter emails are sent from `data@collegiateacademies.org`.** This is configured in the system and used for all outgoing attendance letter communications.
 
 ## How Does the Process Decide Whether to Run on a Given Day?
 
@@ -24,9 +24,12 @@ All attendance letter emails are sent from **`data@collegiateacademies.org`**. T
 
 ## From Where Does This Process Get Its Data?
 
-- **Primary Source:** All student, absence, and communication data is pulled directly from the Schoolrunner API.
-- **APIs Used:** The process uses endpoints for students, absences, communications, and calendar days, among others.
-- **Configuration:** School-specific configuration (IDs, contacts, etc.) is stored in the codebase and referenced as needed.
+- **Student, absence, and communication data are pulled directly from the Schoolrunner API.**
+    - Students: `/api/v1/students` endpoint, filtered by school and active status.
+    - Absences: `/api/v1/absences` endpoint, filtered by school, active status, and current term date range.
+    - Communications: `/api/v1/communications` endpoint, filtered by school, active status, and current term date range.
+    - Calendar: `/api/v1/calendar_days` endpoint, to determine if today is a school day.
+    - The term start date is determined dynamically using the current term for the school.
 
 ## How Are Attendance Letters Triggered?
 
@@ -36,9 +39,9 @@ All attendance letter emails are sent from **`data@collegiateacademies.org`**. T
 
 ## Is There Any OA (Opportunities Academy) Specific Logic?
 
-Yes. Opportunities Academy (OA) has custom logic and letter content:
-- **Custom Letter Content:** OA uses a different set of letter blocks and messaging tailored to its unique attendance and IEP requirements.
-- **Conditional Logic:** The script checks if the school is OA and applies OA-specific templates and logic for generating letters.
+- **Yes.** Opportunities Academy (OA) has custom logic and letter content:
+    - OA uses a different set of letter blocks and messaging tailored to its unique attendance and IEP requirements.
+    - The script checks if the school is OA and applies OA-specific templates and logic for generating letters.
 
 ## When Do Attendance Letters Run?
 
