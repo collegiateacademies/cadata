@@ -60,4 +60,4 @@ Attendance letters are scheduled to run automatically via cron jobs. Each school
 
 ---
 
-*You can update this documentation with more details about letter content, customization, or troubleshooting as needed.*
+*Please contact tophermckee@gmail.com for any additional questions.*
