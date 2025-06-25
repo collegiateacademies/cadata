@@ -83,7 +83,6 @@ def daily_attendance_sms(school_name, test_date=None):
     logging.info(f"Writing absent student SIS IDs to CSV file: {csv_path}")
     with open(csv_path, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
-        writer.writerow(['sis_id'])
         for sid in sis_ids:
             writer.writerow([sid])
     logging.info(f"Absent student SIS IDs written to {csv_path}")

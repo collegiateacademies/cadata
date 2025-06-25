@@ -68,44 +68,67 @@ Emails are sent using the `send_email` function, which is called within the scri
   
   Example body (with placeholders):
   
-      Good morning,
-      
+      Good morning,<br><br>
       Attached is the daily attendance SMS report for {{ date }} for {{ school_name }}.
-      
-      Note: These absences are already logged in Schoolrunner. It is imperative that these notifications are sent for compliance purposes.
-      
-      To send the SMS, please:
-        1. Download the attached file.
-        2. Log in to the SchoolMessenger website: https://asp.schoolmessenger.com/collegiateacademies/start.php
-        3. Click New Broadcast.
-        4. Choose Your Subject, for example "{{ date }} Attendance"
-        5. Change the Broadcast Type to Attendance.
-        6. Click Add Recipients and choose Upload List.
-        7. Upload the attached file using the second option, ID# Lookup.
-        8. Click Next.
-        9. Send the SMS to the parents.
-      
-      Best regards,
+      <br>
+      <strong>Note:</strong> These absences are already logged in Schoolrunner. It is imperative that these notifications are sent for compliance purposes.
+      <br>
+      To send the SMS, please
+      <ol>
+          <li>Download the attached file.</li>
+          <li>Log in to the <a href="https://asp.schoolmessenger.com/collegiateacademies/start.php">SchoolMessenger</a> website.</li>
+          <li>Click New Broadcast.</li>
+          <li>Choose Your Subject, for example <code>{{ date }} Attendance</code></li>
+          <li>Change the Broadcast Type to <strong>Attendance</strong>.</li>
+          <li>Click Add Recipients and choose Upload List.</li>
+          <li>Upload the attached file using the second option, <strong>ID# Lookup</strong>.</li>
+          <li>Click Next.</li>
+          <li>Click Add Selected Recipients.</li>
+          <li>Click Continue.</li>
+          <li>Enter the content of the message. If you already have a Saved Message, this is where you can select it.</li>
+          <li>Click Send Now or Schedule to Send Later.</li>
+          <li>Voila! Your SMS has been sent.</li>
+      </ol>
+      <br>
+      Best regards,<br>
       The CA Attendance Robot 🤖
 
   The placeholders `{{ date }}` and `{{ school_name }}` are replaced with the actual date and school name.
 - **Attachment:**  
-  A CSV file named `absent_students_<school_name>_<YYYY-MM-DD>.csv` containing a list of absent student SIS IDs.
+  A CSV file named `absent_students_<school_name>_<YYYY-MM-DD>.csv` containing a list of absent student SIS IDs (no header row).
 
 **Example Email:**
 
-- **To:** `school_attendance_contact@example.com`
-- **Subject:** `Daily Attendance SMS for ASA on 2025-06-25`
-- **Body:**  
-  (See example body above, with placeholders replaced)
-- **Attachment:**  
-  `absent_students_ASA_2025-06-25.csv`
-  ```
-  sis_id
-  12345
-  67890
-  ...
-  ```
+| Field      | Example                                                                                 |
+|------------|-----------------------------------------------------------------------------------------|
+| **To:**    | `school_attendance_contact@example.com`                                                 |
+| **Subject:** | `Daily Attendance SMS for ASA on 2025-06-25`                                         |
+| **Attachment:** | `absent_students_ASA_2025-06-25.csv`<br>```\n12345\n67890\n...\n```               |
+
+**Body:**
+
+Good morning,<br><br>
+Attached is the daily attendance SMS report for 2025-06-25 for ASA.<br>
+<strong>Note:</strong> These absences are already logged in Schoolrunner. It is imperative that these notifications are sent for compliance purposes.<br>
+To send the SMS, please:
+
+1. Download the attached file.
+2. Log in to the <a href="https://asp.schoolmessenger.com/collegiateacademies/start.php">SchoolMessenger</a> website.
+3. Click New Broadcast.
+4. Choose Your Subject, for example <code>2025-06-25 Attendance</code>
+5. Change the Broadcast Type to <strong>Attendance</strong>.
+6. Click Add Recipients and choose Upload List.
+7. Upload the attached file using the second option, <strong>ID# Lookup</strong>.
+8. Click Next.
+9. Click Add Selected Recipients.
+10. Click Continue.
+11. Enter the content of the message. If you already have a Saved Message, this is where you can select it.
+12. Click Send Now or Schedule to Send Later.
+13. Voila! Your SMS has been sent.
+
+<br>
+Best regards,<br>
+The CA Attendance Robot 🤖
 
 ---
 
