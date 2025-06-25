@@ -37,7 +37,8 @@ school_info = {
         'attendance_email': 'hello@livingstoncollegiate.org',
         'attendance_letter_recipient': 'rmurray@collegiateacademies.org',
         'individualized_report_reply': 'rmurray@collegiateacademies.org',
-        'data_manager': 'sadams1@collegiateacademies.org',
+        'daily_attendance_sms': 'jfonshell@collegiateacademies.org',
+        'data_manager': 'jfonshell@collegiateacademies.org',
         'staff_pto_replyto': 'tashford@collegiateacademies.org',
         'dfo_name': 'Thaise',
         'seat_time': {
@@ -63,6 +64,7 @@ school_info = {
         'attendance_email': 'frontdesk@sciacademy.org',
         'attendance_letter_recipient': 'kthomas1@collegiateacademies.org,smyers@collegiateacademies.org',
         'individualized_report_reply': 'frontdesk@sciacademy.org',
+        'daily_attendance_sms': 'ncowlin@collegiateacademies.org',
         'data_manager': 'ncowlin@collegiateacademies.org',
         'staff_pto_replyto': 'ncowlin@collegiateacademies.org',
         'dfo_name': 'Nora',
@@ -89,6 +91,7 @@ school_info = {
         'attendance_email': 'info@collegiatebr.org',
         'attendance_letter_recipient': 'krichardson@collegiateacademies.org,ahunter2@collegiateacademies.org',
         'individualized_report_reply': 'krichardson@collegiateacademies.org,ahunter2@collegiateacademies.org',
+        'daily_attendance_sms': 'fsall@collegiateacademies.org',
         'data_manager': 'fsall@collegiateacademies.org',
         'staff_pto_replyto': 'krichardson@collegiateacademies.org,ahunter2@collegiateacademies.org',
         'dfo_name': 'Tyler',
@@ -115,6 +118,7 @@ school_info = {
         'attendance_email': 'info@carvercollegiate.org',
         'attendance_letter_recipient': 'amueller@collegiateacademies.org',
         'individualized_report_reply': 'amueller@collegiateacademies.org',
+        'daily_attendance_sms': 'tdemuns@collegiateacademies.org',
         'data_manager': 'tdemuns@collegiateacademies.org',
         'staff_pto_replyto': 'bbienemy@collegiateacademies.org',
         'dfo_name': 'Brandy',
@@ -141,6 +145,7 @@ school_info = {
         'attendance_email': 'info@walterlcohen.org',
         'attendance_letter_recipient': 'info@walterlcohen.org',
         'individualized_report_reply': 'info@walterlcohen.org',
+        'daily_attendance_sms': 'jeasley@collegiateacademies.org',
         'data_manager': 'jeasley@collegiateacademies.org',
         'staff_pto_replyto': 'btaylor@collegiateacademies.org',
         'dfo_name': 'Blaire',
@@ -167,6 +172,7 @@ school_info = {
         'attendance_email': 'hello@opportunitiesacademy.org',
         'attendance_letter_recipient': 'hello@opportunitiesacademy.org',
         'individualized_report_reply': 'hello@opportunitiesacademy.org',
+        'daily_attendance_sms': 'kimani@collegiateacademies.org',
         'data_manager': 'kimani@collegiateacademies.org',
         'staff_pto_replyto': 'kimani@collegiateacademies.org',
         'dfo_name': 'King Victorr',
@@ -201,14 +207,19 @@ underline = "\u001b[4m"
 
 
 sys.path.append("..")
-
+if sys.platform == 'darwin':
+    log_dir = '/Users/tophermckee/cadata/logs/'
+elif sys.platform == 'linux':
+    log_dir = '/home/data_admin/cadata/logs/'
+else:
+    log_dir = '../logs/'
 
 logging.basicConfig(
     level=logging.INFO,
     format="\n[%(levelname)s] %(asctime)s -- %(filename)s on line %(lineno)s\n\tFunction name: %(funcName)s\n\tMessage: %(message)s\n",
     datefmt='%B-%d-%Y %H:%M:%S',
-    filename=f"../logs/{datetime.datetime.today().strftime('%Y-%m-%d')}_{Path(__main__.__file__).stem}.log",
-    filemode='w'
+    filename=f"{log_dir}{datetime.datetime.today().strftime('%Y-%m-%d')}_{Path(__main__.__file__).stem}.log",
+    filemode='a'
 )
 
 attendance_letter_blocks_page1 = [
@@ -585,10 +596,18 @@ def sr_api_pull(search_key: str, parameters: dict = {}, page_limit: int = None) 
                 counter += 1
         logging.info(f"🎉 Done pulling {' '.join(search_key.split('-'))}! 🎉\n")
     
-    if counter >= 5000:
-        logging.info(f"../logs/json/{datetime.datetime.now().strftime('%Y-%m-%d_%H:%M:%S')}_{search_key}.json would be {counter} lines long. Skipping dumping the file.")
+    if sys.platform == 'darwin':
+        json_log_dir = '/Users/tophermckee/cadata/logs/json/'
+    elif sys.platform == 'linux':
+        json_log_dir = '/home/data_admin/cadata/logs/json/'
     else:
-        with open(f"../logs/json/{datetime.datetime.now().strftime('%Y-%m-%d_%H:%M:%S')}_{search_key}.json", "w") as file:
+        json_log_dir = '../logs/json/'
+
+    if counter >= 5000:
+        logging.info(f"{json_log_dir}{datetime.datetime.now().strftime('%Y-%m-%d_%H:%M:%S')}_{search_key}.json would be {counter} lines long. Skipping dumping the file.")
+    else:
+        os.makedirs(json_log_dir, exist_ok=True)
+        with open(f"{json_log_dir}{datetime.datetime.now().strftime('%Y-%m-%d_%H:%M:%S')}_{search_key}.json", "w") as file:
             logging.info('dumping json info to logs folder')
             json.dump(items, file, indent=4)
 
@@ -744,7 +763,7 @@ def extract_sr_student_detail(detail_list: list, detail_key: str):
             return detail[detail_key]
 
 
-def today_is_a_school_day(school: str, school_id: str) -> bool:
+def today_is_a_school_day(school: str, school_id: str, print_response: bool = False) -> bool:
     params = {
         'school_ids': school_id,
         'max_date': datetime.datetime.now().strftime('%Y-%m-%d'),
@@ -754,7 +773,14 @@ def today_is_a_school_day(school: str, school_id: str) -> bool:
     headers = {'Authorization': 'Basic ' + base64.b64encode(bytes(f"{credentials['sr_email']}:{credentials['sr_pass']}", "UTF-8")).decode("ascii")}
     response = requests.get('https://ca.schoolrunner.org/api/v1/calendar_days?', params=params, headers=headers).json()
 
-    if response['results']['calendar_days'][0]['in_session'] == '0':
+    if print_response:
+        print(response)
+
+    calendar_days = response['results'].get('calendar_days', [])
+    if not calendar_days:
+        logging.warning(f"No calendar day data found for {school.upper()} on {datetime.datetime.now().strftime('%Y-%m-%d')}. Assuming not a school day.")
+        return False
+    if calendar_days[0].get('in_session', '0') == '0':
         logging.info(f"Today is not a school day at {school.upper()}")
         return False
     else:
