@@ -65,6 +65,97 @@ Daily attendance emails are scheduled to run automatically via cron jobs for eac
 
 - **No.** The daily attendance email process is the same for all schools, including OA. There is no OA-specific logic in this process.
 
+## What Does a Typical Daily Attendance Email Look Like?
+
+A typical daily attendance email is an HTML email that provides:
+
+- The overall daily attendance percentage for the school.
+- Attendance rates by grade.
+- Lists of students who are absent (out-of-school absences), organized by grade.
+
+**Example Email Structure:**
+
+- A table with the daily attendance percentage at the top.
+- Grade headers as table rows.
+- Lists of absent students under each grade.
+
+The email is visually formatted using a table for clarity and readability.
+
+### How Is the Email Content Generated?
+
+1. **Data Collection:**
+   - The script pulls student and absence data from the Schoolrunner API, filtered by school, active status, and the current date.
+
+2. **Attendance Calculation:**
+   - For each grade, it calculates the attendance rate and compiles lists of absent students.
+
+3. **HTML Generation:**
+   - The email content is generated using an HTML template (`html/daily_attendance.html`).
+   - Placeholders in the template (such as `###total###`, `###grade_headers###`, and `###name_lists###`) are replaced with the calculated attendance percentage, grade headers, and lists of absent students, respectively.
+
+4. **Email Sending:**
+   - The completed HTML is sent as an email from `data@collegiateacademies.org` to the designated attendance contact for the school.
+
+**Sample HTML Template:**
+
+```
+<html>
+  <body style="font-family: sans-serif;">
+    <table style="border-collapse: collapse; width: 100%;">
+      <tr>
+        <td colspan="4" style="text-align: center; font-weight: bold;">Daily Attendance Percentage: 83.94%</td>
+      </tr>
+      <tr>
+        <th style="border: 1px solid #000;">12th: 99.32%</th>
+        <th style="border: 1px solid #000;">11th: 69.93%</th>
+        <th style="border: 1px solid #000;">10th: 84.76%</th>
+        <th style="border: 1px solid #000;">9th: 82.25%</th>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; vertical-align: top;">
+          Student 1 - (AU)<br>
+          Student 2 - (AU)<br>
+          Student 3 - (AU)<br>
+          ...
+        </td>
+        <td style="border: 1px solid #000; vertical-align: top;">
+          Student 2 - (OSS)<br>
+          Student 3 - (OSS)<br>
+          Student 4 - (AU)<br>
+          ...
+        </td>
+        <td style="border: 1px solid #000; vertical-align: top;">
+          Student 5 - (AU)<br>
+          Student 6 - (AU)<br>
+          Student 7 - (AU)<br>
+          ...
+        </td>
+        <td style="border: 1px solid #000; vertical-align: top;">
+          Student 8 - (OSS)<br>
+          Student 9 - (OSS)<br>
+          Student 10 - (AU)<br>
+          ...
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
+```
+
+**Visual Example:**
+
+**Daily Attendance Percentage: 83.94%**
+
+| 12th: 99.32%         | 11th: 69.93%         | 10th: 84.76%         | 9th: 82.25%         |
+|----------------------|----------------------|----------------------|---------------------|
+| Student 1 - (AU)<br>Student 2 - (AU)<br>Student 3 - (AU)<br>... | Student 2 - (OSS)<br>Student 3 - (OSS)<br>Student 4 - (AU)<br>... | Student 5 - (AU)<br>Student 6 - (AU)<br>Student 7 - (AU)<br>... | Student 8 - (OSS)<br>Student 9 - (OSS)<br>Student 10 - (AU)<br>... |
+
+**Daily Attendance Percentage:** 83.94%
+
+*This is an automated message from Collegiate Academies Data Team.*
+
+The actual content will reflect the current day's attendance data for the school, with each grade as a column and absent students listed vertically under each grade.
+
 ## Summary
 
 - **Emails sent from:** `data@collegiateacademies.org`

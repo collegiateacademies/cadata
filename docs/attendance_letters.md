@@ -71,6 +71,13 @@ Attendance letters are scheduled to run automatically via cron jobs. Each school
 25    5     	*     	*     	1     cd /home/data_admin/cadata/triggers && /usr/bin/python3  oa_attendance_letters.py
 ```
 
+## What Does a Typical Attendance Letter Email Look Like?
+
+- The email is sent from `data@collegiateacademies.org` to the school's designated attendance contact(s).
+- The body of the email is typically brief, e.g., "Attached are this week's attendance letters for your school."
+- The main content is a PDF attachment containing personalized letters for each student who meets attendance thresholds.
+- Each letter in the PDF is generated from predefined templates, with school and student information filled in dynamically.
+
 ## Where Are the Letters Sent?
 
 - The compiled PDF of attendance letters is emailed to the school's designated attendance contact(s) as specified in the configuration.

@@ -68,13 +68,46 @@ Individualized attendance reports are scheduled to run automatically via cron jo
     - The report is only sent if the student has at least one unexcused absence.
     - The OA attendance contact and policy links are used in the email template.
 
-## Summary
+## What Does a Typical Email Look Like and How Is Its Content Generated?
 
-- **Emails sent from:** `data@collegiateacademies.org`
-- **Runs on non-school days?** No; checks Schoolrunner calendar dynamically per school.
-- **Data source:** Schoolrunner API (students, absences, calendar).
-- **Trigger:** Automated via cron jobs, once weekly per school.
-- **OA differences:** Custom content, only sent for students with absences.
+A typical individualized attendance report email is an automated HTML message sent to each student (and their primary contact) summarizing their attendance for the current semester. The content is generated as follows:
+
+- **Greeting:** Opens with a polite greeting (e.g., "Good afternoon,").
+- **Absence Summary:** States the number of unexcused absences (e.g., "You have 3 unexcused absence(s) currently.").
+- **Absence Table:** Includes a table listing each absence, with columns for "Absence Date" and "Absence Code".
+- **Contact Link:** Provides a mailto link to the school's attendance office for questions.
+- **Policy and Seat Time Info:** Shows seat time and attendance policy information, with special formatting (e.g., highlighted warnings) if the student is at risk.
+- **Closing:** Ends with a signature from the "Collegiate Academies Attendance Robot 🤖".
+
+**How the Content Is Generated:**
+- The script pulls student and absence data from the Schoolrunner API, filtered by school, active status, and the current semester.
+- For each student, it counts unexcused absences and builds a table of their absences.
+- The HTML template (`individualized_attendance_report.html`) contains placeholders (e.g., `###au###`, `###table_data###`, `###attendance_email###`) that are replaced with the actual data for each student.
+- The email is sent from `data@collegiateacademies.org`, with the school's attendance email as the reply-to address.
+- For OA (Opportunities Academy), the content is customized and only sent if the student has at least one unexcused absence.
+
+**Example Email (simplified):**
+
+```
+Good afternoon,
+
+You have 3 unexcused absence(s) currently.
+
+| Absence Date | Absence Code |
+|--------------|--------------|
+| 2025-05-01   | AU           |
+| 2025-05-10   | AU           |
+| 2025-06-01   | AU           |
+
+Click here to email us or reply to this email if you have any questions about your attendance.
+
+[Seat time and attendance policy info]
+
+Sincerely,
+The Collegiate Academies Attendance Robot 🤖
+```
+
+The actual email uses the HTML template for formatting and may include additional policy details or warnings as needed.
 
 ---
 
