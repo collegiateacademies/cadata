@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Good morning,<br><br>
+    Attached is the daily attendance SMS report for {{ date }} for {{ school_name }}.
+    <br>
+    <strong>Note:</strong> These absences are already logged in Schoolrunner. It is imperative that these notifications are sent for compliance purposes.
+    <br>
+    To send the SMS, please
+    <ol>
+        <li>Download the attached file.</li>
+        <li>Log in to the <a href="https://asp.schoolmessenger.com/collegiateacademies/start.php">SchoolMessenger</a> website.</li>
+        <li>Click New Broadcast.</li>
+        <li>Choose Your Subject, for example <code>{{ date }} Attendance</code></li>
+        <li>Change the Broadcast Type to <strong>Attendance</strong>.</li>
+        <li>Click Add Recipients and choose Upload List.</li>
+        <li>Upload the attached file using the second option, <strong>ID# Lookup</strong>.</li>
+        <li>Click Next.</li>
+        <li>Send the SMS to the parents.</li>
+    </ol>
+    <br>
+    Best regards,<br>
+    The CA Attendance Robot 🤖
+</body>
+</html>
