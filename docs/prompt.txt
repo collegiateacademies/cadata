@@ -5,4 +5,4 @@ write documentation for when and how {process_name} runs. do your best to descri
 3. from where does this process get its data?
 4. how is it triggered?
 5. is there any OA specific logic?
-6. what does a typical email look like and how is its content generated?
+6. what does a typical email look like (not in html) and how is its content generated?
