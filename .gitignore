@@ -140,3 +140,4 @@ triggers/StudentsBySchool.csv
 logs/csv/*attendance_report*.csv
 triggers/map_output.zip
 crontab.cron
+attendance_outputs/absent_students_ASA_2025-03-18.csv
