@@ -1,4 +1,4 @@
-write documentation for when and how {process_name} runs. do your best to describe what it does and when it runs and how it's triggered for all the schools. i've included the crontab as well. please make sure to answer the following questions clearly in the documentation:
+write documentation for when and how {process_name} runs. do your best to describe what it does and when it runs and how it's triggered for all the schools. i've included the crontab as well. please make sure to answer the following questions (if they're relevant) clearly in the documentation:
 
 1. from which email address are emails sent?
 2. does this process run on non-school days? where does it get this information? is it checking a semester date, a hard-coded date, etc.? explain to the best of your ability how it knows whether or not to run and what range of dates to get information for. this is integral information for most processes and can be different per school and process
