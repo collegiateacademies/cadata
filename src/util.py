@@ -1077,3 +1077,37 @@ def powerschool_powerquery(query_name, payload):
         logging.error(f"Error getting powerschool data -- {error}", exc_info=True)
 
     return output
+
+
+def today_is_monday() -> datetime.date:
+    if datetime.date.today().weekday() == 0:
+        logging.info(f"{datetime.date.today()} a Monday, sorry everyone.")
+        return True
+    else:
+        logging.info(f"Today is not Monday, {datetime.date.today()} is a {datetime.date.today().strftime('%A')}")
+        return False
+
+
+def start_date_of_previous_month() -> datetime.date:
+    if datetime.date.today().month == 1:
+        return datetime.date(datetime.date.today().year - 1, 12, 1)
+    else:
+        return datetime.date(datetime.date.today().year, datetime.date.today().month - 1, 1)
+
+
+def end_date_of_previous_month() -> datetime.date:
+    if datetime.date.today().month == 1:
+        month_range = calendar.monthrange(datetime.date.today().year - 1, 12)
+        return datetime.date(datetime.date.today().year - 1, 12, month_range[1])
+    else:
+        month_range = calendar.monthrange(datetime.date.today().year, datetime.date.today().month - 1)
+        return datetime.date(datetime.date.today().year, datetime.date.today().month - 1, month_range[1])
+
+
+def start_date_of_current_month() -> datetime.date:
+    return datetime.date(datetime.date.today().year, datetime.date.today().month, 1)
+
+
+def end_date_of_current_month() -> datetime.date:
+    month_range = calendar.monthrange(datetime.date.today().year, datetime.date.today().month)
+    return datetime.date(datetime.date.today().year, datetime.date.today().month, month_range[1])
