@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weekly Automation Schedule (America/Chicago)</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f8f9fa;
+      margin: 0;
+      padding: 2em;
+      color: #222;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 0.5em;
+    }
+    .calendar-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2em auto;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    }
+    .calendar-table th, .calendar-table td {
+      border: 1px solid #d1d5db;
+      padding: 0.6em 0.4em;
+      text-align: left;
+      vertical-align: top;
+      min-width: 120px;
+      font-size: 0.98em;
+    }
+    .calendar-table th {
+      background: #e3e7ed;
+      text-align: center;
+      font-weight: 600;
+      font-size: 1.05em;
+    }
+    .calendar-table td {
+      background: #f9fafb;
+      min-height: 2.5em;
+    }
+    .calendar-table tr:nth-child(even) td {
+      background: #f3f4f6;
+    }
+    .event {
+      margin-bottom: 0.3em;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      display: block;
+    }
+    .event.gunicorn { background: #e0f7fa; color: #006064; }
+    .event.attendance { background: #fff3e0; color: #e65100; }
+    .event.map { background: #e8f5e9; color: #1b5e20; }
+    .event.supply { background: #ede7f6; color: #4527a0; }
+    .event.staff { background: #fce4ec; color: #ad1457; }
+    .event.email { background: #e3f2fd; color: #01579b; }
+    .event.lunch { background: #f9fbe7; color: #827717; }
+    .event.report { background: #f3e5f5; color: #4a148c; }
+    .event.cleaner { background: #eceff1; color: #263238; }
+    .time-col { font-weight: bold; background: #e3e7ed; text-align: right; }
+    .empty-slot { color: #bbb; font-style: italic; text-align: center; }
+    @media (max-width: 900px) {
+      .calendar-table th, .calendar-table td { font-size: 0.92em; min-width: 80px; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Weekly Automation Schedule <span style="font-size:0.6em; color:#666;">(America/Chicago)</span></h1>
+  <table class="calendar-table">
+    <tr>
+      <th>Time</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+      <th>Wednesday</th>
+      <th>Thursday</th>
+      <th>Friday</th>
+      <th>Saturday</th>
+      <th>Sunday</th>
+    </tr>
+    <!-- 00:00 -->
+    <tr>
+      <td class="time-col">00:00</td>
+      <td><span class="event gunicorn">Restart Gunicorn (pkill)</span></td>
+      <td><span class="event gunicorn">Restart Gunicorn (pkill)</span></td>
+      <td><span class="event gunicorn">Restart Gunicorn (pkill)</span></td>
+      <td><span class="event gunicorn">Restart Gunicorn (pkill)</span></td>
+      <td><span class="event gunicorn">Restart Gunicorn (pkill)</span></td>
+      <td><span class="event gunicorn">Restart Gunicorn (pkill)</span></td>
+      <td><span class="event gunicorn">Restart Gunicorn (pkill)</span></td>
+    </tr>
+    <!-- 00:01 -->
+    <tr>
+      <td class="time-col">00:01</td>
+      <td><span class="event gunicorn">Restart Gunicorn (start)</span></td>
+      <td><span class="event gunicorn">Restart Gunicorn (start)</span></td>
+      <td><span class="event gunicorn">Restart Gunicorn (start)</span></td>
+      <td><span class="event gunicorn">Restart Gunicorn (start)</span></td>
+      <td><span class="event gunicorn">Restart Gunicorn (start)</span></td>
+      <td><span class="event gunicorn">Restart Gunicorn (start)</span></td>
+      <td><span class="event gunicorn">Restart Gunicorn (start)</span></td>
+    </tr>
+    <!-- 01:00–04:00 -->
+    <tr><td class="time-col">01:00</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td></tr>
+    <tr><td class="time-col">02:00</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td></tr>
+    <tr><td class="time-col">03:00</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td></tr>
+    <tr><td class="time-col">04:00</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td></tr>
+    <!-- 05:00–05:25 -->
+    <tr>
+      <td class="time-col">05:00–05:25</td>
+      <td>
+        <span class="event attendance">05:00 ASA Attendance Letters</span>
+        <span class="event attendance">05:05 LCA Attendance Letters</span>
+        <span class="event attendance">05:10 WLC Attendance Letters</span>
+        <span class="event attendance">05:15 GWC Attendance Letters</span>
+        <span class="event attendance">05:20 CBR Attendance Letters</span>
+        <span class="event attendance">05:25 OA Attendance Letters</span>
+      </td>
+      <td class="empty-slot">(empty)</td>
+      <td class="empty-slot">(empty)</td>
+      <td>
+        <span class="event attendance">05:00 ASA Attendance Letter Data Checker</span>
+        <span class="event attendance">05:01 LCA Attendance Letter Data Checker</span>
+        <span class="event attendance">05:02 WLC Attendance Letter Data Checker</span>
+        <span class="event attendance">05:03 GWC Attendance Letter Data Checker</span>
+        <span class="event attendance">05:04 CBR Attendance Letter Data Checker</span>
+        <span class="event attendance">05:05 OA Attendance Letter Data Checker</span>
+      </td>
+      <td class="empty-slot">(empty)</td>
+      <td class="empty-slot">(empty)</td>
+      <td class="empty-slot">(empty)</td>
+    </tr>
+    <!-- 06:00 -->
+    <tr>
+      <td class="time-col">06:00</td>
+      <td><span class="event map">MAP Upload</span></td>
+      <td><span class="event map">MAP Upload</span></td>
+      <td><span class="event map">MAP Upload</span></td>
+      <td><span class="event map">MAP Upload</span></td>
+      <td><span class="event map">MAP Upload</span></td>
+      <td><span class="event map">MAP Upload</span></td>
+      <td><span class="event map">MAP Upload</span></td>
+    </tr>
+    <!-- 06:25–18:25 (hourly) -->
+    <tr>
+      <td class="time-col">06:25–18:25</td>
+      <td><span class="event supply">LCA Supply Wizard Name Update (hourly)</span></td>
+      <td><span class="event supply">LCA Supply Wizard Name Update (hourly)</span></td>
+      <td><span class="event supply">LCA Supply Wizard Name Update (hourly)</span></td>
+      <td><span class="event supply">LCA Supply Wizard Name Update (hourly)</span></td>
+      <td><span class="event supply">LCA Supply Wizard Name Update (hourly)</span></td>
+      <td class="empty-slot">(empty)</td>
+      <td class="empty-slot">(empty)</td>
+    </tr>
+    <!-- 07:00 -->
+    <tr><td class="time-col">07:00</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td></tr>
+    <!-- 08:00 -->
+    <tr>
+      <td class="time-col">08:00</td>
+      <td><span class="event staff">Network PowerSchool Staff Export</span></td>
+      <td><span class="event staff">Network PowerSchool Staff Export</span></td>
+      <td><span class="event staff">Network PowerSchool Staff Export</span></td>
+      <td><span class="event staff">Network PowerSchool Staff Export</span></td>
+      <td><span class="event staff">Network PowerSchool Staff Export</span></td>
+      <td class="empty-slot">(empty)</td>
+      <td class="empty-slot">(empty)</td>
+    </tr>
+    <!-- 09:00–10:00 -->
+    <tr><td class="time-col">09:00</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td></tr>
+    <tr><td class="time-col">10:00</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td></tr>
+    <!-- 11:00 -->
+    <tr>
+      <td class="time-col">11:00</td>
+      <td>
+        <span class="event email">LCA, GWC, ASA, WLC, OA, CBR Daily Attendance Emails</span>
+        <span class="event lunch">Lunch Service Provider Emails (all schools)</span>
+      </td>
+      <td>
+        <span class="event email">LCA, GWC, ASA, WLC, OA, CBR Daily Attendance Emails</span>
+        <span class="event lunch">Lunch Service Provider Emails (all schools)</span>
+      </td>
+      <td>
+        <span class="event email">LCA, GWC, ASA, WLC, OA, CBR Daily Attendance Emails</span>
+        <span class="event lunch">Lunch Service Provider Emails (all schools)</span>
+      </td>
+      <td>
+        <span class="event email">LCA, GWC, ASA, WLC, OA, CBR Daily Attendance Emails</span>
+        <span class="event lunch">Lunch Service Provider Emails (all schools)</span>
+      </td>
+      <td>
+        <span class="event email">LCA, GWC, ASA, WLC, OA, CBR Daily Attendance Emails</span>
+        <span class="event lunch">Lunch Service Provider Emails (all schools)</span>
+      </td>
+      <td><span class="event lunch">Lunch Service Provider Emails (all schools)</span></td>
+      <td><span class="event lunch">Lunch Service Provider Emails (all schools)</span></td>
+    </tr>
+    <!-- 12:00–14:00 -->
+    <tr><td class="time-col">12:00</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td></tr>
+    <tr><td class="time-col">13:00</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td></tr>
+    <tr><td class="time-col">14:00</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td></tr>
+    <!-- 15:00 -->
+    <tr>
+      <td class="time-col">15:00</td>
+      <td><span class="event email">LCA, GWC, ASA, WLC, OA, CBR Daily Attendance Emails</span></td>
+      <td><span class="event email">LCA, GWC, ASA, WLC, OA, CBR Daily Attendance Emails</span></td>
+      <td><span class="event email">LCA, GWC, ASA, WLC, OA, CBR Daily Attendance Emails</span></td>
+      <td><span class="event email">LCA, GWC, ASA, WLC, OA, CBR Daily Attendance Emails</span></td>
+      <td><span class="event email">LCA, GWC, ASA, WLC, OA, CBR Daily Attendance Emails</span></td>
+      <td class="empty-slot">(empty)</td>
+      <td class="empty-slot">(empty)</td>
+    </tr>
+    <!-- 16:00 -->
+    <tr>
+      <td class="time-col">16:00</td>
+      <td><span class="event report">LCA Individualized Attendance Reports</span></td>
+      <td><span class="event report">GWC Individualized Attendance Reports</span></td>
+      <td><span class="event report">ASA Individualized Attendance Reports</span></td>
+      <td><span class="event report">WLC Individualized Attendance Reports</span></td>
+      <td><span class="event report">OA Individualized Attendance Reports</span></td>
+      <td class="empty-slot">(empty)</td>
+      <td class="empty-slot">(empty)</td>
+    </tr>
+    <!-- 16:30 -->
+    <tr>
+      <td class="time-col">16:30</td>
+      <td class="empty-slot">(empty)</td>
+      <td class="empty-slot">(empty)</td>
+      <td class="empty-slot">(empty)</td>
+      <td class="empty-slot">(empty)</td>
+      <td><span class="event report">CBR Individualized Attendance Reports</span></td>
+      <td class="empty-slot">(empty)</td>
+      <td class="empty-slot">(empty)</td>
+    </tr>
+    <!-- 17:00–19:00 -->
+    <tr><td class="time-col">17:00</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td></tr>
+    <tr><td class="time-col">18:00</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td></tr>
+    <tr><td class="time-col">19:00</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td></tr>
+    <!-- 20:00 -->
+    <tr>
+      <td class="time-col">20:00</td>
+      <td><span class="event cleaner">Log Cleaner</span></td>
+      <td><span class="event cleaner">Log Cleaner</span></td>
+      <td><span class="event cleaner">Log Cleaner</span></td>
+      <td><span class="event cleaner">Log Cleaner</span></td>
+      <td><span class="event cleaner">Log Cleaner</span></td>
+      <td><span class="event cleaner">Log Cleaner</span></td>
+      <td><span class="event cleaner">Log Cleaner</span></td>
+    </tr>
+    <!-- 21:00–23:00 -->
+    <tr><td class="time-col">21:00</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td></tr>
+    <tr><td class="time-col">22:00</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td></tr>
+    <tr><td class="time-col">23:00</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td><td class="empty-slot">(empty)</td></tr>
+  </table>
+  <div style="max-width: 900px; margin: 2em auto; font-size: 1em; color: #444;">
+    <h2>Legend</h2>
+    <ul>
+      <li><span class="event gunicorn">Gunicorn Restart</span></li>
+      <li><span class="event attendance">Attendance Letters/Data Checker</span></li>
+      <li><span class="event map">MAP Upload</span></li>
+      <li><span class="event supply">LCA Supply Wizard Name Update</span></li>
+      <li><span class="event staff">Network PowerSchool Staff Export</span></li>
+      <li><span class="event email">Daily Attendance Emails</span></li>
+      <li><span class="event lunch">Lunch Service Provider Emails</span></li>
+      <li><span class="event report">Individualized Attendance Reports</span></li>
+      <li><span class="event cleaner">Log Cleaner</span></li>
+    </ul>
+    <p><strong>Notes:</strong></p>
+    <ul>
+      <li>All times are in America/Chicago timezone.</li>
+      <li>LCA Supply Wizard Name Update runs every hour at :25 from 6:25 to 18:25, Monday through Friday.</li>
+      <li>Lunch Service Provider Emails run at 11:00–11:05 (one per minute for each school) every day.</li>
+      <li>Daily Attendance Emails run at 11:00 and 15:00, Monday through Friday.</li>
+      <li>Network PowerSchool Staff Export runs at 08:00, Monday through Friday.</li>
+      <li>MAP Upload and Log Cleaner run every day.</li>
+      <li>Gunicorn restarts every day at midnight.</li>
+      <li>Individualized Attendance Reports and Attendance Letters are school/day specific as shown.</li>
+      <li>Daily Attendance SMS is commented out and not currently scheduled.</li>
+    </ul>
+  </div>
+</body>
+</html>
