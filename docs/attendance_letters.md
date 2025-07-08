@@ -71,6 +71,60 @@ Attendance letters are scheduled to run automatically via cron jobs. Each school
 25    5     	*     	*     	1     cd /home/data_admin/cadata/triggers && /usr/bin/python3  oa_attendance_letters.py
 ```
 
+## How Do I Run Attendance Letters Now?
+
+- The script is now unified and can be run for any school from the command line:
+
+```
+python attendance_letters.py <school> <semester|year|YYYY-MM-DD> <repeated_letters> [test] [test_date]
+```
+- `<school>`: School code (e.g., ASA, OA, GWC, etc.)
+- `<semester|year|YYYY-MM-DD>`: Use 'semester', 'year', or a specific start date (YYYY-MM-DD)
+- `<repeated_letters>`: True or False (whether to allow repeated letters)
+- `[test]`: Optional. Add 'test' to enable test mode (see below)
+- `[test_date]`: Optional. In test mode, specify a date (YYYY-MM-DD) to simulate 'today'
+
+### Examples
+
+- Production: `python attendance_letters.py ASA semester True`
+- Test mode: `python attendance_letters.py OA year True test 2025-03-15`
+- Hardcoded date: `python attendance_letters.py OA 2025-01-01 True`
+
+## What is Test Mode?
+
+- **Test mode** is enabled by adding `test` as the fourth argument.
+- In test mode:
+    - All communications are logged with `sandbox=True` (not real communications).
+    - The email is sent to `tophermckee@gmail.com` with `TEST TO {recipient}:` in the subject and no CC.
+    - The script will run even if today is not a school day.
+    - If you provide a `[test_date]` argument, the script will use that date as 'today' for all logic and output.
+
+### Example Test Mode Usage
+
+```
+python attendance_letters.py ASA semester True test 2025-03-15
+```
+
+## How Are Cron Jobs Set Up Now?
+
+- You no longer need a separate script for each school. Instead, use the unified script with the appropriate arguments.
+- Example crontab entry for ASA:
+
+```
+0 5 * * 1 cd /Users/tophermckee/cadata/src && /usr/bin/python3 attendance_letters.py ASA semester True
+```
+
+- Adjust the arguments for each school as needed (see above for options).
+
+## Additional Notes (2025 Update)
+
+- All file paths are now absolute and platform-aware (macOS/Linux).
+- The script ensures all output directories exist before writing files.
+- Debug print statements are included to help diagnose file path issues.
+- The script is fully backward compatible with previous cron schedules and logic.
+
+---
+
 ## What Does a Typical Attendance Letter Email Look Like?
 
 - The email is sent from `data@collegiateacademies.org` to the school's designated attendance contact(s).
