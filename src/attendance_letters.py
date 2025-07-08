@@ -117,10 +117,10 @@ def generate_attendance_letters(school: str, start_date: str, test_mode: bool = 
                 h=4,
                 new_x="LMARGIN",
                 new_y="NEXT",
-                txt=f"{database[student]['first_name']} {database[student]['last_name']} - {today_date.strftime('%A, %B %-d, %Y')} (3 Absence Letter)",
+                text=f"{database[student]['first_name']} {database[student]['last_name']} - {today_date.strftime('%A, %B %-d, %Y')} (3 Absence Letter)",
                 markdown=True
             )
-            pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", txt='')
+            pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", text='')
             
             if school == 'OA':
                 pass
@@ -144,7 +144,7 @@ def generate_attendance_letters(school: str, start_date: str, test_mode: bool = 
                     pdf.multi_cell(col_width, line_height, datum, border=1, new_x="RIGHT", new_y="TOP", max_line_height=pdf.font_size)
                 pdf.ln(line_height)
 
-            pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", txt='')
+            pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", text='')
 
             if school == 'OA':
                 generate_page_content(pdf, school, oa_attendance_letter_blocks)
@@ -155,8 +155,8 @@ def generate_attendance_letters(school: str, start_date: str, test_mode: bool = 
                 else:
                     generate_page_content(pdf, school, attendance_letter3_blocks_page2)
                 
-            pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", txt='Sincerely,')
-            pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", txt=school_info[school]['principal'])
+            pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", text='Sincerely,')
+            pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", text=school_info[school]['principal'])
 
             if school == 'OA':
                 pdf.add_page()
@@ -184,10 +184,10 @@ def generate_attendance_letters(school: str, start_date: str, test_mode: bool = 
                 h=4,
                 new_x="LMARGIN",
                 new_y="NEXT",
-                txt=f"{database[student]['first_name']} {database[student]['last_name']} - {today_date.strftime('%A, %B %-d, %Y')} (5 Absence Letter)",
+                text=f"{database[student]['first_name']} {database[student]['last_name']} - {today_date.strftime('%A, %B %-d, %Y')} (5 Absence Letter)",
                 markdown=True
             )
-            pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", txt='')
+            pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", text='')
             
             if school == 'OA':
                 pass
@@ -210,7 +210,7 @@ def generate_attendance_letters(school: str, start_date: str, test_mode: bool = 
                     pdf.multi_cell(col_width, line_height, datum, border=1, new_x="RIGHT", new_y="TOP", max_line_height=pdf.font_size)
                 pdf.ln(line_height)
 
-            pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", txt='')
+            pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", text='')
             
             if school == 'OA':
                 generate_page_content(pdf, school, oa_attendance_letter_blocks)
@@ -220,8 +220,8 @@ def generate_attendance_letters(school: str, start_date: str, test_mode: bool = 
                 else:
                     generate_page_content(pdf, school, attendance_letter5_blocks_page2)
                 
-            pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", txt='Sincerely,')
-            pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", txt=school_info[school]['principal'])
+            pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", text='Sincerely,')
+            pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", text=school_info[school]['principal'])
             
             if school == 'OA':
                 pdf.add_page()
@@ -249,10 +249,10 @@ def generate_attendance_letters(school: str, start_date: str, test_mode: bool = 
                 h=4,
                 new_x="LMARGIN",
                 new_y="NEXT",
-                txt=f"{database[student]['first_name']} {database[student]['last_name']} - {today_date.strftime('%A, %B %-d, %Y')} (10 Absence Letter)",
+                text=f"{database[student]['first_name']} {database[student]['last_name']} - {today_date.strftime('%A, %B %-d, %Y')} (10 Absence Letter)",
                 markdown=True
             )
-            pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", txt='')
+            pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", text='')
             
             if school == 'OA':
                 pass
@@ -275,7 +275,7 @@ def generate_attendance_letters(school: str, start_date: str, test_mode: bool = 
                     pdf.multi_cell(col_width, line_height, datum, border=1, new_x="RIGHT", new_y="TOP", max_line_height=pdf.font_size)
                 pdf.ln(line_height)
 
-            pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", txt='')
+            pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", text='')
             
             if school == 'OA':
                 generate_page_content(pdf, school, oa_attendance_letter_blocks)
@@ -285,8 +285,8 @@ def generate_attendance_letters(school: str, start_date: str, test_mode: bool = 
                 else:
                     generate_page_content(pdf, school, attendance_letter10_blocks_page2)
                 
-            pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", txt='Sincerely,')
-            pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", txt=school_info[school]['principal'])
+            pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", text='Sincerely,')
+            pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", text=school_info[school]['principal'])
             
             if school == 'OA':
                 pdf.add_page()
