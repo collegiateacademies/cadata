@@ -6,3 +6,5 @@ write documentation for when and how {process_name} runs. do your best to descri
 4. how is it triggered?
 5. is there any OA specific logic?
 6. what does a typical email look like (not in html) and how is its content generated?
+
+also update ~/cadata/README.md for anything that's been updated here, specifically if there needs to be a new link to this document if a new doc has been created
