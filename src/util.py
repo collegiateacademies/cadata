@@ -708,18 +708,30 @@ def send_email(
         cc: str = '',
         reply_to: str = '',
         attachment: str = '',
-        sender_string: str = '') -> bool:
+        sender_string: str = '',
+        sender: str = '') -> bool:
     """Sends an email from the CA Data Email. Returns `True` or `False` if sent successfully."""
+    # Determine which account to use for sending
+    if sender:
+        sender_key = sender.lower()
+        email_addr_key = f"{sender_key}_email_addr"
+        app_password_key = f"{sender_key}_app_password"
+        email_addr = credentials.get(email_addr_key, credentials['cadata_email_addr'])
+        app_password = credentials.get(app_password_key, credentials['python_gmail_app_password'])
+    else:
+        email_addr = credentials['cadata_email_addr']
+        app_password = credentials['python_gmail_app_password']
+
     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
         try:
-            smtp.login(credentials['cadata_email_addr'], credentials['python_gmail_app_password'])
+            smtp.login(email_addr, app_password)
         except Exception as error:
             logging.error(f"Error at SSL login for {recipient} -- {error}", exc_info=True)
             smtp.quit()
 
         msg = EmailMessage()
         msg['Subject'] = subject_line
-        msg['From'] = credentials['cadata_email_addr'] if sender_string == '' else sender_string
+        msg['From'] = email_addr if sender_string == '' else sender_string
         msg['To'] = recipient
         if cc != '':
             msg['Cc'] = cc
