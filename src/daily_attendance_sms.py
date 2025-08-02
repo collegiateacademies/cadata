@@ -110,7 +110,8 @@ def daily_attendance_sms(school_name, test_date=None):
         recipient=recipient,
         subject_line=subject,
         html_body=html_body,
-        attachment=csv_path
+        attachment=csv_path,
+        cc="shogarty@collegiateacademies.org,klambrecht@collegiateacademies.org,afelter@collegiateacademies.org"
     )
     logging.info(f"Email sent to {recipient}.")
 
