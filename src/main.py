@@ -65,7 +65,8 @@ def individualized_attendance_reports(school: str, start_date: str) -> None:
                 html_body=html_email,
                 cc=p1_email,
                 reply_to=school_info[school]['attendance_email'],
-                sender_string=f"{school} Attendance Updates"
+                sender_string=f"{school} Attendance Updates",
+                sender=school
             )
             
             newline="\n"
