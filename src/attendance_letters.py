@@ -329,7 +329,7 @@ def generate_attendance_letters(school: str, start_date: str, test_mode: bool = 
             text_body='Good morning,\n\nThe following letters have already been logged in Schoolrunner for you. All you need to do is fold, stuff, stamp, and send them out!\n\n- The CA Data Robot 🤖',
             subject_line=f'{school} Attendance Letters {today_yyyy_mm_dd}',
             attachment=pdf_path,
-            cc="shogarty@collegiateacademies.org"
+            cc="shogarty@collegiateacademies.org,klambrecht@collegiateacademies.org,afelter@collegiateacademies.org"
         )
 
 def parse_bool(val):
