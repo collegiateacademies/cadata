@@ -46,8 +46,6 @@ Individualized attendance reports are scheduled to run automatically via cron jo
 
 ## From Which Email Address Are Emails Sent?
 
-## From Which Email Address Are Emails Sent?
-
 - **Individualized attendance reports are now sent from school-specific email addresses.**
     - For each school, the report is sent from that school's designated email address (e.g., `asa@collegiateacademies.org` for ASA, `gwc@collegiateacademies.org` for GWC, etc.).
     - For OA (Opportunities Academy), the report is sent from `data@collegiateacademies.org`.
