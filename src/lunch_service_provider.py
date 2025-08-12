@@ -2,10 +2,16 @@ from util import *
 import sys
 
 def get_most_recent_monday(ref_date=None):
-    """Return the most recent Monday before or on ref_date (defaults to today)."""
+    """Return the Monday of the previous week relative to ref_date (defaults to today).
+    When called on a Monday, returns the Monday of the previous week."""
     if ref_date is None:
         ref_date = datetime.date.today()
-    return ref_date - datetime.timedelta(days=ref_date.weekday())
+    # Get the most recent Monday
+    monday = ref_date - datetime.timedelta(days=ref_date.weekday())
+    # If today is Monday, go back one more week
+    if ref_date.weekday() == 0:  # 0 = Monday
+        monday = monday - datetime.timedelta(days=7)
+    return monday
 
 def attendance_report(
     start_date: datetime.date = None,
