@@ -165,7 +165,8 @@ def daily_attendance_email(school: str) -> None:
         html_email = file.read()
 
     send_email(
-        recipient=school_info[school]['attendance_letter_recipient'],
+        recipient=school_info[school]['daily_attendance_email_recipient'],
+        cc="afelter@collegiateacademies.org,klambrecht@collegiateacademies.org",
         subject_line=f"{today_yyyy_mm_dd} {time_of_day} Attendance Email",
         html_body=html_email
             .replace('###grade_headers###', header_html)
