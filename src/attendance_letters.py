@@ -1,5 +1,26 @@
 from util import *
 
+# Function to sanitize text for PDF output
+def sanitize_text(text):
+    if not isinstance(text, str):
+        return text
+    replacements = {
+        '\u2018': "'",  # left single quotation mark
+        '\u2019': "'",  # right single quotation mark
+        '\u201c': '"',   # left double quotation mark
+        '\u201d': '"',   # right double quotation mark
+        '\u2013': '-',    # en dash
+        '\u2014': '-',    # em dash
+        '\u2026': '...',  # ellipsis
+        '\u00a0': ' ',    # non-breaking space
+    }
+    for uni, ascii_char in replacements.items():
+        text = text.replace(uni.encode('utf-8').decode('unicode_escape'), ascii_char)
+    # Also replace any remaining curly quotes directly
+    text = text.replace('’', "'").replace('‘', "'")
+    text = text.replace('“', '"').replace('”', '"')
+    return text
+
 def generate_attendance_letters(school: str, start_date: str, test_mode: bool = False, test_date: str = None) -> None:
     
     if test_mode and test_date:
@@ -117,7 +138,7 @@ def generate_attendance_letters(school: str, start_date: str, test_mode: bool = 
                 h=4,
                 new_x="LMARGIN",
                 new_y="NEXT",
-                text=f"{database[student]['first_name']} {database[student]['last_name']} - {today_date.strftime('%A, %B %-d, %Y')} (3 Absence Letter)",
+                text=sanitize_text(f"{database[student]['first_name']} {database[student]['last_name']} - {today_date.strftime('%A, %B %-d, %Y')} (3 Absence Letter)"),
                 markdown=True
             )
             pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", text='')
@@ -161,9 +182,9 @@ def generate_attendance_letters(school: str, start_date: str, test_mode: bool = 
             if school == 'OA':
                 pdf.add_page()
 
-            pdf.text(15, 255, f"Parents/Guardians of {database[student]['first_name']} {database[student]['last_name']}")
-            pdf.text(15, 260, database[student]['street'])
-            pdf.text(15, 265, f"{database[student]['city']}, {database[student]['state']} {database[student]['zip']}")
+            pdf.text(15, 255, sanitize_text(f"Parents/Guardians of {database[student]['first_name']} {database[student]['last_name']}"))
+            pdf.text(15, 260, sanitize_text(database[student]['street']))
+            pdf.text(15, 265, sanitize_text(f"{database[student]['city']}, {database[student]['state']} {database[student]['zip']}"))
             
             log_communication(
                 student_id = database[student]['sr_id'],
@@ -184,7 +205,7 @@ def generate_attendance_letters(school: str, start_date: str, test_mode: bool = 
                 h=4,
                 new_x="LMARGIN",
                 new_y="NEXT",
-                text=f"{database[student]['first_name']} {database[student]['last_name']} - {today_date.strftime('%A, %B %-d, %Y')} (5 Absence Letter)",
+                text=sanitize_text(f"{database[student]['first_name']} {database[student]['last_name']} - {today_date.strftime('%A, %B %-d, %Y')} (5 Absence Letter)"),
                 markdown=True
             )
             pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", text='')
@@ -226,9 +247,9 @@ def generate_attendance_letters(school: str, start_date: str, test_mode: bool = 
             if school == 'OA':
                 pdf.add_page()
 
-            pdf.text(15, 255, f"Parents/Guardians of {database[student]['first_name']} {database[student]['last_name']}")
-            pdf.text(15, 260, database[student]['street'])
-            pdf.text(15, 265, f"{database[student]['city']}, {database[student]['state']} {database[student]['zip']}")
+            pdf.text(15, 255, sanitize_text(f"Parents/Guardians of {database[student]['first_name']} {database[student]['last_name']}"))
+            pdf.text(15, 260, sanitize_text(database[student]['street']))
+            pdf.text(15, 265, sanitize_text(f"{database[student]['city']}, {database[student]['state']} {database[student]['zip']}"))
 
             log_communication(
                 student_id = database[student]['sr_id'],
@@ -249,7 +270,7 @@ def generate_attendance_letters(school: str, start_date: str, test_mode: bool = 
                 h=4,
                 new_x="LMARGIN",
                 new_y="NEXT",
-                text=f"{database[student]['first_name']} {database[student]['last_name']} - {today_date.strftime('%A, %B %-d, %Y')} (10 Absence Letter)",
+                text=sanitize_text(f"{database[student]['first_name']} {database[student]['last_name']} - {today_date.strftime('%A, %B %-d, %Y')} (10 Absence Letter)"),
                 markdown=True
             )
             pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", text='')
@@ -291,9 +312,9 @@ def generate_attendance_letters(school: str, start_date: str, test_mode: bool = 
             if school == 'OA':
                 pdf.add_page()
 
-            pdf.text(15, 255, f"Parents/Guardians of {database[student]['first_name']} {database[student]['last_name']}")
-            pdf.text(15, 260, database[student]['street'])
-            pdf.text(15, 265, f"{database[student]['city']}, {database[student]['state']} {database[student]['zip']}")
+            pdf.text(15, 255, sanitize_text(f"Parents/Guardians of {database[student]['first_name']} {database[student]['last_name']}"))
+            pdf.text(15, 260, sanitize_text(database[student]['street']))
+            pdf.text(15, 265, sanitize_text(f"{database[student]['city']}, {database[student]['state']} {database[student]['zip']}"))
 
             log_communication(
                 student_id = database[student]['sr_id'],
