@@ -190,6 +190,34 @@ school_info = {
             'contact_email': 'hello@opportunitiesacademy.org'
         }
     },
+    'NT': {
+        'short_name': 'NT',
+        'long_name': 'Network Team',
+        'sr_id': '999',
+        'ps_id': '999',
+        'street': '2625 Thalia St',
+        'city': 'New Orleans',
+        'state': 'LA',
+        'zip': '70113',
+        'principal': 'Jerel Bryant',
+        'fax': '504-503-0008',
+        'phone': '504-503-0008',
+        'attendance_email': 'cpuliafico@collegiateacademies.org',
+        'attendance_letter_recipient': 'cpuliafico@collegiateacademies.org',
+        'daily_attendance_email_recipient': 'cpuliafico@collegiateacademies.org',
+        'individualized_report_reply': 'cpuliafico@collegiateacademies.org',
+        'daily_attendance_sms': '',
+        'data_manager': 'cpuliafico@collegiateacademies.org',
+        'staff_pto_replyto': 'cpuliafico@collegiateacademies.org',
+        'dfo_name': 'Caitlin',
+        'seat_time': {
+            'calendar': False,
+            'contact': 'NT',
+            'link': '',
+            'contact_name': '',
+            'contact_email': ''
+        }
+    },
 }
 
 
