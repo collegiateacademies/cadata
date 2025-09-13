@@ -22,7 +22,7 @@ def sanitize_text(text):
     return text
 
 def generate_attendance_letters(school: str, start_date: str, test_mode: bool = False, test_date: str = None) -> None:
-    
+
     if test_mode and test_date:
         today_date = datetime.datetime.strptime(test_date, "%Y-%m-%d")
         today_yyyy_mm_dd = test_date
@@ -92,13 +92,13 @@ def generate_attendance_letters(school: str, start_date: str, test_mode: bool = 
                 '5au_letters_logged': 0,
                 '10au_letters_logged': 0,
             }
-    
+
     for absence in absence_list:
         if absence['absence_type']['code'] == 'AU' and absence['student']['active'] == '1' and absence['student']['school_id'] == school_info[school]['sr_id']:
             database[absence['student_id']]['au'] += 1
         elif absence['absence_type']['code'] == 'TU' and absence['student']['active'] == '1' and absence['student']['school_id'] == school_info[school]['sr_id']:
             database[absence['student_id']]['tu'] += 1
-    
+
     for communication in communications_list:
         if communication['student_id'] in database and communication['student']['active'] == '1' and communication['communication_method']['name'] == "Letter" and communication['communication_type']['name'] == 'Attendance' and communication['comments'] == '3+ AU Letter':
             database[communication['student_id']]['3au_letters_logged'] += 1
@@ -117,6 +117,7 @@ def generate_attendance_letters(school: str, start_date: str, test_mode: bool = 
         base_dir = "/home/data_admin/cadata/"
     logs_dir = os.path.join(base_dir, "logs/json")
     os.makedirs(logs_dir, exist_ok=True)
+
     with open(os.path.join(logs_dir, f"{datetime.datetime.now().strftime('%Y-%m-%d_%H:%M:%S')}_{school}_attendance_database.json"), "w") as file:
             logging.info('dumping attendance database info to logs folder')
             json.dump(database, file, indent=4)
@@ -142,7 +143,7 @@ def generate_attendance_letters(school: str, start_date: str, test_mode: bool = 
                 markdown=True
             )
             pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", text='')
-            
+
             if school == 'OA':
                 pass
             else:
@@ -169,13 +170,13 @@ def generate_attendance_letters(school: str, start_date: str, test_mode: bool = 
 
             if school == 'OA':
                 generate_page_content(pdf, school, oa_attendance_letter_blocks)
-                
+
             else:
                 if database[student]['home_language'] == '113':
                     generate_page_content(pdf, school, attendance_letter3_blocks_spanish_page2)
                 else:
                     generate_page_content(pdf, school, attendance_letter3_blocks_page2)
-                
+
             pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", text='Sincerely,')
             pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", text=school_info[school]['principal'])
 
@@ -185,7 +186,7 @@ def generate_attendance_letters(school: str, start_date: str, test_mode: bool = 
             pdf.text(15, 255, sanitize_text(f"Parents/Guardians of {database[student]['first_name']} {database[student]['last_name']}"))
             pdf.text(15, 260, sanitize_text(database[student]['street']))
             pdf.text(15, 265, sanitize_text(f"{database[student]['city']}, {database[student]['state']} {database[student]['zip']}"))
-            
+
             log_communication(
                 student_id = database[student]['sr_id'],
                 communication_method_id = '15' if database[student]['home_language'] == '113' else '17',
@@ -196,7 +197,7 @@ def generate_attendance_letters(school: str, start_date: str, test_mode: bool = 
                 comments = '3+ AU Letter',
                 sandbox=True if test_mode else False
             )
-        
+
         if database[student]['au'] >= 5 and database[student]['5au_letters_logged'] == 0:
             pdf.add_page()
             pdf.image(os.path.join(base_dir, f"assets/{school.lower()}_letterhead.png"), x=125, y=5, h=8)
@@ -209,7 +210,7 @@ def generate_attendance_letters(school: str, start_date: str, test_mode: bool = 
                 markdown=True
             )
             pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", text='')
-            
+
             if school == 'OA':
                 pass
             else:
@@ -232,7 +233,7 @@ def generate_attendance_letters(school: str, start_date: str, test_mode: bool = 
                 pdf.ln(line_height)
 
             pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", text='')
-            
+
             if school == 'OA':
                 generate_page_content(pdf, school, oa_attendance_letter_blocks)
             else:
@@ -240,10 +241,10 @@ def generate_attendance_letters(school: str, start_date: str, test_mode: bool = 
                     generate_page_content(pdf, school, attendance_letter5_blocks_spanish_page2)
                 else:
                     generate_page_content(pdf, school, attendance_letter5_blocks_page2)
-                
+
             pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", text='Sincerely,')
             pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", text=school_info[school]['principal'])
-            
+
             if school == 'OA':
                 pdf.add_page()
 
@@ -274,7 +275,7 @@ def generate_attendance_letters(school: str, start_date: str, test_mode: bool = 
                 markdown=True
             )
             pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", text='')
-            
+
             if school == 'OA':
                 pass
             else:
@@ -297,7 +298,7 @@ def generate_attendance_letters(school: str, start_date: str, test_mode: bool = 
                 pdf.ln(line_height)
 
             pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", text='')
-            
+
             if school == 'OA':
                 generate_page_content(pdf, school, oa_attendance_letter_blocks)
             else:
@@ -305,10 +306,10 @@ def generate_attendance_letters(school: str, start_date: str, test_mode: bool = 
                     generate_page_content(pdf, school, attendance_letter10_blocks_spanish_page2)
                 else:
                     generate_page_content(pdf, school, attendance_letter10_blocks_page2)
-                
+
             pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", text='Sincerely,')
             pdf.multi_cell(w=0, h=4, new_x="LMARGIN", new_y="NEXT", text=school_info[school]['principal'])
-            
+
             if school == 'OA':
                 pdf.add_page()
 
@@ -337,12 +338,19 @@ def generate_attendance_letters(school: str, start_date: str, test_mode: bool = 
     if test_mode:
         test_recipient = 'tophermckee@gmail.com'
         real_recipient = school_info[school]['attendance_letter_recipient']
+
         send_email(
             recipient=test_recipient,
             text_body='Good morning,\n\nThe following letters have already been logged in Schoolrunner for you. All you need to do is fold, stuff, stamp, and send them out!\n\n- The CA Data Robot 🤖',
             subject_line=f'TEST TO {real_recipient}: {school} Attendance Letters {today_yyyy_mm_dd}',
             attachment=pdf_path,
-            cc=None
+        )
+
+        upload_basic(
+            drive_name=f"{school}_{today_yyyy_mm_dd}_attendance_letter.pdf",
+            local_path=pdf_path,
+            mimetype='application/pdf',
+            folder_id='1KzBEJAhcn5oFktHomopbhmx3FcDi2gT4'
         )
     else:
         send_email(
@@ -351,6 +359,13 @@ def generate_attendance_letters(school: str, start_date: str, test_mode: bool = 
             subject_line=f'{school} Attendance Letters {today_yyyy_mm_dd}',
             attachment=pdf_path,
             cc="shogarty@collegiateacademies.org,klambrecht@collegiateacademies.org,afelter@collegiateacademies.org"
+        )
+
+        upload_basic(
+            drive_name=f"{school}_{today_yyyy_mm_dd}_attendance_letter.pdf",
+            local_path=pdf_path,
+            mimetype='application/pdf',
+            folder_id='1KzBEJAhcn5oFktHomopbhmx3FcDi2gT4'
         )
 
 def parse_bool(val):
