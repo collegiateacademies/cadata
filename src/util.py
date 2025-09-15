@@ -91,7 +91,7 @@ school_info = {
         'fax': '225-286-7808',
         'phone': '225-892-6962',
         'attendance_email': 'info@collegiatebr.org',
-        'attendance_letter_recipient': 'krichardson@collegiateacademies.org,mwalker@collegiateacademies.org,dross@collegiateacademies.org,drichard@collegiateacademies.org',
+        'attendance_letter_recipient': 'krichardson@collegiateacademies.org,mwalker@collegiateacademies.org,dross1@collegiateacademies.org,drichard@collegiateacademies.org',
         'daily_attendance_email_recipient': 'krichardson@collegiateacademies.org,dross1@collegiateacademies.org,omccann@collegiateacademies.org,smcall@collegiateacademies.org,kporter@collegiateacademies.org',
         'individualized_report_reply': 'krichardson@collegiateacademies.org,ahunter2@collegiateacademies.org',
         'daily_attendance_sms': 'fsall@collegiateacademies.org',
@@ -629,7 +629,7 @@ def sr_api_pull(search_key: str, parameters: dict = {}, page_limit: int = None) 
                 items.append(item)
                 counter += 1
         logging.info(f"🎉 Done pulling {' '.join(search_key.split('-'))}! 🎉\n")
-    
+
     if sys.platform == 'darwin':
         json_log_dir = '/Users/tophermckee/cadata/logs/json/'
     elif sys.platform == 'linux':
@@ -719,7 +719,7 @@ def log_communication(
     headers = {'Authorization': 'Basic ' + base64.b64encode(bytes(f"{credentials['sr_email']}:{credentials['sr_pass']}", "UTF-8")).decode("ascii")}
 
     logging.info(f'Logging communication for {student_id}')
-    
+
     try:
         if sandbox:
             response = requests.post(f"https://ca.sandbox.schoolrunner.org/api/v1/communications", json=payload, params=params, headers=headers).json()
@@ -1005,7 +1005,7 @@ def create(file_name, mime_type, folder_id=None):
         2 - the mime type of the file being created
             (e.g., text/csv) reference -- https://developers.google.com/drive/api/guides/ref-export-formats
         3 - optional value for the Google folder ID where the file will be saved
-   
+
     See documentation:
     https://developers.google.com/drive/api/v3/reference/files/create
     """
@@ -1014,25 +1014,25 @@ def create(file_name, mime_type, folder_id=None):
 
     try:
         service = build('drive', 'v3', credentials=drive_creds)
-    
+
         logging.info(f'creating {file_name} on google drive in folder {folder_id}...')
 
         file_metadata = {
             'name': file_name,
             'mimeType': mime_type
         }
-        
+
         if folder_id is not None:
             file_metadata['parents'] = [folder_id]
-        
+
         results = service.files().create(body=file_metadata).execute()
         file_id = results['id']
-        
+
         logging.info(f"file created with id: {file_id}\n")
 
     except Exception as err:
         logging.error(f"creating {file_name} on google drive in folder {folder_id} -- {err}", exc_info=True)
-   
+
     return file_id
 
 
@@ -1040,7 +1040,7 @@ def upload_basic(drive_name, local_path, mimetype, folder_id):
     """Insert new file.
     Returns : Id's of the file uploaded
     """
-    
+
     drive_creds = google_auth_flow()
 
     try:
@@ -1066,7 +1066,7 @@ def upload_basic(drive_name, local_path, mimetype, folder_id):
 
 def get_typeform(typeform_id):
     typeform_token = credentials['typeform_token']
-    
+
     headers = {
         'Authorization': f'Bearer {typeform_token}',
     }
