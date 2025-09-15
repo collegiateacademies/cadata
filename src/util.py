@@ -63,7 +63,7 @@ school_info = {
         'fax': '504-324-0171',
         'phone': '504-373-6264',
         'attendance_email': 'frontdesk@sciacademy.org',
-        'attendance_letter_recipient': 'ghosey@collegiateacademies.org,dsmith1@collegiateacademies.org',
+        'attendance_letter_recipient': 'ghosey@collegiateacademies.org,dsmith@collegiateacademies.org',
         'daily_attendance_email_recipient': 'ghosey@collegiateacademies.org,dchoix@collegiateacademies.org,igabriel@collegiateacademies.org,agabriel@collegiateacademies.org,lwilbon@collegiateacademies.org,smyers@collegiateacademies.org',
         'individualized_report_reply': 'frontdesk@sciacademy.org',
         'daily_attendance_sms': 'ncowlin@collegiateacademies.org',
