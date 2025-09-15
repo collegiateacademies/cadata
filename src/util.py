@@ -882,7 +882,13 @@ def return_googlesheet_by_key(spreadsheet_key: str, sheet_name: str) -> gspread.
         "https://www.googleapis.com/auth/drive.file",
         "https://www.googleapis.com/auth/drive"
     ]
-    creds = ServiceAccountCredentials.from_json_keyfile_name('../ca-data-administrator-f52c3e758490.json', scope)
+    if sys.platform == 'darwin':
+        creds_path = '/Users/tophermckee/cadata/ca-data-administrator-f52c3e758490.json'
+    elif sys.platform == 'linux':
+        creds_path = '/home/data_admin/cadata/ca-data-administrator-f52c3e758490.json'
+    else:
+        creds_path = '../ca-data-administrator-f52c3e758490.json'
+    creds = ServiceAccountCredentials.from_json_keyfile_name(creds_path, scope)
     client = gspread.authorize(creds)
     return client.open_by_key(spreadsheet_key).worksheet(sheet_name)
 
@@ -905,7 +911,7 @@ def return_googlesheet_values_by_key(spreadsheet_key: str = '', sheet_name: str 
         "https://www.googleapis.com/auth/drive.file",
         "https://www.googleapis.com/auth/drive"
     ]
-    creds = ServiceAccountCredentials.from_json_keyfile_name('../ca-data-administrator-f52c3e758490.json', scope)
+    creds = ServiceAccountCredentials.from_json_keyfile_name(secrets_path, scope)
     client = gspread.authorize(creds)
     if range != '':
         return client.open_by_key(spreadsheet_key).worksheet(sheet_name).get(range)
@@ -980,8 +986,15 @@ def google_auth_flow():
     # The file token.json stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
     # time.
-    if os.path.exists('../token.json'):
-        drive_creds = Credentials.from_authorized_user_file('../token.json', SCOPES)
+    if sys.platform == 'darwin':
+        token_path = '/Users/tophermckee/cadata/token.json'
+        secrets_path = '/Users/tophermckee/cadata/ca-data-administrator.json'
+    elif sys.platform == 'linux':
+        token_path = '/home/data_admin/cadata/token.json'
+        secrets_path = '/home/data_admin/cadata/ca-data-administrator.json'
+
+    if os.path.exists(token_path):
+        drive_creds = Credentials.from_authorized_user_file(token_path, SCOPES)
 
     # If there are no (valid) credentials available, let the user log in.
     if not drive_creds or not drive_creds.valid:
@@ -989,10 +1002,10 @@ def google_auth_flow():
             drive_creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
-                '../ca-data-administrator.json', SCOPES)
+                secrets_path, SCOPES)
             drive_creds = flow.run_local_server(port=0)
         # Save the credentials for the next run
-        with open('../token.json', 'w') as token:
+        with open(token_path, 'w') as token:
             token.write(drive_creds.to_json())
 
     return drive_creds
