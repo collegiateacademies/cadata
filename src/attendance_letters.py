@@ -16,6 +16,18 @@ def sanitize_text(text):
     }
     for uni, ascii_char in replacements.items():
         text = text.replace(uni.encode('utf-8').decode('unicode_escape'), ascii_char)
+    # Remove invisible Unicode formatting characters (e.g., LRM, RLM, directional marks)
+    invisible_chars = [
+        '\u200e', # LEFT-TO-RIGHT MARK
+        '\u200f', # RIGHT-TO-LEFT MARK
+        '\u202a', # LEFT-TO-RIGHT EMBEDDING
+        '\u202b', # RIGHT-TO-LEFT EMBEDDING
+        '\u202c', # POP DIRECTIONAL FORMATTING
+        '\u202d', # LEFT-TO-RIGHT OVERRIDE
+        '\u202e', # RIGHT-TO-LEFT OVERRIDE
+    ]
+    for uni in invisible_chars:
+        text = text.replace(uni.encode('utf-8').decode('unicode_escape'), '')
     # Also replace any remaining curly quotes directly
     text = text.replace('’', "'").replace('‘', "'")
     text = text.replace('“', '"').replace('”', '"')
