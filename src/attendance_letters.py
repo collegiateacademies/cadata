@@ -15,7 +15,7 @@ def sanitize_text(text):
         '\u00a0': ' ',    # non-breaking space
     }
     for uni, ascii_char in replacements.items():
-        text = text.replace(uni.encode('utf-8').decode('unicode_escape'), ascii_char)
+        text = text.replace(uni, ascii_char)
     # Remove invisible Unicode formatting characters (e.g., LRM, RLM, directional marks)
     invisible_chars = [
         '\u200e', # LEFT-TO-RIGHT MARK
@@ -27,7 +27,7 @@ def sanitize_text(text):
         '\u202e', # RIGHT-TO-LEFT OVERRIDE
     ]
     for uni in invisible_chars:
-        text = text.replace(uni.encode('utf-8').decode('unicode_escape'), '')
+        text = text.replace(uni, '')
     # Also replace any remaining curly quotes directly
     text = text.replace('’', "'").replace('‘', "'")
     text = text.replace('“', '"').replace('”', '"')
