@@ -911,6 +911,12 @@ def return_googlesheet_values_by_key(spreadsheet_key: str = '', sheet_name: str 
         "https://www.googleapis.com/auth/drive.file",
         "https://www.googleapis.com/auth/drive"
     ]
+
+    if sys.platform == 'darwin':
+        secrets_path = '/Users/tophermckee/cadata/ca-data-administrator.json'
+    elif sys.platform == 'linux':
+        secrets_path = '/home/data_admin/cadata/ca-data-administrator.json'
+
     creds = ServiceAccountCredentials.from_json_keyfile_name(secrets_path, scope)
     client = gspread.authorize(creds)
     if range != '':
