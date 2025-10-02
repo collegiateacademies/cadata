@@ -93,17 +93,17 @@ school_info = {
         'attendance_email': 'info@collegiatebr.org',
         'attendance_letter_recipient': 'krichardson@collegiateacademies.org,mwalker@collegiateacademies.org,dross1@collegiateacademies.org,drichard@collegiateacademies.org',
         'daily_attendance_email_recipient': 'krichardson@collegiateacademies.org,dross1@collegiateacademies.org,omccann@collegiateacademies.org,smcall@collegiateacademies.org,kporter@collegiateacademies.org',
-        'individualized_report_reply': 'krichardson@collegiateacademies.org,ahunter2@collegiateacademies.org',
+        'individualized_report_reply': 'krichardson@collegiateacademies.org,tmunson@collegiateacademies.org',
         'daily_attendance_sms': 'fsall@collegiateacademies.org',
         'data_manager': 'fsall@collegiateacademies.org',
-        'staff_pto_replyto': 'krichardson@collegiateacademies.org,ahunter2@collegiateacademies.org',
+        'staff_pto_replyto': 'krichardson@collegiateacademies.org,tmunson@collegiateacademies.org',
         'dfo_name': 'Tyler',
         'seat_time': {
             'calendar': False,
             'contact': True,
             'link': '',
-            'contact_name': 'Kimberly Richardson, and Ms. Hunter',
-            'contact_email': 'krichardson@collegiateacademies.org,ahunter2@collegiateacademies.org'
+            'contact_name': 'Kimberly Richardson, and Tyler Munson',
+            'contact_email': 'krichardson@collegiateacademies.org,tmunson@collegiateacademies.org'
         }
     },
     'GWC': {
