@@ -87,7 +87,7 @@ school_info = {
         'city': 'Baton Rouge',
         'state': 'LA',
         'zip': '70806',
-        'principal': 'Samantha Johnson',
+        'principal': 'Devin Richard',
         'fax': '225-286-7808',
         'phone': '225-892-6962',
         'attendance_email': 'info@collegiatebr.org',
