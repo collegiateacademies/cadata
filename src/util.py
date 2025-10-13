@@ -148,7 +148,7 @@ school_info = {
         'phone': '504-503-1400',
         'attendance_email': 'info@walterlcohen.org',
         'attendance_letter_recipient': 'sscott1@collegiateacademies.org,hbunis@collegiateacademies.org,mdavis@collegiateacademies.org,mjackson@collegiateacademies.org',
-        'daily_attendance_email_recipient': 'hbunis@collegiateacademies.org,mdavis@collegiateacademies.org,mjackson@collegiateacademies.org,sscott1@collegiateacademies.org,jeasley@collegiateacademies.org,bcampbell@collegiateacademies.org',
+        'daily_attendance_email_recipient': 'hbunis@collegiateacademies.org,mdavis@collegiateacademies.org,mjackson@collegiateacademies.org,sscott1@collegiateacademies.org,jeasley@collegiateacademies.org,bcampbell@collegiateacademies.org,info@walterlcohen.org',
         'individualized_report_reply': 'info@walterlcohen.org',
         'daily_attendance_sms': 'jeasley@collegiateacademies.org',
         'data_manager': 'jeasley@collegiateacademies.org',
