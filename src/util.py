@@ -74,8 +74,8 @@ school_info = {
             'calendar': False,
             'contact': True,
             'link': '',
-           'contact_name': 'Ms. Myers',
-           'contact_email': 'smyers@collegiateacademies.org'
+           'contact_name': 'Glenn Hosey',
+           'contact_email': 'ghosey@collegiateacademies.org'
         }
     },
     'CBR': {
