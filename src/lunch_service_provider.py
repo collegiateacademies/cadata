@@ -139,7 +139,7 @@ def attendance_report(
         if test_mode:
             recipient = 'tophermckee@gmail.com'
         else:
-            recipient = 'afelter@collegiateacademies.org,kwelch@collegiateacademies.org,tess@schoolfoodsolutions.org,kaylee@schoolfoodsolutions.org,JPickel@collegiateacademies.org,ali@schoolfoodsolutions.org'
+            recipient = 'afelter@collegiateacademies.org,rharman@collegiateacademies.org,tess@schoolfoodsolutions.org,kaylee@schoolfoodsolutions.org,JPickel@collegiateacademies.org,ali@schoolfoodsolutions.org'
         send_email(
             recipient = recipient,
             subject_line = f'Attendance Report for {school}',
