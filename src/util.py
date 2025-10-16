@@ -37,7 +37,7 @@ school_info = {
         'attendance_email': 'hello@livingstoncollegiate.org',
         'attendance_letter_recipient': 'laustin@collegiateacademies.org,zfinegan@collegiateacademies.org,hburr@collegiateacademies.org,sarthur@collegiateacademies.org,cbarker@collegiateacademies.org',
         'daily_attendance_email_recipient': 'alangham@collegiateacademies.org,hburr@collegiateacademies.org,zfinegan@collegiateacademies.org,laustin@collegiateacademies.org,sarthur@collegiateacademies.org,tashford@collegiateacademies.org,cbarker@collegiateacademies.org',
-        'individualized_report_reply': 'rmurray@collegiateacademies.org',
+        'individualized_report_reply': 'ghosey@collegiateacademies.org',
         'daily_attendance_sms': 'jfonshell@collegiateacademies.org',
         'data_manager': 'jfonshell@collegiateacademies.org',
         'staff_pto_replyto': 'tashford@collegiateacademies.org',
@@ -46,8 +46,8 @@ school_info = {
             'calendar': False,
             'contact': True,
             'link': '',
-            'contact_name': 'Robin Murray',
-            'contact_email': 'rmurray@collegiateacademies.org'
+            'contact_name': 'Glenn Hosey',
+            'contact_email': 'Glenn Hosey'
         }
     },
     'ASA': {
