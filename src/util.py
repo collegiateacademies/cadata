@@ -92,7 +92,7 @@ school_info = {
         'phone': '225-892-6962',
         'attendance_email': 'info@collegiatebr.org',
         'attendance_letter_recipient': 'krichardson@collegiateacademies.org,mwalker@collegiateacademies.org,dross1@collegiateacademies.org,drichard@collegiateacademies.org',
-        'daily_attendance_email_recipient': 'krichardson@collegiateacademies.org,dross1@collegiateacademies.org,omccann@collegiateacademies.org,smcall@collegiateacademies.org,kporter@collegiateacademies.org',
+        'daily_attendance_email_recipient': 'krichardson@collegiateacademies.org,dross1@collegiateacademies.org,omccann@collegiateacademies.org,smcall@collegiateacademies.org,kporter@collegiateacademies.org,drichard@collegiateacademies.org',
         'individualized_report_reply': 'krichardson@collegiateacademies.org,tmunson@collegiateacademies.org',
         'daily_attendance_sms': 'fsall@collegiateacademies.org',
         'data_manager': 'fsall@collegiateacademies.org',
