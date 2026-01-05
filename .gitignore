@@ -142,3 +142,4 @@ triggers/map_output.zip
 crontab.cron
 attendance_outputs/*
 !attendance_outputs/.gitkeep
+scripts/*.csv
