@@ -13,6 +13,7 @@ from googleapiclient.http import MediaFileUpload
 from simplegmail import Gmail
 from pprint import pformat
 from todoist_api_python.api import TodoistAPI
+from typing import Optional
 import __main__
 
 pp = pprint.PrettyPrinter(indent=2)
